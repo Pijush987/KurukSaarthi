@@ -41,7 +41,9 @@ void main() async{
     options: DefaultFirebaseOptions.currentPlatform,
   );
   servicesLocator();
-  LocalNotificationServices().requestPermission();
+  LocalNotificationServices().requestPermission().whenComplete((){
+    LocalNotificationServices().requestStoragePermissions();
+  });
   // StorageServices().requestStoragePermission();
   // StorageServices().loadFileFromSdCard();
   runApp(const MyApp());

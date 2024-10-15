@@ -5,6 +5,7 @@ import 'package:kuruk_saarthi/configs/color/color.dart';
 import 'package:kuruk_saarthi/configs/components/loading_widget.dart';
 import 'package:kuruk_saarthi/configs/components/svg_image_widget.dart';
 import 'package:kuruk_saarthi/utils/assets_path.dart';
+import 'package:kuruk_saarthi/utils/extension/flush_bar_extension.dart';
 import 'package:kuruk_saarthi/utils/extension/general_ectensions.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -38,7 +39,7 @@ class _ShareWidgetState extends State<ShareWidget> {
 
       showCustomLoader(context, 55);
       // Request storage permissions (important for Android 10 and above)
-      if (await Permission.storage.request().isGranted) {
+      // if (await Permission.storage.request().isGranted) {
         RenderRepaintBoundary boundary = _globalKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
         ui.Image image = await boundary.toImage(pixelRatio: 3.0);
         ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
@@ -54,9 +55,14 @@ class _ShareWidgetState extends State<ShareWidget> {
         await file.writeAsBytes(pngBytes);
         stopCustomLoader(context);
         print('Saved to: $filePath');
-      } else {
-        print('Permission denied');
-      }
+        context.flushBarSuccessMessage(message: "File has been downloaded");
+
+      // } else {
+      //   await Permission.storage.request();
+      //   stopCustomLoader(context);
+      //   print('Permission denied');
+      //   throw Exception("Permission not granted");
+      // }
     } catch (e) {
       print(e);
     }
