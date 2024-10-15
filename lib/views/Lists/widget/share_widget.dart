@@ -13,6 +13,7 @@ import 'dart:ui' as ui;
 import 'dart:typed_data';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 // import 'package:share_plus/share_plus.dart';
 
 class ShareWidget extends StatefulWidget {
@@ -34,7 +35,7 @@ class ShareWidget extends StatefulWidget {
 class _ShareWidgetState extends State<ShareWidget> {
   final GlobalKey _globalKey = GlobalKey();
 
-  Future<void> _captureAndSavePng() async {
+  Future<void> _captureAndSavePng(bool  showToken) async {
     try {
 
       showCustomLoader(context, 55);
@@ -55,7 +56,9 @@ class _ShareWidgetState extends State<ShareWidget> {
         await file.writeAsBytes(pngBytes);
         stopCustomLoader(context);
         print('Saved to: $filePath');
-        context.flushBarSuccessMessage(message: "File has been downloaded");
+        if(showToken){
+          context.flushBarSuccessMessage(message: "File has been downloaded");
+        }
 
       // } else {
       //   await Permission.storage.request();
@@ -77,31 +80,31 @@ class _ShareWidgetState extends State<ShareWidget> {
       onTap: (){
         Navigator.pop(context);
       },
-      child: RepaintBoundary(
-        key: _globalKey,
-        child: Container(
-          color: Colors.transparent,
-          height: context.mediaQueryHeight,
-          width: context.mediaQueryWidth,
-          child: Center(
-            child: GestureDetector(
-              onTap: (){
-                FocusScope.of(context).requestFocus(new FocusNode());
-              },
-              child: Center(
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 12),
-                  decoration: BoxDecoration(
-                    color: AppColors.whiteColor,
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: AppColors.cardBorderColor)
-                  ),
-                  padding: EdgeInsets.all(16),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-        
-                    children: [
-                      Container(
+      child: Container(
+        color: Colors.transparent,
+        height: context.mediaQueryHeight,
+        width: context.mediaQueryWidth,
+        child: Center(
+          child: GestureDetector(
+            onTap: (){
+              FocusScope.of(context).requestFocus(new FocusNode());
+            },
+            child: Center(
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 12),
+                decoration: BoxDecoration(
+                  color: AppColors.whiteColor,
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(color: AppColors.cardBorderColor)
+                ),
+                padding: EdgeInsets.all(16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+
+                  children: [
+                    RepaintBoundary(
+                      key: _globalKey,
+                      child: Container(
                         decoration: BoxDecoration(
                             color: AppColors.whiteColor,
                             borderRadius: BorderRadius.circular(15),
@@ -118,23 +121,25 @@ class _ShareWidgetState extends State<ShareWidget> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Expanded(
-        
+
                                   child: hiperText(title: "Age",subtitle: widget.age,context: context),),
-        
+
                                 Expanded(child: hiperText(title: "Booth",subtitle: widget.booth,context: context,color: AppColors.primaryColor),),
+                                Expanded(child: hiperText(title: "Gender",subtitle: widget.sex,context: context),),
+
                               ],),
                             SizedBox(height: 12),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(child: hiperText(title: "Gender",subtitle: widget.sex,context: context),),
-                                Expanded(
-                                  child: hiperText(title: "Voter ID",subtitle: widget.voterId,context: context),),
-        
-        
-                            ],),
+                            hiperText(title: "Voter ID",subtitle: widget.voterId,context: context),
+
                             SizedBox(height: 12),
-                            hiperText(title: "Booth Address",subtitle: widget.boothAddress,context: context),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Booth Addres",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w700)),
+                              Text(" : ",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w600)),
+                              Expanded(child: Text(widget.boothAddress,maxLines: 5, style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color:AppColors.secondaryTextColor,fontWeight: FontWeight.w700,overflow: TextOverflow.ellipsis,))),
+                            ],),
+
                             SizedBox(height: 30),
                             Container(
                               child: new Image.asset('assets/banner.png',
@@ -146,65 +151,70 @@ class _ShareWidgetState extends State<ShareWidget> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 12),
-                      Row(children: [
-                        Expanded(child:  InkWell(
-                          onTap:_captureAndSavePng,
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: AppColors.whiteColor,
-                              border: Border.all(color: AppColors.cardBorderColor),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgImageWidget(svgPath: AssetsPath.download,color: null),
-                                SizedBox(width: 8),
-                                Text("Download",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w600)),
-                              ],
-                            ),
+                    ),
+                    SizedBox(height: 12),
+                    Row(children: [
+                      Expanded(child:  InkWell(
+                        onTap:(){
+                          _captureAndSavePng(true);
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: AppColors.whiteColor,
+                            border: Border.all(color: AppColors.cardBorderColor),
+                            borderRadius: BorderRadius.circular(12),
                           ),
-                        )),
-                        SizedBox(width: 12),
-                        Expanded(child:  InkWell(
-                          onTap: ()async{
-                            final directory = Directory('/storage/emulated/0/Download');
-                            if (!(await directory.exists())) {
-                              await directory.create(recursive: true);
-                            }
-                            final filePath = '${directory.path}/banner.png';
-                            // await FlutterShare.shareFile(
-                            //   title: 'Share Image',
-                            //   filePath: filePath,
-                            //   text: 'Check out this image!',
-                            // );
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: AppColors.primaryColor,
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgImageWidget(svgPath: AssetsPath.shareIcon,color: null),
-                                SizedBox(width: 8),
-                                Text("Share",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.whiteColor,fontWeight: FontWeight.w600)),
-        
-                              ],
-                            ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgImageWidget(svgPath: AssetsPath.download,color: null),
+                              SizedBox(width: 8),
+                              Text("Download",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w600)),
+                            ],
                           ),
-                        ))
-                      ],)
-                    ],
-                  ),
+                        ),
+                      )),
+                      SizedBox(width: 12),
+                      Expanded(child:  InkWell(
+                        onTap: ()async{
+                          final directory = Directory('/storage/emulated/0/Download');
+                          if (!(await directory.exists())) {
+                            await directory.create(recursive: true);
+                          }else{
+                            _captureAndSavePng(false);
+                          }
+                          final filePath = '${directory.path}/banner.png';
+                          final result = await Share.shareXFiles([XFile(filePath)], text: '');
+                          if (result.status == ShareResultStatus.success) {
+                            print('Thank you for sharing the picture!');
+                          }
+
+
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: AppColors.primaryColor,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgImageWidget(svgPath: AssetsPath.shareIcon,color: null),
+                              SizedBox(width: 8),
+                              Text("Share",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.whiteColor,fontWeight: FontWeight.w600)),
+
+                            ],
+                          ),
+                        ),
+                      ))
+                    ],)
+                  ],
                 ),
               ),
             ),

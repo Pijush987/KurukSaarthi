@@ -229,7 +229,7 @@ class _AlertsScreenState extends State<ListsScreen> with TickerProviderStateMixi
                                               physics: NeverScrollableScrollPhysics(),
                                               itemBuilder: (context,index){
                                                 final voters = state.allVoters[index];
-                                                return PersonDetailsWidget(voterId: voters.voterIDNumber, name: voters.name,dob: voters.state,age: index.toString(),sex: voters.gender,onShare: (){
+                                                return PersonDetailsWidget(booth: voters.boothNumber, voterId: voters.voterIDNumber, name: voters.name,dob: voters.state,age: voters.age.toString(),sex: voters.gender,onShare: (){
                                                   showModalBottomSheet(
                                                       context: context,
                                                       backgroundColor: Colors.transparent,

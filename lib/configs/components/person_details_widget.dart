@@ -9,8 +9,9 @@ class PersonDetailsWidget extends StatelessWidget {
   final String voterId;
   final String age;
   final String sex;
+  final String booth;
   final VoidCallback onShare;
-  const PersonDetailsWidget({super.key, required this.name, required this.dob, required this.voterId, required this.age, required this.sex, required this.onShare});
+  const PersonDetailsWidget({super.key, required this.name, required this.dob, required this.voterId, required this.age, required this.sex, required this.onShare, required this.booth});
 
   @override
   Widget build(BuildContext context) {
@@ -23,16 +24,55 @@ class PersonDetailsWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          hiperText(title: "Name",subtitle: name,context: context),
+          // hiperText(title: "Name",subtitle: name,context: context),
+
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("Name",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w700)),
+            Text(" : ",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w600)),
+            Expanded(child: Text(name,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w700,overflow: TextOverflow.ellipsis))),
+          ],),
+          
           SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Age",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w700)),
+                  Text(" : ",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w600)),
+                  Text(age,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w700,overflow: TextOverflow.ellipsis)),
+                ],),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Gender",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w700)),
+                  Text(" : ",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w600)),
+                  Text(sex,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w700,overflow: TextOverflow.ellipsis)),
+                ],),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Booth",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w700)),
+                  Text(" : ",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w600)),
+                  Text(booth,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w700,overflow: TextOverflow.ellipsis)),
+                ],),
+
               // hiperText(title: "DOB",subtitle: dob,context: context),
-              hiperText(title: "Age",subtitle: age,context: context),
-              hiperText(title: "Gender",subtitle: sex,context: context),
-              hiperText(title: "Voter ID",subtitle: voterId,context: context),
+              // hiperText(title: "Age",subtitle: age,context: context),
+              // hiperText(title: "Gender",subtitle: sex,context: context),
+              // hiperText(title: "Voter ID",subtitle: voterId,context: context),
           ],),
+          SizedBox(height: 12),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Voter ID",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w700)),
+              Text(" : ",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w600)),
+              Expanded(child: Text(voterId,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w700,overflow: TextOverflow.ellipsis))),
+            ],),
           // SizedBox(height: 12),
           // hiperText(title: "Voter ID",subtitle: voterId,context: context),
           SizedBox(height: 18),
