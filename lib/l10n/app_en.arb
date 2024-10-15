@@ -1,0 +1,31 @@
+{
+  "helloWorld": "Hello World",
+  "appTitle": "KurukSaarthi",
+  "connectionErrorText1": "We’re unable to show results.",
+  "connectionErrorText2": "Please check your internet",
+  "connectionErrorText3": "connection",
+  "retry": "RETRY",
+  "noResultFound": "Sorry, no result.",
+  "helloDearVoters": "Hello, dear voters",
+  "enterYourLoginPIN": "Enter your login PIN",
+  "login": "Login",
+  "enterYourPin": "Enter your pin",
+  "pinCodeShouldBe5digit": "Pin code should be 5 digit",
+  "pinIsNotCorrect": "Pin is not correct",
+  "bhandaraVidhanSabh": "Bhandara Vidhan Sabha",
+  "sakoliVidhanSabha": "Sakoli Vidhan Sabha",
+  "tumsarVidhanSabha": "Tumsar Vidhan Sabha",
+  "selectVidhanSabhaRegion": "Select Vidhan Sabha region",
+  "continueBtn": "Continue",
+  "chooseVidhanSabha": "Choose Vidhan Sabha",
+  "pleaseSelectOneOption": "Please select one option.",
+  "home": "Home",
+  "lists": "Lists",
+  "alerts": "Alerts",
+  "help": "Help",
+  "searchByNameOrVoterId": "Search by name or voter id"
+
+
+
+
+}

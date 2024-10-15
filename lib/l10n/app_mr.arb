@@ -1,0 +1,14 @@
+{
+    "helloWorld": "हॅलो वर्ल्ड",
+    "appTitle": "कुरुकसारथी",
+    "connectionErrorText1": "आम्ही परिणाम दाखवू शकत नाही.",
+    "connectionErrorText2": "कृपया तुमचे इंटर्न तपासा",
+    "connectionErrorText3": "कनेक्शन",
+    "retry": "पुन्हा प्रयत्न करा",
+    "noResultFound": "क्षमस्व, शोध परिणाम नाही.",
+    "helloDearVoters": "नमस्कार, प्रिय मतदाता",
+    "enterYourLoginPIN": "तुमचा लॉगिन पिन एंटर करा",
+    "login": "लॉगिन करा"
+
+
+}

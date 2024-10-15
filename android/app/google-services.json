@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "376130096126",
+    "project_id": "kuruksaarthi-app",
+    "storage_bucket": "kuruksaarthi-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:376130096126:android:d46a840f24128575b68eaf",
+        "android_client_info": {
+          "package_name": "com.example.kuruk_saarthi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbE7ec3cseK5K2yRssSvakHY_HxAtYA_8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
