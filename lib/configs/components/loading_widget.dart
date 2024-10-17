@@ -1,4 +1,5 @@
 import 'dart:io' show Platform;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,7 @@ Future showSyncAlertDialog(BuildContext context,double? size){
     barrierDismissible: false,
     builder: (BuildContext context) {
       return AlertDialog(
-          title: Text("Wait until sync not complete\n this will take 7 to 10 minute and user need's to good internet connection",textAlign: TextAlign.center, style:  Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.primaryColor,fontWeight: FontWeight.w600),),
+          title: Text(AppLocalizations.of(context)!.waitUntilSyncNotComplete +  "\n"+AppLocalizations.of(context)!.thisWillTake7to10MinuteAndUserNeedToGoodInternetConnection,textAlign: TextAlign.center, style:  Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.primaryColor,fontWeight: FontWeight.w600),),
           backgroundColor: Colors.white,
           content: SizedBox(
               width: size??50,

@@ -16,3 +16,4 @@ class Constant{
 }
  ValueNotifier<String> notificationNotifier = ValueNotifier<String>("");
  ValueNotifier<bool> isDataSync = ValueNotifier<bool>(false);
+ ValueNotifier<String> selectLanguage = ValueNotifier<String>("मराठी");

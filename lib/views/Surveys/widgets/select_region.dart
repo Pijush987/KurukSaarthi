@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,7 @@ class SelectRegion extends StatelessWidget {
             // Add more decoration..
           ),
           hint:Text(
-            'Region',
+            AppLocalizations.of(context)!.region,
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.subTextColor,fontWeight: FontWeight.w600),
           ),
           items: state.allRegion.map((item) {
@@ -139,7 +140,7 @@ class SelectArea extends StatelessWidget {
             // Add more decoration..
           ),
           hint:Text(
-            'Area',
+            AppLocalizations.of(context)!.area,
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.subTextColor,fontWeight: FontWeight.w600),
           ),
           items: state.allArea.map((item) {

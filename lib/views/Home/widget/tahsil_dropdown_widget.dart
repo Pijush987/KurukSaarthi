@@ -3,6 +3,7 @@ import 'package:kuruk_saarthi/configs/color/color.dart';
 import 'package:kuruk_saarthi/configs/components/svg_image_widget.dart';
 import 'package:kuruk_saarthi/utils/assets_path.dart';
 import 'package:kuruk_saarthi/utils/extension/general_ectensions.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TahsilDropdownWidget extends StatelessWidget {
   final VoidCallback onTap;
@@ -32,7 +33,7 @@ class TahsilDropdownWidget extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(10),
-              child: Text("Select Region",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.blackColor,fontWeight: FontWeight.w700),),
+              child: Text(AppLocalizations.of(context)!.selectRegion,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.blackColor,fontWeight: FontWeight.w700),),
             ),
             ListView.separated(
                 padding: EdgeInsets.all(10),

@@ -49,7 +49,7 @@ class ConfirmPinFormFields extends StatelessWidget {
                     child: SvgImageWidget(svgPath: AssetsPath.showPassword,color: null),
                   ),
                 ),
-                hintText:'Re-enter new PIN to confirm',
+                hintText:AppLocalizations.of(context)!.re_enter_new_pin_to_confirm,
                 hintStyle: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 15,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w400,decoration: TextDecoration.none,  decorationThickness: 0,),
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kuruk_saarthi/configs/color/color.dart';
 import 'package:kuruk_saarthi/configs/components/svg_image_widget.dart';
 import 'package:kuruk_saarthi/utils/assets_path.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SyncButtonWidget extends StatelessWidget {
   const SyncButtonWidget({super.key});
@@ -21,7 +22,7 @@ class SyncButtonWidget extends StatelessWidget {
         children: [
           SvgImageWidget(svgPath: AssetsPath.reloadIcon,color: null),
           SizedBox(width: 8),
-          Text("Sync now",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.whiteColor,fontWeight: FontWeight.w600)),
+          Text(AppLocalizations.of(context)!.syncNow,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.whiteColor,fontWeight: FontWeight.w600)),
 
         ],
       ),

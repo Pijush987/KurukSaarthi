@@ -7,6 +7,7 @@ import 'package:kuruk_saarthi/configs/components/svg_image_widget.dart';
 import 'package:kuruk_saarthi/utils/assets_path.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:kuruk_saarthi/utils/extension/validations_exception.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NewPinFormField extends StatelessWidget {
   final FocusNode focusNode;
@@ -45,7 +46,7 @@ class NewPinFormField extends StatelessWidget {
                     child: SvgImageWidget(svgPath: AssetsPath.showPassword,color: null),
                   ),
                 ),
-                hintText:'Enter new PIN',
+                hintText:AppLocalizations.of(context)!.enterNewPIN,
                 hintStyle: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 15,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w400,decoration: TextDecoration.none,  decorationThickness: 0,),
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kuruk_saarthi/configs/color/color.dart';
 import 'package:kuruk_saarthi/utils/extension/general_ectensions.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BoothDropdownWidget extends StatelessWidget {
   final VoidCallback onTap;
@@ -33,7 +34,7 @@ class BoothDropdownWidget extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(10),
-              child: Text("Select booth numbere",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.blackColor,fontWeight: FontWeight.w700),),
+              child: Text(AppLocalizations.of(context)!.selectBoothNumbere,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.blackColor,fontWeight: FontWeight.w700),),
             ),
             ListView.separated(
               padding: EdgeInsets.all(10),

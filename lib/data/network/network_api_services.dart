@@ -112,9 +112,26 @@ class NetworkApiService implements BaseApiServices{
   }
 
   @override
-  Future putApi({required String url, data, header}) {
-    // TODO: implement putApi
-    throw UnimplementedError();
+  Future putApi({required String url, data, header})async {
+    if (kDebugMode) {
+      print(url);
+      print(data);
+      print(header);
+    }
+    dynamic responseJson;
+    try {
+
+      final Response response = await http.put(Uri.parse(url), body: data, headers: header).timeout(const Duration(minutes: 10));
+      responseJson = returnResponse(response);
+    } on SocketException {
+      throw NoInternetException('No Internet Connection');
+    } on TimeoutException {
+      throw FetchDataException('Network Request time out');
+    }
+    if (kDebugMode) {
+      print(responseJson);
+    }
+    return responseJson;
   }
 
 

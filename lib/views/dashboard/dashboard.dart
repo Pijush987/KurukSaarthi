@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kuruk_saarthi/bloc/dashboard_bloc/dashboard_bloc.dart';
-import 'package:kuruk_saarthi/bloc/surveys_bloc/surveys_bloc.dart';
-import 'package:kuruk_saarthi/configs/color/color.dart';
-import 'package:kuruk_saarthi/main.dart';
 import 'package:kuruk_saarthi/services/messaging/messaging_services.dart';
 import 'package:kuruk_saarthi/views/Surveys/surveys_screen.dart';
 import 'package:kuruk_saarthi/views/dashboard/widget/bottom_nav_bar_widget.dart';
@@ -52,7 +47,7 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false ,// fluter 2.x
+      resizeToAvoidBottomInset: false ,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body:  SizedBox.expand(
           child: PageView(

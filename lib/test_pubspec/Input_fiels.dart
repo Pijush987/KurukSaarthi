@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart' as pinput;
 import 'package:syncfusion_flutter_sliders/sliders.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InputField extends StatefulWidget {
   const InputField({super.key});
@@ -47,7 +48,7 @@ class _InputFieldState extends State<InputField> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Syncfusion Flutter Slider'),
+        title:   Text(AppLocalizations.of(context)!.syncfusionFlutterSlider),
       ),
       body: Row(
         children: [

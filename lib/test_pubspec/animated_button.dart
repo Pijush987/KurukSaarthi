@@ -7,6 +7,7 @@ import 'package:kuruk_saarthi/utils/assets_path.dart';
 import '../configs/color/color.dart';
 import '../configs/components/svg_image_widget.dart';
 import '../utils/const.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AnimatedSyncButton extends StatefulWidget {
   final VoidCallback onTap;
@@ -28,18 +29,20 @@ class _AnimatedSyncButtonState extends State<AnimatedSyncButton> {
 
   void startAnimation() {
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {
-        gradientColors = gradientColors[0] == AppColors.primaryColor
-            ? [AppColors.primaryColor.withOpacity(0.3), Color(0xffF47216)]
-            : [Color(0xffF47216),AppColors.primaryColor.withOpacity(0.5)];
+      if(mounted){
+        setState(() {
+          gradientColors = gradientColors[0] == AppColors.primaryColor
+              ? [AppColors.primaryColor.withOpacity(0.3), Color(0xffF47216)]
+              : [Color(0xffF47216),AppColors.primaryColor.withOpacity(0.5)];
 
-        // Toggle shadow properties
-        shadowBlurRadius = shadowBlurRadius == 0.0 ? 3.0 : 0.0;
-        spreadRadius = spreadRadius == 0.0 ? 3.0 : 0.0;
-        shadowColor = shadowColor == Color(0xffF47216)
-            ?Color(0xffF47216)
-            : Color(0xffF47216);
-      });
+          // Toggle shadow properties
+          shadowBlurRadius = shadowBlurRadius == 0.0 ? 3.0 : 0.0;
+          spreadRadius = spreadRadius == 0.0 ? 3.0 : 0.0;
+          shadowColor = shadowColor == Color(0xffF47216)
+              ?Color(0xffF47216)
+              : Color(0xffF47216);
+        });
+      }
     });
   }
 
@@ -126,7 +129,7 @@ class _AnimatedSyncButtonState extends State<AnimatedSyncButton> {
             children: [
               SvgImageWidget(svgPath: AssetsPath.reloadIcon,color: null),
               SizedBox(width: 4),
-              Text("Sync now",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.whiteColor,fontWeight: FontWeight.w600)),
+              Text(AppLocalizations.of(context)!.syncNow,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.whiteColor,fontWeight: FontWeight.w600)),
 
             ],
           ),

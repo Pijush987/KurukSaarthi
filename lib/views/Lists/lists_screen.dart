@@ -23,6 +23,7 @@ import 'package:kuruk_saarthi/views/Lists/widget/share_widget.dart';
 import 'package:kuruk_saarthi/views/Lists/widget/tahsil_dropdown_widget.dart';
 import 'package:kuruk_saarthi/views/Lists/widget/voice_search_widget.dart';
 import 'package:kuruk_saarthi/views/Lists/widget/voter_list_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ListsScreen extends StatefulWidget {
   const ListsScreen({super.key});
@@ -41,7 +42,7 @@ class _AlertsScreenState extends State<ListsScreen> with TickerProviderStateMixi
   late RangeValues currentRangeValues ;
   final _searchFocusNode = FocusNode();
   ScrollController _scrollController = ScrollController();
-  ListsBloc _listsBloc = ListsBloc();
+  // ListsBloc _listsBloc = ListsBloc();
 
   @override
   void initState() {
@@ -80,16 +81,36 @@ class _AlertsScreenState extends State<ListsScreen> with TickerProviderStateMixi
     );
 
 
-    _listsBloc.add(FetchLists());
+    // _listsBloc.add(FetchLists());
+    context.read<ListsBloc>().add(BoothChange(selectedBooth: ''));
+    context.read<ListsBloc>().add(RegionChange(selectedRegion: ''));
+    context.read<ListsBloc>().add(AgeChange(selectedAge: ''));
+    context.read<ListsBloc>().add(FetchLists());
+
     _scrollController.addListener(() {
       if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
-        _listsBloc.add(FetchLists());
+        if(context.read<ListsBloc>().state.selectedAge.isNotEmpty){
+          context.read<ListsBloc>().add(FetchLists(age: context.read<ListsBloc>().state.selectedAge));
+        }
+        else if(context.read<ListsBloc>().state.selectedRegion.isNotEmpty){
+          context.read<ListsBloc>().add(FetchLists(region: context.read<ListsBloc>().state.selectedRegion));
+        }
+        else if(context.read<ListsBloc>().state.selectedBooth.isNotEmpty){
+          context.read<ListsBloc>().add(FetchLists(booth:context.read<ListsBloc>().state.selectedBooth));
+        }
+        else{
+          context.read<ListsBloc>().add(FetchLists());
+        }
       }
     });
   }
 
   Future<void> _onRefresh()async{
-    _listsBloc.add(FetchLists(refresh: true));
+    context.read<ListsBloc>().add(FetchLists(refresh: true));
+    // _listsBloc.add(FetchLists(refresh: true));
+    context.read<ListsBloc>().add(BoothChange(selectedBooth: ''));
+    context.read<ListsBloc>().add(RegionChange(selectedRegion: ''));
+    context.read<ListsBloc>().add(AgeChange(selectedAge: ''));
   }
 
 
@@ -105,7 +126,8 @@ class _AlertsScreenState extends State<ListsScreen> with TickerProviderStateMixi
     shareController.dispose();
     languageController.dispose();
     _scrollController.dispose();
-    _listsBloc.close();
+    // _listsBloc.close();
+
   }
   @override
   Widget build(BuildContext context) {
@@ -137,7 +159,7 @@ class _AlertsScreenState extends State<ListsScreen> with TickerProviderStateMixi
                               children: [
                                 SvgImageWidget(svgPath: AssetsPath.locationIcon,color: null),
                                 const SizedBox(width: 12),
-                                Text("Bhandara Vidhan Sabha",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w700,fontFamily: ''),),
+                                Text(AppLocalizations.of(context)!.bhandaraVidhanSabha,style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w700,fontFamily: ''),),
                               ],
                             )),
                             LanguageWidget(
@@ -158,7 +180,8 @@ class _AlertsScreenState extends State<ListsScreen> with TickerProviderStateMixi
                               },
                               onSubmit: (value) {
                                 print("value  $value");
-                                _listsBloc.add(FetchLists(searchQuery: value,refresh: true));
+                                context.read<ListsBloc>().add(FetchLists(searchQuery: value,refresh: true));
+                                // _listsBloc.add(FetchLists(searchQuery: value,refresh: true));
                               },
                             ),
                           ),
@@ -172,37 +195,49 @@ class _AlertsScreenState extends State<ListsScreen> with TickerProviderStateMixi
                         const SizedBox(height: 18),
                         Row(
                           children: [
-                            Expanded(child: SelectWidget(
-                              text: "Region",
-                              onTap: (){
-                                openTahsilBottomSheet();
+                            Expanded(child: BlocBuilder<ListsBloc, ListsState>(
+                              builder: (context, state) {
+                                return SelectWidget(
+                                  text:state.selectedRegion.isEmpty?AppLocalizations.of(context)!.selectRegion:state.selectedRegion,
+                                  onTap: (){
+                                    openTahsilBottomSheet();
+                                  },
+                                );
                               },
                             )),
                             const SizedBox(width: 12),
-                            Expanded(child: SelectWidget(
-                              text: "Booth",
-                              onTap: (){
-                                openBoothBottomSheet();
+                            Expanded(child: BlocBuilder<ListsBloc, ListsState>(
+                              builder: (context, state) {
+                                return SelectWidget(
+                                  text:state.selectedBooth.isEmpty?AppLocalizations.of(context)!.booth:state.selectedBooth,
+                                  onTap: (){
+                                    openBoothBottomSheet();
+                                  },
+                                );
                               },
                             )),
                             const SizedBox(width: 12),
-                            Expanded(child: SelectWidget(
-                              text: "Age",
-                              onTap: (){
-                                openAgeBottomSheet();
+                            Expanded(child: BlocBuilder<ListsBloc, ListsState>(
+                              builder: (context, state) {
+                                return SelectWidget(
+                                  text:state.selectedAge.isEmpty?AppLocalizations.of(context)!.age:state.selectedAge,
+                                  onTap: (){
+                                    openAgeBottomSheet();
+                                  },
+                                );
                               },
-                            ))
+                            )),
                           ],
                         ),
                         const SizedBox(height: 12),
                         BlocBuilder<ListsBloc, ListsState>(
-                            bloc: _listsBloc,
-                            buildWhen: (current, previous) {
-                              print(current.postApiStatus);
-                              print(previous.postApiStatus);
-                              return true;
-                            } ,
+                            // buildWhen: (current, previous) {
+                            //   debugPrint("fetch data &&& 1 ${current.postApiStatus}");
+                            //   debugPrint("fetch data &&& 2 ${previous.postApiStatus}");
+                            //   return current.postApiStatus != previous.postApiStatus;
+                            // },
                             builder: (context, state) {
+                              debugPrint("fetch data &&& 3${state.postApiStatus}");
                               if (state.postApiStatus == PostApiStatus.loading) {
                                 return   Expanded(
                                     child: Center(child: CircularProgressIndicator())
@@ -211,7 +246,7 @@ class _AlertsScreenState extends State<ListsScreen> with TickerProviderStateMixi
                               else if (state.postApiStatus == PostApiStatus.success) {
                                 return state.allVoters.isEmpty?
                                 Expanded(
-                                  child: Center(child: EmptyListWidget()),
+                                  child: Center(child: EmptyListWidget(isRefresh: true,onTab: _onRefresh)),
                                 ) :Expanded(
                                     child:  SingleChildScrollView(
                                       physics: AlwaysScrollableScrollPhysics(),

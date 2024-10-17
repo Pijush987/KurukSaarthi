@@ -17,15 +17,35 @@ class ListsBloc extends Bloc<ListsEvent, ListsState> {
 
   ListsBloc() : super(const ListsState(allVoters: [])) {
     on<FetchLists>(_onFetchLists);
+    on<RegionChange>(_onRegonChange);
+    on<BoothChange>(_onBoothChange);
+    on<AgeChange>(_onAgeChange);
   }
 
-  Future<void> _onFetchLists( FetchLists event, Emitter<ListsState> emit) async {
+  void _onRegonChange(RegionChange event, Emitter<ListsState> emit){
+    emit(
+      state.copyWith(selectedRegion:event.selectedRegion),
+    );
+  }
+  void _onBoothChange(BoothChange event, Emitter<ListsState> emit){
+    emit(
+      state.copyWith(selectedBooth:event.selectedBooth),
+    );
+  }
+  void _onAgeChange(AgeChange event, Emitter<ListsState> emit){
+    emit(
+      state.copyWith(selectedAge:event.selectedAge),
+    );
+  }
 
+
+
+  Future<void> _onFetchLists( FetchLists event, Emitter<ListsState> emit) async {
+    // emit(state.copyWith(postApiStatus: PostApiStatus.loading));
     if(event.refresh){
       _currentpage = 0;
       _allVoters.clear();
     }
-
     if(event.searchQuery.isNotEmpty){
       print("value  ${event.searchQuery}");
       emit(state.copyWith(postApiStatus: PostApiStatus.loading));
@@ -39,7 +59,7 @@ class ListsBloc extends Bloc<ListsEvent, ListsState> {
         emit(state.copyWith(postApiStatus: PostApiStatus.error, message: "data fetch error"));
       }
     }
-    else if(event.voterIdFilter.isNotEmpty || event.age.isNotEmpty){
+    else if(event.voterIdFilter.isNotEmpty){
       print("value  ${event.searchQuery}");
       emit(state.copyWith(postApiStatus: PostApiStatus.loading));
       try {
@@ -64,12 +84,47 @@ class ListsBloc extends Bloc<ListsEvent, ListsState> {
 
 
         try {
-          debugPrint("fetch data");
-          final value = await databaseHelper.getVoters( offset:_currentpage*event.limit ,limit: event.limit);
-          _currentpage++;
-          _allVoters.addAll(value);
-          emit(state.copyWith(allVoters: List.from(_allVoters)));
-          emit(state.copyWith(postApiStatus: PostApiStatus.success));
+          debugPrint("fetch data  ${event.age}");
+          print("value 7777 ");
+          if(event.age.isNotEmpty){
+            debugPrint("fetch data %%%%${event.age}");
+            final value = await databaseHelper.getVotersByAge( offset:_currentpage*event.limit ,limit: event.limit,age: int.parse(event.age));
+            _currentpage++;
+            _allVoters.addAll(value);
+            emit(state.copyWith(allVoters: List.from(_allVoters)));
+            emit(state.copyWith(postApiStatus: PostApiStatus.success));
+          }else if(event.booth.isNotEmpty){
+            debugPrint("fetch data  #${event.booth}");
+            debugPrint("fetch data  ##${_currentpage*event.limit}");
+            debugPrint("fetch data  ##${event.limit}");
+            final value = await databaseHelper.getVotersByBooth( offset:_currentpage*event.limit ,limit: event.limit,boothNumber: event.booth);
+            _currentpage++;
+            if(value.isEmpty){
+              _allVoters.clear();
+              emit(state.copyWith(allVoters: List.from(_allVoters)));
+              emit(state.copyWith(postApiStatus: PostApiStatus.success));
+            }else{
+              _allVoters.addAll(value);
+              emit(state.copyWith(allVoters: List.from(_allVoters)));
+              emit(state.copyWith(postApiStatus: PostApiStatus.success));
+            }
+          }else if(event.region.isNotEmpty){
+            debugPrint("fetch data  ##${event.region}");
+            debugPrint("fetch data  ##${_currentpage*event.limit}");
+            debugPrint("fetch data  ##${event.limit}");
+            final value = await databaseHelper.getVotersByRegion( offset:_currentpage*event.limit ,limit: event.limit,region: event.region);
+            _currentpage++;
+            _allVoters.addAll(value);
+            emit(state.copyWith(allVoters: List.from(_allVoters)));
+            emit(state.copyWith(postApiStatus: PostApiStatus.success));
+          }else{
+            debugPrint("fetch data &&&");
+            final value = await databaseHelper.getVoters( offset:_currentpage*event.limit ,limit: event.limit);
+            _currentpage++;
+            _allVoters.addAll(value);
+            emit(state.copyWith(allVoters: List.from(_allVoters)));
+            emit(state.copyWith(postApiStatus: PostApiStatus.success));
+          }
         } catch (e) {
           emit(state.copyWith(postApiStatus: PostApiStatus.error, message: "data fetch error"));
         }

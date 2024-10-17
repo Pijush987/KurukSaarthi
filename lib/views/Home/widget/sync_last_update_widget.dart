@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter/material.dart';
 import 'package:jiffy/jiffy.dart';
@@ -24,7 +25,6 @@ class _SyncLastUpdateWidgetState extends State<SyncLastUpdateWidget> {
     super.initState();
     _getDetails();
     notificationNotifier.addListener((){
-      log("Notifier###########################666 ");
       _getDetails();
     });
   }
@@ -59,7 +59,7 @@ class _SyncLastUpdateWidgetState extends State<SyncLastUpdateWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text("Last synced",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w600)),
+          Text(AppLocalizations.of(context)!.lastSynced,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w600)),
           SizedBox(height: 8),
           Text("$lastSync",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w500),textAlign: TextAlign.center,),
 

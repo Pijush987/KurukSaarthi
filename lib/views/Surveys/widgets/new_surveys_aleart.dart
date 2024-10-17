@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,7 +50,7 @@ class NewSurveysAleart extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
 
-                    Text("Area",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
+                    Text(AppLocalizations.of(context)!.area,style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
 
                     SizedBox(height: 10),
 
@@ -57,7 +58,7 @@ class NewSurveysAleart extends StatelessWidget {
 
                     SizedBox(height: 15),
 
-                    Text("Region",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
+                    Text(AppLocalizations.of(context)!.region,style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
 
                     SizedBox(height: 10),
 
@@ -65,12 +66,12 @@ class NewSurveysAleart extends StatelessWidget {
 
                     SizedBox(height: 15),
 
-                    Text("Booth Number",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
+                    Text(AppLocalizations.of(context)!.boothNumber,style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
 
                     SizedBox(height: 10),
                     BoothNumberAleart(),
                     SizedBox(height: 15),
-                    Text("Booth Incharge Name",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
+                    Text(AppLocalizations.of(context)!.boothInchargeName,style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
                     SizedBox(height: 10),
                     BoothInchragename(),
                     SizedBox(height: 30),
@@ -91,7 +92,7 @@ class NewSurveysAleart extends StatelessWidget {
                           if(state.message.isNotEmpty){
                             context.flushBarErrorMessage(message: state.message.toString());
                           }
-                          context.flushBarSuccessMessage(message: "Incharge create successful");
+                          context.flushBarSuccessMessage(message: AppLocalizations.of(context)!.inchargeCreateSuccessful);
                           // Navigator.pop(context);
                           // context.read<DashboardBloc>().add(CurrentIndexChange(currentIndex: 1));
                           // showDialog(
@@ -119,7 +120,7 @@ class NewSurveysAleart extends StatelessWidget {
                             CustomButton(
                               height: 44,
                               width: 110,
-                              title: "Proceed",
+                              title: AppLocalizations.of(context)!.proceed,
                               borderRadios: 10,
                               textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 15,color: AppColors.whiteColor,fontWeight: FontWeight.w600),
                               onPress:state.boothInchargeName.isEmpty?null: ()async{
@@ -131,7 +132,7 @@ class NewSurveysAleart extends StatelessWidget {
                             CustomButton(
                                 height: 44,
                                 width: 110,
-                                title: "Close",
+                                title: AppLocalizations.of(context)!.close,
                                 backgroundColor: Colors.white,
                                 borderColor: AppColors.primaryColor,
                                 borderRadios: 10,

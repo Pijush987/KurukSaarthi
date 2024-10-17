@@ -4,6 +4,7 @@ import 'package:kuruk_saarthi/configs/components/svg_image_widget.dart';
 import 'package:kuruk_saarthi/utils/assets_path.dart';
 import 'package:kuruk_saarthi/utils/const.dart';
 import 'package:kuruk_saarthi/utils/extension/general_ectensions.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HelpScreen extends StatefulWidget {
   const HelpScreen({super.key});
@@ -29,7 +30,7 @@ class _AlertsScreenState extends State<HelpScreen> {
                   children: [
                     SvgImageWidget(svgPath: AssetsPath.backArrow,color: null),
                     SizedBox(width: 16),
-                    Text("Help centre",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.blackColor,fontWeight: FontWeight.w600),),
+                    Text(AppLocalizations.of(context)!.helpCentre,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.blackColor,fontWeight: FontWeight.w600),),
                     SizedBox(height: 50),
                    ],),
                 Container(
@@ -47,7 +48,7 @@ class _AlertsScreenState extends State<HelpScreen> {
                           children: [
                             SvgImageWidget(svgPath: AssetsPath.call,color: null),
                             SizedBox(width: 10),
-                            Text("Contact number",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w600)),
+                            Text(AppLocalizations.of(context)!.contactNumber,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w600)),
                           ],
                         ), SizedBox(height: 10),
                         Text("727-XXX-XX89",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 20,color: AppColors.textFieldColor1,fontWeight: FontWeight.w600)),
@@ -70,7 +71,7 @@ class _AlertsScreenState extends State<HelpScreen> {
                           children: [
                             SvgImageWidget(svgPath: AssetsPath.email,color: null),
                             SizedBox(width: 10),
-                            Text("E-mail address",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w600)),
+                            Text(AppLocalizations.of(context)!.emailAddress,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w600)),
                           ],
                         ), SizedBox(height: 10),
                         Text("support@kuruksaarthi.in",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 20,color: AppColors.textFieldColor1,fontWeight: FontWeight.w600)),

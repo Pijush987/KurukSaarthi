@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kuruk_saarthi/bloc/list_bloc/lists_bloc.dart';
+import 'package:kuruk_saarthi/bloc/list_bloc/lists_event.dart';
+import 'package:kuruk_saarthi/bloc/list_bloc/lists_state.dart';
 import 'package:kuruk_saarthi/configs/color/color.dart';
 import 'package:kuruk_saarthi/configs/components/svg_image_widget.dart';
 import 'package:kuruk_saarthi/utils/assets_path.dart';
 import 'package:kuruk_saarthi/utils/extension/general_ectensions.dart';
 import 'package:kuruk_saarthi/views/region_select/region_select_screen.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../services/database/database_services.dart';
 
 class AgeDropdown extends StatefulWidget {
   final VoidCallback onTap;
@@ -18,6 +25,10 @@ class AgeDropdown extends StatefulWidget {
 
 class _AgeDropdownState extends State<AgeDropdown> {
   double _value = 30.0;
+  DatabaseHelper databaseHelper = DatabaseHelper();
+
+
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -35,36 +46,44 @@ class _AgeDropdownState extends State<AgeDropdown> {
         ),
         child:Column(
           children: [
-            Row(
-              children: [
-                Expanded(
-                  child: SfSlider(
-                    min: 18.0,
-                    max: 100.0,
-                    value: _value,
-                    stepSize: 1,
-                    showTicks: true,
-                    // thumbIcon: ,
-                    showLabels: true,
-                    enableTooltip: true,
-                    shouldAlwaysShowTooltip: true,
-                    minorTicksPerInterval: 1,
-                    onChanged: (dynamic value){
-                      setState(() {
-                        _value = value;
-                      });
-                    },
-                  ),
-                ),
-              ],
+            BlocBuilder<ListsBloc, ListsState>(
+                builder: (context, state) {
+                return Row(
+                  children: [
+                    Expanded(
+                      child: SfSlider(
+                        min: 18.0,
+                        max: 100.0,
+                        value:state.selectedAge.isEmpty?18.0: double.parse(state.selectedAge),
+                        stepSize: 1,
+                        showTicks: true,
+                        // thumbIcon: ,
+                        showLabels: true,
+                        enableTooltip: true,
+                        shouldAlwaysShowTooltip: true,
+                        minorTicksPerInterval: 1,
+                        onChanged: (dynamic value){
+                            _value = value;
+                            context.read<ListsBloc>().add(BoothChange(selectedBooth: ''));
+                            context.read<ListsBloc>().add(RegionChange(selectedRegion: ''));
+                            context.read<ListsBloc>().add(AgeChange(selectedAge: ''));
+                            context.read<ListsBloc>().add(AgeChange(selectedAge:  (_value.toInt()).toString()));
+                            context.read<ListsBloc>().add(FetchLists(age: (_value.toInt()).toString(),refresh: true));
+                            Navigator.pop(context);
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              }
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                Text("(min)",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.blackColor,fontWeight: FontWeight.w400),),
-                Text("(max)",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.blackColor,fontWeight: FontWeight.w400),),
+                Text("(${AppLocalizations.of(context)!.min})",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.blackColor,fontWeight: FontWeight.w400),),
+                Text("(${AppLocalizations.of(context)!.max})",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.blackColor,fontWeight: FontWeight.w400),),
 
               ],),
             )

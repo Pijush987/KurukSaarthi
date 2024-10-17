@@ -1,19 +1,15 @@
 import 'dart:math';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kuruk_saarthi/configs/color/color.dart';
-import 'package:kuruk_saarthi/configs/components/custom_button.dart';
-import 'package:kuruk_saarthi/configs/components/svg_image_widget.dart';
+import 'package:kuruk_saarthi/configs/routes/routes_name.dart';
 import 'package:kuruk_saarthi/main.dart';
 import 'package:kuruk_saarthi/services/session_manager/session_controller.dart';
-import 'package:kuruk_saarthi/utils/assets_path.dart';
-import 'package:kuruk_saarthi/utils/enums.dart';
+import 'package:kuruk_saarthi/utils/extension/flush_bar_extension.dart';
 import 'package:kuruk_saarthi/utils/extension/general_ectensions.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-
 import '../../../bloc/surveys_bloc/surveys_bloc.dart';
-import '../../../configs/components/empty_list_widget.dart';
 
 class AnalyticsBarWidget extends StatefulWidget {
 
@@ -39,19 +35,27 @@ class _AnalyticsBarWidgetState extends State<AnalyticsBarWidget> {
       _surveysBloc.add(SurveyStatic());
       Future.delayed(Duration(seconds: 3), () async{
         print("55555555555555555555555555");
+
+        if(_surveysBloc.state.message =="420"){
+          context.flushBarErrorMessage(message: AppLocalizations.of(context)!.your_token_has_been_expire_try_to_login_again);
+          print("session expire");Navigator.pushNamedAndRemoveUntil(context, RoutesName.login, (route) => false);
+
+        }
         final PARTY_PLUS = await SessionController().sharedPreferenceClass.readValue('partyPositive');
         final PARTY_MINUS = await SessionController().sharedPreferenceClass.readValue('partyNegitive');
         final NEUTRAL = await SessionController().sharedPreferenceClass.readValue('neutral');
         final DEAD = await SessionController().sharedPreferenceClass.readValue('dead');
         final total = await SessionController().sharedPreferenceClass.readValue('totalSurvey');
         _data = [
-          _ChartData('Party+', double.parse(PARTY_PLUS),AppColors.primaryColor),
-          _ChartData('Party-', double.parse(PARTY_MINUS),AppColors.fieldBackgroundColor),
-          _ChartData('Death',  double.parse(DEAD),AppColors.fieldBackgroundColor),
-          _ChartData('Neutral', double.parse(NEUTRAL),AppColors.fieldBackgroundColor),
+          _ChartData('${AppLocalizations.of(context)!.party}+', double.parse(PARTY_PLUS),AppColors.primaryColor),
+          _ChartData('${AppLocalizations.of(context)!.party}-', double.parse(PARTY_MINUS),AppColors.fieldBackgroundColor),
+          _ChartData(AppLocalizations.of(context)!.death,  double.parse(DEAD),AppColors.fieldBackgroundColor),
+          _ChartData(AppLocalizations.of(context)!.neutral, double.parse(NEUTRAL),AppColors.fieldBackgroundColor),
         ];
         _totalSurvey = double.parse(total);
-        setState(() {});
+        if(mounted){
+          setState(() {});
+        }
       });
 
     });

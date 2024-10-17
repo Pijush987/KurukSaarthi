@@ -3,6 +3,7 @@ import 'package:kuruk_saarthi/configs/color/color.dart';
 import 'package:kuruk_saarthi/configs/components/svg_image_widget.dart';
 import 'package:kuruk_saarthi/utils/assets_path.dart';
 import 'package:kuruk_saarthi/views/Surveys/widgets/chose_voter_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VoterItem extends StatelessWidget {
   final String name;
@@ -27,17 +28,17 @@ class VoterItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          hiperText(title: "Name",subtitle: name,context: context),
+          hiperText(title: AppLocalizations.of(context)!.name,subtitle: name,context: context),
           SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              hiperText(title: "region",subtitle: region,context: context),
-              hiperText(title: "Age",subtitle: age,context: context),
-              hiperText(title: "Gender",subtitle: sex,context: context),
+              hiperText(title:AppLocalizations.of(context)!.gender,subtitle: region,context: context),
+              hiperText(title: AppLocalizations.of(context)!.age,subtitle: age,context: context),
+              hiperText(title: AppLocalizations.of(context)!.gender,subtitle: sex,context: context),
             ],),
           SizedBox(height: 12),
-          hiperText(title: "Voter ID",subtitle: voterId,context: context),
+          hiperText(title: AppLocalizations.of(context)!.voterId,subtitle: voterId,context: context),
           SizedBox(height: 18),
           Container(
             margin: EdgeInsets.only(right: 80),

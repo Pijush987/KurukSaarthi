@@ -8,6 +8,7 @@ import 'package:kuruk_saarthi/configs/color/color.dart';
 import 'package:kuruk_saarthi/services/database/database_services.dart';
 import 'package:kuruk_saarthi/services/session_manager/session_controller.dart';
 import 'package:kuruk_saarthi/utils/const.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TotalVotersWidget extends StatefulWidget {
   const TotalVotersWidget({super.key});
@@ -28,7 +29,6 @@ class _TotalVotersWidgetState extends State<TotalVotersWidget> {
     super.initState();
     _getDetails();
     notificationNotifier.addListener((){
-      log("Notifier###########################666 ");
       _getDetails();
     });
   }
@@ -37,10 +37,6 @@ class _TotalVotersWidgetState extends State<TotalVotersWidget> {
     total = await SessionController().sharedPreferenceClass.readValue('totalVoters')??'';
     final data = await dbHelper.getTotalCount();
     total = data.toString();
-
-    log("Notifier#  total voters ${total}");
-    log("Notifier# total fetch ${data}");
-
     if( data == 0||  data<int.parse(total)){
     isDataSync.value = true;
     }
@@ -58,11 +54,6 @@ class _TotalVotersWidgetState extends State<TotalVotersWidget> {
   }
 
 
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -74,11 +65,11 @@ class _TotalVotersWidgetState extends State<TotalVotersWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Total voters",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w600)),
+          Text(AppLocalizations.of(context)!.totalVoters,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w600)),
           SizedBox(height: 8),
           Text("$total",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 28,color: AppColors.primaryColor,fontWeight: FontWeight.w700)),
           SizedBox(height: 12),
-          Text("*As of ${lastDate}",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w500,fontStyle: FontStyle.italic)),
+          Text("${AppLocalizations.of(context)!.asOf} ${lastDate}", style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w500,fontStyle: FontStyle.italic)),
 
         ],
       ),

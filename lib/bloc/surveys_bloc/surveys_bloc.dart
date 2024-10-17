@@ -361,7 +361,12 @@ class SurveysBloc extends Bloc<SurveysEvent, SurveysState> {
 
     try {
       await  surveyApiRepository.getSurveyStatistics(header:headers,queryParams:data).then((value)async{
-        if(value["success"] == false){
+        if(value["success"] == false && value["code"]==420){
+          await SessionController().removeUserInPreference();
+          await SessionController().getUserFromPreference();
+          emit(state.copyWith(postApiStatusStatic: PostApiStatus.error, message: "420"));
+        }
+        else if(value["success"] == false){
           emit(state.copyWith(postApiStatusStatic: PostApiStatus.error, message: value.message));
         }
         else{

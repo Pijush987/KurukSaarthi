@@ -3,7 +3,7 @@ class AppUrl {
 
   static var baseUrl = 'https://app.kuruksaarthi.in/app/v1' ;
   static var loginApi =  '$baseUrl/user/login' ;
-  static var pinChange =  '$baseUrl/user/change/password' ;
+  static var pinChange =  '$baseUrl/account/pin/change' ;
   static var regionSelect =  '$baseUrl/api/region_select' ;
   static var voterListAPi =  '$baseUrl/Voter/list' ;
   static var staticSurvey =  '$baseUrl/survey/statistics' ;

@@ -24,7 +24,6 @@ class _NotificationListWidgetState extends State<NotificationListWidget> {
     super.initState();
     _loadNotifications();
     notificationNotifier.addListener((){
-      log("Notifier###########################666 ");
       _loadNotifications();
     });
   }
@@ -44,7 +43,6 @@ class _NotificationListWidgetState extends State<NotificationListWidget> {
     ValueListenableBuilder<String>(
     valueListenable: notificationNotifier,
     builder: (BuildContext context, String isValid, child) {
-    print("isValid    $isValid");
     return  ListView.separated(
         padding: EdgeInsets.all(4),
         shrinkWrap: true,

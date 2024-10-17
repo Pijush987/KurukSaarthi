@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kuruk_saarthi/configs/color/color.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TotalVotersWidget extends StatelessWidget {
   const TotalVotersWidget({super.key});
@@ -15,7 +16,7 @@ class TotalVotersWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Total voters",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w600)),
+          Text(AppLocalizations.of(context)!.totalVoters,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w600)),
           SizedBox(height: 8),
           Text("8,17,398",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 28,color: AppColors.primaryColor,fontWeight: FontWeight.w700)),
           SizedBox(height: 12),

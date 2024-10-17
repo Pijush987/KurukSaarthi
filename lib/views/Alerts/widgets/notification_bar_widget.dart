@@ -8,6 +8,7 @@ import 'package:kuruk_saarthi/utils/assets_path.dart';
 import 'package:kuruk_saarthi/utils/const.dart';
 
 import '../../../services/database/database_services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NotificationBarWidget extends StatefulWidget {
   final bool isBack;
@@ -65,7 +66,7 @@ class _NotificationBarWidgetState extends State<NotificationBarWidget> {
                   SvgImageWidget(svgPath: AssetsPath.backArrow,color: null),
                 if(widget.isBack)
                   SizedBox(width: 16),
-                Text("Notifications (${notifications.length})",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.blackColor,fontWeight: FontWeight.w600),),
+                Text(AppLocalizations.of(context)!.notifications+" (${notifications.length})",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.blackColor,fontWeight: FontWeight.w600),),
 
 
               ],),
@@ -84,7 +85,7 @@ class _NotificationBarWidgetState extends State<NotificationBarWidget> {
               children: [
                 SvgImageWidget(svgPath: AssetsPath.deleteIcon,color: null),
                 SizedBox(width: 8),
-                Text("Delete all",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.primaryColor,fontWeight: FontWeight.w600),)
+                Text(AppLocalizations.of(context)!.deleteAll,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.primaryColor,fontWeight: FontWeight.w600),)
               ],),
           )
         ],

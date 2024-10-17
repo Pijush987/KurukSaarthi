@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -77,7 +78,7 @@ class _SurveysScreenState extends State<SurveysScreen> {
                             children: [
                               SvgImageWidget(svgPath: AssetsPath.backArrow,color: null),
                               const SizedBox(width: 16),
-                              Text("Track Survey ",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.blackColor,fontWeight: FontWeight.w600),),
+                              Text("${AppLocalizations.of(context)!.trackSurvey} ",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.blackColor,fontWeight: FontWeight.w600),),
                             ],),
                         ),
                         InkWell(
@@ -96,7 +97,7 @@ class _SurveysScreenState extends State<SurveysScreen> {
                               children: [
                                 SvgImageWidget(svgPath: AssetsPath.reloadIcon,color: null),
                                 const SizedBox(width: 8),
-                                Text("Refresh",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.whiteColor,fontWeight: FontWeight.w600)),
+                                Text(AppLocalizations.of(context)!.refresh,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.whiteColor,fontWeight: FontWeight.w600)),
 
                               ],
                             ),
@@ -116,7 +117,6 @@ class _SurveysScreenState extends State<SurveysScreen> {
 
                         },
                         builder: (context, state) {
-                          print("mmmmm   ${state.allSurvey.length}");
                           if (state.postApiStatus == PostApiStatus.loading) {
                             return   Expanded(
                                 child: Center(child: CircularProgressIndicator())
@@ -139,9 +139,7 @@ class _SurveysScreenState extends State<SurveysScreen> {
                                               shrinkWrap: true,
                                               physics: NeverScrollableScrollPhysics(),
                                               itemBuilder: (context,index){
-                                                print("mmmmm1111   ${state.allSurvey.length}");
                                                 final survey = state.allSurvey[index];
-                                                print("survey ${survey.inchargeName}");
                                                 return SurveyTrackWidget(index: index.toString(), positive:survey.partyPlus.toString(), negitive: survey.partyMinus.toString(), dead: survey.dead.toString(), neutral: survey.neutral.toString(), total: survey.count.toString(), booth: survey.voterNo.toString(), inchargeName:survey.inchargeName.toString(), time: '',);
 
                                                 // return VoterItem(voterId: survey.voterIDNumber, name: survey.name,region: survey.region,age: survey.age.toString(),sex: survey.gender,onShare: (){},

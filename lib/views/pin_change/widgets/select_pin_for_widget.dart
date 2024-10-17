@@ -6,6 +6,7 @@ import 'package:kuruk_saarthi/configs/color/color.dart';
 import 'package:kuruk_saarthi/configs/components/svg_image_widget.dart';
 import 'package:kuruk_saarthi/utils/assets_path.dart';
 import 'package:kuruk_saarthi/utils/extension/general_ectensions.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SelectPinForWidget extends StatelessWidget {
 
@@ -19,11 +20,11 @@ class SelectPinForWidget extends StatelessWidget {
           children: [
             Expanded(child: customAction(context: context,onTab: (){
               context.read<PinChangeBloc>().add(PinChangeFor(pinChangeFor: 'Karyakarta'));
-            },text:"Karyakarta" ,isSelectItem: state.pinChangeFor == "Karyakarta")),
+            },text:AppLocalizations.of(context)!.karyakarta ,isSelectItem: state.pinChangeFor == "Karyakarta")),
             SizedBox(width: 12),
             Expanded(child: customAction(context: context,onTab: (){
               context.read<PinChangeBloc>().add(PinChangeFor(pinChangeFor: 'Booth Incharge'));
-            },text:"Booth Incharge" ,isSelectItem: state.pinChangeFor == "Booth Incharge"))
+            },text:AppLocalizations.of(context)!.boothIncharge,isSelectItem: state.pinChangeFor == "Booth Incharge"))
           ],
         );
       },

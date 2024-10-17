@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kuruk_saarthi/bloc/surveys_bloc/surveys_bloc.dart';
 import 'package:kuruk_saarthi/configs/color/color.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BoothInchragename extends StatelessWidget {
   const BoothInchragename({super.key});
@@ -24,7 +25,7 @@ class BoothInchragename extends StatelessWidget {
               minHeight: 18,
               minWidth: 18
           ),
-          hintText:'Enter booth in-charge name',
+          hintText:AppLocalizations.of(context)!.enterBoothInChargeName,
           hintStyle: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 15,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w400,decoration: TextDecoration.none,  decorationThickness: 0,),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(14),
@@ -50,7 +51,7 @@ class BoothInchragename extends StatelessWidget {
         },
         validator: (value) {
           if(value!.isEmpty){
-            return "empty";
+            return AppLocalizations.of(context)!.empty;
           }
           return null;
         },

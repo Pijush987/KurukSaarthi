@@ -10,6 +10,7 @@ import 'package:kuruk_saarthi/views/pin_change/widgets/confirm_pin_form_fields.d
 import 'package:kuruk_saarthi/views/pin_change/widgets/new_pin_form_field.dart';
 import 'package:kuruk_saarthi/views/pin_change/widgets/select_pin_for_widget.dart';
 import 'package:kuruk_saarthi/views/pin_change/widgets/set_pin_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../bloc/home_bloc/home_bloc.dart';
 
@@ -30,6 +31,7 @@ class _PinChangeState extends State<PinChange> {
     @override
     void initState() {
       super.initState();
+      context.read<PinChangeBloc>().add(PinChangeFor(pinChangeFor: ''));
     }
 
     @override
@@ -63,7 +65,7 @@ class _PinChangeState extends State<PinChange> {
                             },
                               child: SvgImageWidget(svgPath: AssetsPath.backArrow,color: null)),
                           SizedBox(width: 16),
-                          Text("Change PIN",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.blackColor,fontWeight: FontWeight.w600),),
+                          Text(AppLocalizations.of(context)!.changePin,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.blackColor,fontWeight: FontWeight.w600),),
                         ],),
                       SizedBox(height: 24),
                       Expanded(child:SingleChildScrollView(
@@ -71,11 +73,11 @@ class _PinChangeState extends State<PinChange> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Set PIN for",style: Theme.of(context).textTheme.displayMedium!.copyWith(fontSize: 15,color: AppColors.blackColor,fontWeight: FontWeight.w600),),
+                            Text(AppLocalizations.of(context)!.setPINfor,style: Theme.of(context).textTheme.displayMedium!.copyWith(fontSize: 15,color: AppColors.blackColor,fontWeight: FontWeight.w600),),
                             SizedBox(height: 16),
                             SelectPinForWidget(),
                             SizedBox(height: 30),
-                            Text("New PIN",style: Theme.of(context).textTheme.displayMedium!.copyWith(fontSize: 15,color: AppColors.blackColor,fontWeight: FontWeight.w600),),
+                            Text(AppLocalizations.of(context)!.newPin,style: Theme.of(context).textTheme.displayMedium!.copyWith(fontSize: 15,color: AppColors.blackColor,fontWeight: FontWeight.w600),),
                             SizedBox(height: 20),
                             NewPinFormField(focusNode: _newPin,),
                             SizedBox(height: 16),
@@ -84,9 +86,9 @@ class _PinChangeState extends State<PinChange> {
                             SetPinButton(formKey: _formKey)
                           ],
                         ),
-
                       ))
-                    ],),
+                    ],
+                  ),
                 ),
               ),
             ),

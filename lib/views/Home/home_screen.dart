@@ -9,6 +9,8 @@ import 'package:kuruk_saarthi/configs/components/empty_list_widget.dart';
 import 'package:kuruk_saarthi/configs/components/loading_widget.dart';
 import 'package:kuruk_saarthi/configs/components/svg_image_widget.dart';
 import 'package:kuruk_saarthi/main.dart';
+import 'package:kuruk_saarthi/services/database/database_services.dart';
+import 'package:kuruk_saarthi/services/session_manager/session_controller.dart';
 import 'package:kuruk_saarthi/test_pubspec/animated_button.dart';
 import 'package:kuruk_saarthi/utils/assets_path.dart';
 import 'package:kuruk_saarthi/utils/const.dart';
@@ -33,6 +35,7 @@ import 'package:kuruk_saarthi/views/Home/widget/tahsil_dropdown_widget.dart';
 import 'package:kuruk_saarthi/views/Home/widget/total_voters_widget.dart';
 import 'package:kuruk_saarthi/views/Home/widget/voice_search_widget.dart';
 import 'package:kuruk_saarthi/views/Lists/widget/dashboard_bar_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -105,10 +108,32 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
       duration: Duration(milliseconds: 500),
       vsync: this,
     );
-
-
+    isDataSync.addListener((){
+      if(isDataSync.value == true){
+        deleteVoters();
+      }
+    });
 
   }
+
+Future deleteVoters()async{
+  final dbHelper = DatabaseHelper();
+  await dbHelper.deleteAllVoters();
+
+  await SessionController().saveTotalCount(1);
+  await SessionController().getTotalCount();
+
+  await SessionController().saveTotalVoters(0);
+  await SessionController().getTotalVoters();
+
+  await SessionController().saveLastSync('');
+  await SessionController().getLastSync();
+
+
+  if(mounted){
+    setState(() {});
+  }
+}
 
   @override
   void dispose() {
@@ -141,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
           print("object ${state.message.toString()}");
           if(state.message.isEmpty){
             stopCustomLoader(context);
-            context.flushBarSuccessMessage(message: 'Sync Successful');
+            context.flushBarSuccessMessage(message: AppLocalizations.of(context)!.syncSuccessful);
             setState(() {
               print("object ${state.message.toString()}");
             });
@@ -175,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
                             children: [
                               SvgImageWidget(svgPath: AssetsPath.locationIcon,color: null),
                               const SizedBox(width: 12),
-                              Text("Bhandara Vidhan Sabha",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w700,fontFamily: ''),),
+                              Text(AppLocalizations.of(context)!.bhandaraVidhanSabh,style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w700,fontFamily: ''),),
                             ],
                           )),
                           LanguageWidget(
@@ -213,7 +238,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
                             const DashboardBarWidget(),
                             const SizedBox(height:14),
                             SizedBox(
-                              height: 124,
+                              height: 145,
                               child:   Row(children: [
                                 Expanded(
                                     child: TotalVotersWidget(),
@@ -238,7 +263,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
                             const SizedBox(height: 16),
                             BlocBuilder<SurveysBloc, SurveysState>(
                               builder: (context, state) {
-                                print("state.staticSurvey  ${state.staticSurvey}");
                                 return AnalyticsBarWidget();
                               },
                             ),

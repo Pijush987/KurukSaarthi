@@ -15,6 +15,7 @@ import 'package:kuruk_saarthi/views/Home/widget/attach_file_widget.dart';
 import 'package:kuruk_saarthi/views/Surveys/widgets/new_surveys_aleart.dart';
 
 import '../../../bloc/surveys_bloc/surveys_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ActionWidget extends StatelessWidget {
   final AnimationController notificationController;
@@ -27,13 +28,13 @@ class ActionWidget extends StatelessWidget {
     return Column(children: [
       Row(children: [
         Expanded(
-            child:customAction(context:  context,text: "Change PIN",svgPath: AssetsPath.lockIcon,onTab: (){
+            child:customAction(context:  context,text: AppLocalizations.of(context)!.changePin,svgPath: AssetsPath.lockIcon,onTab: (){
               Navigator.pushNamed(context, RoutesName.chnagePin, arguments: (route) => false);
             })
         ),
         SizedBox(width: 14),
         Expanded(
-            child:customAction(context:  context,text: "Notify users",svgPath: AssetsPath.notifyIcon,onTab: (){
+            child:customAction(context:  context,text: AppLocalizations.of(context)!.notifyUsers,svgPath: AssetsPath.notifyIcon,onTab: (){
               onSendNotification(context,formKey);
             })
         )
@@ -62,7 +63,7 @@ class ActionWidget extends StatelessWidget {
           children: [
             SvgImageWidget(svgPath: svgPath,color: null),
             SizedBox(width: 12),
-            Text(text,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w600)),
+            Text(text,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w600)),
 
           ],
         ),

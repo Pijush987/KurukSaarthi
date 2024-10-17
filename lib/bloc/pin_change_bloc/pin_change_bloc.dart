@@ -77,19 +77,19 @@ class PinChangeBloc extends Bloc<PinChangeEvent, PinChangeState> {
 
     final token = await SessionController().sharedPreferenceClass.readValue('token');
     Map<String, dynamic> newToken = jsonDecode(token) ;
+    emit(state.copyWith(postApiStatus: PostApiStatus.loading));
 
     Map<String,String> headers = {
-      'Content-Type':'application/json',
       'Authorization': 'Bearer ${newToken['token']}'
     };
 
+
     Map<String,dynamic> data = {
-      "role":state.pinChangeFor.toString(),
+      "role":state.pinChangeFor.toString()=="Karyakarta"?"USER":"MEMBER",
       "pin":state.newPin.toString(),
     };
     debugPrint("step1");
 
-    emit(state.copyWith(postApiStatus: PostApiStatus.loading));
 
     await loginApiRepository.pinChange(data: data,header: headers).then((value)async{
       debugPrint("step2");

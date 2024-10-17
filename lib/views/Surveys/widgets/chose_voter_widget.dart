@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -61,7 +61,7 @@ class ChoseVoterWidget extends StatelessWidget {
         // Add more decoration..
       ),
       hint:Text(
-        'Mark Voter Component',
+        AppLocalizations.of(context)!.markVoterComponent,
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w600),
       ),
       items: dropdownItem.map((item) {

@@ -6,6 +6,7 @@ import 'package:kuruk_saarthi/utils/extension/general_ectensions.dart';
 import 'package:kuruk_saarthi/views/Alerts/widgets/notification_bar_widget.dart';
 import 'package:kuruk_saarthi/views/Alerts/widgets/notification_list_widget.dart';
 import 'package:kuruk_saarthi/views/Alerts/widgets/send_notification_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../configs/color/color.dart';
 
@@ -95,7 +96,7 @@ class _AlertsScreenState extends State<AlertsScreen> with TickerProviderStateMix
               children: [
                 const Icon(Icons.add,color: AppColors.whiteColor),
                 const SizedBox(width: 6),
-                Text("Create alert",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.whiteColor,fontWeight: FontWeight.w600)),
+                Text(AppLocalizations.of(context)!.createAlert,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.whiteColor,fontWeight: FontWeight.w600)),
               ],
             ),
           ),

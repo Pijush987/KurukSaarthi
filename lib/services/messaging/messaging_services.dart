@@ -74,6 +74,10 @@ class MessagingService {
       debugPrint('Got a message whilst in the foreground!');
       debugPrint('Message data: ${message.notification!.title.toString()}');
       debugPrint('Message data: ${message.notification!.body.toString()}');
+      debugPrint('Message data: ${message.notification!.bodyLocArgs}');
+      debugPrint('Message data: ${message.notification!.bodyLocKey}');
+      debugPrint('Message data: ${message.notification!.titleLocArgs}');
+      debugPrint('Message data: ${message.notification!.titleLocKey}');
 
       final dbHelper = DatabaseHelper();
       String currentDate = DateTime.now().toString();
@@ -83,8 +87,10 @@ class MessagingService {
       await dbHelper.insertNotification(message.notification!.body.toString(), now).whenComplete((){
         debugPrint('Notify');
         notificationNotifier.value = now.toString();
+        if(message.notification!.body == "reset"){
+          isDataSync.value = true;
+        }
         debugPrint('Notify333');
-
       });
 
 

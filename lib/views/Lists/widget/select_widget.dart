@@ -25,7 +25,7 @@ class SelectWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(text,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.blackColor,fontWeight: FontWeight.w400),),
+            Expanded(child: Text(text,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.blackColor,fontWeight: FontWeight.w400),overflow: TextOverflow.ellipsis,)),
             SvgImageWidget(svgPath: AssetsPath.arrowDown,color: AppColors.primaryColor),
           ],
         ),

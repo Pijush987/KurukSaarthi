@@ -41,6 +41,11 @@ class SessionController {
     sharedPreferenceClass.setValue('isLogin', 'true');
   }
 
+  Future<void> removeUserInPreference() async {
+    sharedPreferenceClass.setValue('token','');
+    sharedPreferenceClass.setValue('isLogin', 'false');
+  }
+
   Future<void> saveTotalCount(int count) async {
     sharedPreferenceClass.setValue('count', count.toString());
   }

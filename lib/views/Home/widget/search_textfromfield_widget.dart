@@ -54,7 +54,7 @@ class SearchTextFromFieldWidget extends StatelessWidget {
         },
         validator: (value) {
           if (value!.isEmpty) {
-            return 'Enter email';
+            return AppLocalizations.of(context)!.enterEmail;
           }
           return null;
         },

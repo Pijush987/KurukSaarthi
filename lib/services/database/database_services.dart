@@ -128,6 +128,54 @@ class DatabaseHelper {
     });
   }
 
+  Future<List<VoterModel>> getVotersByAge({required int age, required int offset, required int limit}) async {
+    final db = await database;
+    final List<Map<String, dynamic>> queryResult = await db.query(
+      'voters',
+      where: 'age = ?',
+      whereArgs: [age],
+      limit: limit,            // Number of records to return
+      offset: offset,
+    );
+
+    return queryResult.map((row) => VoterModel.fromJson(row)).toList();
+  }
+
+  Future<List<VoterModel>> getVotersByBooth({required String boothNumber, required int offset, required int limit}) async {
+    debugPrint("fetch  ##${boothNumber}");
+    final db = await database;
+    final List<Map<String, dynamic>> queryResult = await db.query(
+      'voters',
+      where: 'boothNumber = ?',
+      whereArgs: [boothNumber],
+      limit: limit,            // Number of records to return
+      offset: offset,
+    );
+    debugPrint("fetch  ##${queryResult.toString()}");
+    return queryResult.map((row) => VoterModel.fromJson(row)).toList();
+  }
+
+  Future<List<VoterModel>> getVotersByRegion({required String region, required int offset, required int limit}) async {
+    final db = await database;
+    debugPrint("fetch  ##${region}");
+    final List<Map<String, dynamic>> queryResult = await db.query(
+      'voters',
+      where: 'region = ?',
+      whereArgs: [region],
+      limit: limit,            // Number of records to return
+      offset: offset,
+    );
+    debugPrint("fetch  ##${queryResult.toString()}");
+
+    return queryResult.map((row) => VoterModel.fromJson(row)).toList();
+  }
+
+
+
+
+
+
+
   Future<int> getTotalCount() async {
     final db = await database;
     var result = await db.rawQuery('SELECT COUNT(*) FROM voters');
@@ -136,6 +184,7 @@ class DatabaseHelper {
   }
 
   Future<List<VoterModel>> searchVoters(String query) async {
+    log("serch   $query query");
     final db = await database;
     // final List<Map<String, dynamic>> maps = await db.rawQuery(
     //   "SELECT * FROM voters WHERE name LIKE '%$query%' OR voterIDNumber LIKE '%$query%'",
@@ -180,6 +229,25 @@ class DatabaseHelper {
     return regions;
   }
 
+  Future<List<String>> allRegions() async {
+    var dbClient = await database;
+    List<Map<String, dynamic>> result = await dbClient.rawQuery(
+        "SELECT DISTINCT region FROM voters"
+    );
+    List<String> regions = result.map((row) => row["region"] as String).toList();
+    return regions;
+  }
+
+  Future<List<String>> allBooth() async {
+    var dbClient = await database;
+    List<Map<String, dynamic>> result = await dbClient.rawQuery(
+        "SELECT DISTINCT boothNumber FROM voters"
+    );
+    List<String> regions = result.map((row) => row["boothNumber"] as String).toList();
+    return regions;
+  }
+
+
   Future<List<String>> getUniqueBoothNumbersByRegion(String region) async {
     var dbClient = await database;
     List<Map<String, dynamic>> result = await dbClient.rawQuery(
@@ -207,6 +275,11 @@ class DatabaseHelper {
   Future<void> deleteAllNotifications() async {
     final db = await database;
     await db.delete('notification');
+  }
+
+  Future<void> deleteAllVoters() async {
+    final db = await database;
+    await db.delete('voters');
   }
 
 }

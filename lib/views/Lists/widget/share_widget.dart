@@ -8,6 +8,7 @@ import 'package:kuruk_saarthi/utils/assets_path.dart';
 import 'package:kuruk_saarthi/utils/extension/flush_bar_extension.dart';
 import 'package:kuruk_saarthi/utils/extension/general_ectensions.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'dart:ui' as ui;
 import 'dart:typed_data';
@@ -115,27 +116,27 @@ class _ShareWidgetState extends State<ShareWidget> {
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            hiperText(title: "Name",subtitle: widget.name,context: context),
+                            hiperText(title: AppLocalizations.of(context)!.name,subtitle: widget.name,context: context),
                             SizedBox(height: 12),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Expanded(
 
-                                  child: hiperText(title: "Age",subtitle: widget.age,context: context),),
+                                  child: hiperText(title: AppLocalizations.of(context)!.age,subtitle: widget.age,context: context),),
 
-                                Expanded(child: hiperText(title: "Booth",subtitle: widget.booth,context: context,color: AppColors.primaryColor),),
-                                Expanded(child: hiperText(title: "Gender",subtitle: widget.sex,context: context),),
+                                Expanded(child: hiperText(title: AppLocalizations.of(context)!.booth,subtitle: widget.booth,context: context,color: AppColors.primaryColor),),
+                                Expanded(child: hiperText(title:AppLocalizations.of(context)!.gender,subtitle: widget.sex,context: context),),
 
                               ],),
                             SizedBox(height: 12),
-                            hiperText(title: "Voter ID",subtitle: widget.voterId,context: context),
+                            hiperText(title: AppLocalizations.of(context)!.voterId,subtitle: widget.voterId,context: context),
 
                             SizedBox(height: 12),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Booth Addres",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w700)),
+                              Text(AppLocalizations.of(context)!.boothAddres,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w700)),
                               Text(" : ",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w600)),
                               Expanded(child: Text(widget.boothAddress,maxLines: 5, style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color:AppColors.secondaryTextColor,fontWeight: FontWeight.w700,overflow: TextOverflow.ellipsis,))),
                             ],),
@@ -144,8 +145,8 @@ class _ShareWidgetState extends State<ShareWidget> {
                             Container(
                               child: new Image.asset('assets/banner.png',
                                 width: context.mediaQueryWidth,
-                                height: 200.0,
-                                fit: BoxFit.cover,
+                                height: 150.0,
+                                fit: BoxFit.fill,
                               ),
                             )
                           ],
@@ -172,7 +173,7 @@ class _ShareWidgetState extends State<ShareWidget> {
                             children: [
                               SvgImageWidget(svgPath: AssetsPath.download,color: null),
                               SizedBox(width: 8),
-                              Text("Download",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w600)),
+                              Text(AppLocalizations.of(context)!.download,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w600)),
                             ],
                           ),
                         ),
@@ -207,7 +208,7 @@ class _ShareWidgetState extends State<ShareWidget> {
                             children: [
                               SvgImageWidget(svgPath: AssetsPath.shareIcon,color: null),
                               SizedBox(width: 8),
-                              Text("Share",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.whiteColor,fontWeight: FontWeight.w600)),
+                              Text(AppLocalizations.of(context)!.share,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.whiteColor,fontWeight: FontWeight.w600)),
 
                             ],
                           ),

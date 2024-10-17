@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:kuruk_saarthi/configs/color/color.dart';
 import 'package:kuruk_saarthi/configs/components/svg_image_widget.dart';
 import 'package:kuruk_saarthi/utils/assets_path.dart';
 import 'package:kuruk_saarthi/utils/extension/general_ectensions.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SurveyTrackWidget extends StatelessWidget {
   final String positive;
@@ -18,6 +20,9 @@ class SurveyTrackWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String newDate = Jiffy.parse(time).format(pattern: 'MMMM do yyyy');
+    final String newTime = Jiffy.parse(time).format(pattern: 'h:mm a');
+
     return  Container(
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -28,19 +33,19 @@ class SurveyTrackWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Election Survey - ${index}",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 16,color: AppColors.blackColor,fontWeight: FontWeight.w500),),
+          Text(AppLocalizations.of(context)!.electionSurvey+" - ${index}",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 16,color: AppColors.blackColor,fontWeight: FontWeight.w500),),
           SizedBox(height: 12),
           Row(children: [
             Expanded(child:Row(
               children: [
-                Text("Positive : ",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w500),),
+                Text(AppLocalizations.of(context)!.positive+" : ",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w500),),
                 SizedBox(width: 10),
                 Text("${positive}",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.subTextColorGreen,fontWeight: FontWeight.w500),),
               ],
             ),),
             Expanded(child:Row(
               children: [
-                Text("Negative : ",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w500),),
+                Text(AppLocalizations.of(context)!.negative+" : ",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w500),),
                 SizedBox(width: 10),
                 Text("${negitive}",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.subTextColorRed,fontWeight: FontWeight.w500),),
               ],
@@ -51,14 +56,14 @@ class SurveyTrackWidget extends StatelessWidget {
           Row(children: [
             Expanded(child:Row(
               children: [
-                Text("Neutral : ",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w500),),
+                Text(AppLocalizations.of(context)!.neutral+" : ",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w500),),
                 SizedBox(width: 10),
                 Text("${neutral}",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.subTextColorYellow,fontWeight: FontWeight.w500),),
               ],
             ),),
             Expanded(child:Row(
               children: [
-                Text("Death : ",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w500),),
+                Text(AppLocalizations.of(context)!.death+" : ",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w500),),
                 SizedBox(width: 10),
                 Text("${dead}",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.subTextColorGray,fontWeight: FontWeight.w500),),
               ],
@@ -69,7 +74,7 @@ class SurveyTrackWidget extends StatelessWidget {
 
           Row(
             children: [
-              Text("Total marked : ",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w500),),
+              Text(AppLocalizations.of(context)!.totalMarked+" : ",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w500),),
               SizedBox(width: 10),
               Text("${total}",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500),),
             ],
@@ -79,7 +84,7 @@ class SurveyTrackWidget extends StatelessWidget {
           SizedBox(height: 12),
           Row(
             children: [
-              Text("Booth : ",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w500),),
+              Text(AppLocalizations.of(context)!.booth+" : ",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w500),),
               SizedBox(width: 10),
               Text("${booth}",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.primaryColor,fontWeight: FontWeight.w500),),
             ],
@@ -87,7 +92,7 @@ class SurveyTrackWidget extends StatelessWidget {
           SizedBox(height: 12),
           Row(
             children: [
-              Text("Incharge : ",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w500),),
+              Text(AppLocalizations.of(context)!.incharge+" : ",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w500),),
               SizedBox(width: 10),
               Flexible(child: Text(inchargeName,style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500,overflow: TextOverflow.ellipsis),)),
             ],
@@ -99,7 +104,7 @@ class SurveyTrackWidget extends StatelessWidget {
                 children: [
                   SvgImageWidget(svgPath: AssetsPath.calender,color: null),
                   SizedBox(width: 10),
-                  Text("26 Sept, 2024",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.subTextColorGray,fontWeight: FontWeight.w500),),
+                  Text(newDate,style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.subTextColorGray,fontWeight: FontWeight.w500),),
                 ],
               ),),
             Expanded(
@@ -107,7 +112,7 @@ class SurveyTrackWidget extends StatelessWidget {
                 children: [
                   SvgImageWidget(svgPath: AssetsPath.clock,color: null),
                   SizedBox(width: 10),
-                  Text("12 : 45 P.M. ",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.subTextColorGray,fontWeight: FontWeight.w500),),
+                  Text(newTime,style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.subTextColorGray,fontWeight: FontWeight.w500),),
                 ],
               ),),
 

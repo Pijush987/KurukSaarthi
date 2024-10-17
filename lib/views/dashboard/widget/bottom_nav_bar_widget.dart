@@ -70,7 +70,7 @@ class BottomNavBarWidget extends StatelessWidget {
                 ),
                 BottomNavigationBarItem(
                   icon:SvgImageWidget(svgPath: AssetsPath.surveys,color:state.currentIndex==1? AppColors.primaryColor:AppColors.secondaryTextColor),
-                  label: "Surveys",
+                  label: AppLocalizations.of(context)!.surveys,
                 ),
                 BottomNavigationBarItem(
                   icon:SvgImageWidget(svgPath: AssetsPath.listsNavBarIcon,color: state.currentIndex==2? AppColors.primaryColor:AppColors.secondaryTextColor),

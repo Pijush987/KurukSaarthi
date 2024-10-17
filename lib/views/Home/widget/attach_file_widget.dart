@@ -3,8 +3,10 @@ import 'package:kuruk_saarthi/configs/color/color.dart';
 import 'package:kuruk_saarthi/configs/components/custom_button.dart';
 import 'package:kuruk_saarthi/configs/components/svg_image_widget.dart';
 import 'package:kuruk_saarthi/utils/extension/general_ectensions.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../utils/assets_path.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AttachFileWidget extends StatelessWidget {
   const AttachFileWidget({super.key});
@@ -38,7 +40,7 @@ class AttachFileWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text("Attach file",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 15,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
+                  Text(AppLocalizations.of(context)!.attachFile,style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 15,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
                   SizedBox(height: 30),
                   Container(
                     padding: EdgeInsets.all(6),
@@ -50,7 +52,7 @@ class AttachFileWidget extends StatelessWidget {
                       children: [
                         Expanded(child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 6),
-                          child: Text("No file chosen",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 12,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w400)),
+                          child: Text(AppLocalizations.of(context)!.noFileChosen,style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 12,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w400)),
                         ),),
                         CustomButton(
                           height: 44,
@@ -62,7 +64,7 @@ class AttachFileWidget extends StatelessWidget {
                             children: [
                             SvgImageWidget(svgPath: AssetsPath.attach_file,color: null),
                             SizedBox(width: 10),
-                            Text("Attach",style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 12,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w500)),
+                            Text(AppLocalizations.of(context)!.attach,style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 12,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w500)),
 
                           ],),
                           borderRadios: 10,
@@ -74,7 +76,7 @@ class AttachFileWidget extends StatelessWidget {
                   CustomButton(
                     height: 44,
                       width: 110,
-                      title: "Upload",
+                      title:AppLocalizations.of(context)!.upload,
                       borderRadios: 10,
                       textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 15,color: AppColors.whiteColor,fontWeight: FontWeight.w600)
                   )

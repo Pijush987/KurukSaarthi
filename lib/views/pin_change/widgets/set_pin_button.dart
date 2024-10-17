@@ -6,6 +6,7 @@ import 'package:kuruk_saarthi/configs/components/custom_button.dart';
 import 'package:kuruk_saarthi/configs/components/loading_widget.dart';
 import 'package:kuruk_saarthi/utils/enums.dart';
 import 'package:kuruk_saarthi/utils/extension/flush_bar_extension.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SetPinButton extends StatelessWidget {
   final formKey;
@@ -30,12 +31,14 @@ class SetPinButton extends StatelessWidget {
           }
 
           if (state.postApiStatus == PostApiStatus.success) {
-            context.flushBarSuccessMessage(message: "Pin Change Successful");
+            stopCustomLoader(context);
+            context.flushBarSuccessMessage(message:AppLocalizations.of(context)!.pinChangeSuccessful);
+            context.read<PinChangeBloc>().add(StatusChange(postApiStatus: PostApiStatus.initial));
           }
         },
       builder: (context, state) {
         return CustomButton(
-          title: 'Set PIN',
+          title: AppLocalizations.of(context)!.setPIN,
           textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.whiteColor,fontWeight: FontWeight.w700),
           borderRadios: 14,
           height: 50,

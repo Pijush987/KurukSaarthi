@@ -2,12 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kuruk_saarthi/bloc/notification_bloc/notification_bloc.dart';
-import 'package:kuruk_saarthi/bloc/pin_change_bloc/pin_change_bloc.dart';
 import 'package:kuruk_saarthi/configs/color/color.dart';
-import 'package:kuruk_saarthi/configs/components/svg_image_widget.dart';
-import 'package:kuruk_saarthi/utils/assets_path.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:kuruk_saarthi/utils/extension/validations_exception.dart';
 
 class NotificationTextfieldWidget extends StatelessWidget {
   const NotificationTextfieldWidget({super.key,});
@@ -30,7 +26,7 @@ class NotificationTextfieldWidget extends StatelessWidget {
               minHeight: 18,
               minWidth: 18
           ),
-          hintText:'e.g. The voters list has been updated',
+          hintText:AppLocalizations.of(context)!.theVotersListHasBeenUpdated,
           hintStyle: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 15,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w400,decoration: TextDecoration.none,  decorationThickness: 0,),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(14),
@@ -55,7 +51,7 @@ class NotificationTextfieldWidget extends StatelessWidget {
         },
         validator: (value) {
           if(value!.isEmpty){
-            return "Please enter your message.";
+            return AppLocalizations.of(context)!.pleaseEnterYourMessage;
           }
           return null;
         },

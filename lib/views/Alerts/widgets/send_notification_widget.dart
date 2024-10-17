@@ -10,6 +10,7 @@ import 'package:kuruk_saarthi/utils/enums.dart';
 import 'package:kuruk_saarthi/utils/extension/flush_bar_extension.dart';
 import 'package:kuruk_saarthi/utils/extension/general_ectensions.dart';
 import 'package:kuruk_saarthi/views/Alerts/widgets/notification_textfield_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SendNotificationWidget extends StatelessWidget {
   final formKey;
@@ -46,7 +47,7 @@ class SendNotificationWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                  Text("Notification title",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 15,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
+                  Text(AppLocalizations.of(context)!.notificationTitle,style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 15,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
                   SizedBox(height: 30),
                   NotificationTextfieldWidget(),
                   SizedBox(height: 30),
@@ -78,7 +79,7 @@ class SendNotificationWidget extends StatelessWidget {
                                     context.read<NotificationBloc>().add(NotificationsApi());
                                   }
                                 },
-                                title: "Send notification",
+                                title: AppLocalizations.of(context)!.sendNotification,
                                 borderRadios: 10,
                                 textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 15,color: AppColors.whiteColor,fontWeight: FontWeight.w600)
                             );
@@ -91,7 +92,7 @@ class SendNotificationWidget extends StatelessWidget {
                             onPress: (){
                               Navigator.pop(context);
                             },
-                            title: "Cancel",
+                            title: AppLocalizations.of(context)!.cancel,
                             borderRadios: 10,
                             backgroundColor: AppColors.whiteColor,
                             borderColor: AppColors.primaryColor,

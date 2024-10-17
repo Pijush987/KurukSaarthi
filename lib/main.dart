@@ -24,6 +24,7 @@ import 'package:kuruk_saarthi/repository/voter_list_api/voter_http_api_repositor
 import 'package:kuruk_saarthi/services/pushNotification/local_notification_services.dart';
 import 'package:kuruk_saarthi/test_pubspec/animated_button.dart';
 import 'package:kuruk_saarthi/utils/const.dart';
+import 'package:kuruk_saarthi/views/Lists/widget/scan_to_seasch.dart';
 import 'bloc/home_bloc/home_bloc.dart';
 import 'bloc/surveys_bloc/surveys_bloc.dart';
 import 'configs/routes/routes.dart';
@@ -65,7 +66,7 @@ class _MyAppState extends State<MyApp> {
   late SurveysBloc _surveysBloc ;
   late ListsBloc _listsBloc ;
   late NotificationBloc _notificationBloc ;
-
+  late Locale locale;
 
   @override
   void initState() {
@@ -79,6 +80,18 @@ class _MyAppState extends State<MyApp> {
     _surveysBloc = SurveysBloc(surveyApiRepository: getIt());
     _listsBloc = ListsBloc();
     _notificationBloc = NotificationBloc(notificationApiRepository: getIt());
+    locale = Locale('mr');
+    selectLanguage.addListener((){
+      if(selectLanguage.value == "English"){
+        locale = Locale('en');
+      }else{
+        locale = Locale('mr');
+      }
+      if(mounted){
+        setState(() {});
+      }
+    });
+
   }
 
   @override
@@ -121,7 +134,7 @@ class _MyAppState extends State<MyApp> {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          locale: const Locale('en'),
+          locale: locale,
           supportedLocales: const [
             Locale('en'), // English locale
             Locale('mr'), // Spanish locale
