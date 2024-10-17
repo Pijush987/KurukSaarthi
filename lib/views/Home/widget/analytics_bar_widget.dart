@@ -46,6 +46,7 @@ class _AnalyticsBarWidgetState extends State<AnalyticsBarWidget> {
         final NEUTRAL = await SessionController().sharedPreferenceClass.readValue('neutral');
         final DEAD = await SessionController().sharedPreferenceClass.readValue('dead');
         final total = await SessionController().sharedPreferenceClass.readValue('totalSurvey');
+        if(mounted){
         _data = [
           _ChartData('${AppLocalizations.of(context)!.party}+', double.parse(PARTY_PLUS),AppColors.primaryColor),
           _ChartData('${AppLocalizations.of(context)!.party}-', double.parse(PARTY_MINUS),AppColors.fieldBackgroundColor),
@@ -53,7 +54,6 @@ class _AnalyticsBarWidgetState extends State<AnalyticsBarWidget> {
           _ChartData(AppLocalizations.of(context)!.neutral, double.parse(NEUTRAL),AppColors.fieldBackgroundColor),
         ];
         _totalSurvey = double.parse(total);
-        if(mounted){
           setState(() {});
         }
       });

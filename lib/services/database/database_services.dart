@@ -34,7 +34,6 @@ class DatabaseHelper {
     final db = await DatabaseHelper().database;
     Batch batch = await db.batch();
 
-    // Add all insert operations to the batch
     for (var voter in voters) {
       batch.insert(
         'voters',
@@ -42,7 +41,6 @@ class DatabaseHelper {
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
     }
-    // Commit the batch (this executes all the insert operations at once)
     await batch.commit(noResult: true);
   }
 
@@ -113,14 +111,13 @@ class DatabaseHelper {
         );
         voters.add(voter);
       }
-      // Insert all orders in a batch
       await insertMultipleOrders(voters);
     }
 
   Future<List<VoterModel>> getVoters({required int offset, required int limit}) async {
     final db = await database;
     final List<Map<String, dynamic>> reqMap = await db.rawQuery(
-      'SELECT * FROM voters LIMIT $limit OFFSET $offset',
+      'SELECT * FROM voters ORDER BY name ASC LIMIT $limit OFFSET $offset',
     );
     log(reqMap.toString());
     return List.generate(reqMap.length, (i) {
@@ -134,7 +131,8 @@ class DatabaseHelper {
       'voters',
       where: 'age = ?',
       whereArgs: [age],
-      limit: limit,            // Number of records to return
+      orderBy: 'name ASC',
+      limit: limit,
       offset: offset,
     );
 
@@ -148,7 +146,8 @@ class DatabaseHelper {
       'voters',
       where: 'boothNumber = ?',
       whereArgs: [boothNumber],
-      limit: limit,            // Number of records to return
+      orderBy: 'name ASC',
+      limit: limit,
       offset: offset,
     );
     debugPrint("fetch  ##${queryResult.toString()}");
@@ -162,37 +161,27 @@ class DatabaseHelper {
       'voters',
       where: 'region = ?',
       whereArgs: [region],
-      limit: limit,            // Number of records to return
+      orderBy: 'name ASC',
+      limit: limit,
       offset: offset,
     );
     debugPrint("fetch  ##${queryResult.toString()}");
-
     return queryResult.map((row) => VoterModel.fromJson(row)).toList();
   }
-
-
-
-
-
-
 
   Future<int> getTotalCount() async {
     final db = await database;
     var result = await db.rawQuery('SELECT COUNT(*) FROM voters');
-    int count = Sqflite.firstIntValue(result) ?? 0; // Extract the count value
+    int count = Sqflite.firstIntValue(result) ?? 0;
     return count;
   }
 
   Future<List<VoterModel>> searchVoters(String query) async {
     log("serch   $query query");
     final db = await database;
-    // final List<Map<String, dynamic>> maps = await db.rawQuery(
-    //   "SELECT * FROM voters WHERE name LIKE '%$query%' OR voterIDNumber LIKE '%$query%'",
-    // );
-
     List<Map<String, dynamic>> results = await db.rawQuery(
-        "SELECT * FROM voters WHERE name LIKE ? OR voterIDNumber LIKE ?",
-        ['%$query%', '%$query%'] // Pass the search query as parameter
+        "SELECT * FROM voters ORDER BY name ASC WHERE name LIKE ? OR voterIDNumber LIKE ?",
+        ['%$query%', '%$query%']
     );
 
     return List.generate(results.length, (i) {
@@ -203,7 +192,7 @@ class DatabaseHelper {
   Future<List<VoterModel>> filterVoters(int minAge, int maxAge, String voterId) async {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.rawQuery(
-      "SELECT * FROM voters WHERE age >= $minAge AND age <= $maxAge AND voterIDNumber = '$voterId'",
+      "SELECT * FROM voters ORDER BY name ASC WHERE age >= $minAge AND age <= $maxAge AND voterIDNumber = '$voterId'",
     );
     return List.generate(maps.length, (i) {
       return VoterModel.fromJson(maps[i]);
@@ -266,9 +255,9 @@ class DatabaseHelper {
     );
 
     if (result.isNotEmpty) {
-      return result[0]["subDivision"] as String;  // Return the first matching subDivision
+      return result[0]["subDivision"] as String;
     } else {
-      return null;  // Return null if no match is found
+      return null;
     }
   }
 

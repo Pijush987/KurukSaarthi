@@ -138,6 +138,7 @@ class NetworkApiService implements BaseApiServices{
   dynamic returnResponse(http.Response response) {
     if (kDebugMode) {
       print(response.statusCode);
+      print(response.body);
     }
 
     switch (response.statusCode) {
@@ -148,7 +149,8 @@ class NetworkApiService implements BaseApiServices{
         dynamic responseJson = jsonDecode(response.body);
         return responseJson;
       case 401:
-        throw BadRequestException(response.body.toString());
+        dynamic responseJson = jsonDecode(response.body);
+        return responseJson;
       case 500:
         throw BadRequestException(response.body.toString());
       case 404:

@@ -64,72 +64,37 @@ class MessagingService {
     fcmToken = await _fcm.getToken();
     log('fcmToken: $fcmToken');
 
-    // Handling background messages using the specified handler
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
     FirebaseMessaging.instance.subscribeToTopic("all");
-
-    // Listening for incoming messages while the app is in the foreground
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async{
-      debugPrint('Got a message whilst in the foreground!');
-      debugPrint('Message data: ${message.notification!.title.toString()}');
-      debugPrint('Message data: ${message.notification!.body.toString()}');
-      debugPrint('Message data: ${message.notification!.bodyLocArgs}');
-      debugPrint('Message data: ${message.notification!.bodyLocKey}');
-      debugPrint('Message data: ${message.notification!.titleLocArgs}');
-      debugPrint('Message data: ${message.notification!.titleLocKey}');
 
-      final dbHelper = DatabaseHelper();
-      String currentDate = DateTime.now().toString();
-      var now = Jiffy.parse(currentDate.toString()).format(pattern: 'MMMM do yyyy, h:mm a');
+      if(message.notification != null){
+        debugPrint('Got a message whilst in the foreground!');
+        debugPrint('Message data: ${message.notification!.title.toString()}');
+        debugPrint('Message data: ${message.notification!.body.toString()}');
+        debugPrint('Notify333 ${message.data}');
+
+        final dbHelper = DatabaseHelper();
+        String currentDate = DateTime.now().toString();
+        var now = Jiffy.parse(currentDate.toString()).format(pattern: 'MMMM do yyyy, h:mm a');
 
 
-      await dbHelper.insertNotification(message.notification!.body.toString(), now).whenComplete((){
-        debugPrint('Notify');
-        notificationNotifier.value = now.toString();
-        if(message.notification!.body == "reset"){
+        await dbHelper.insertNotification(message.notification!.body.toString(), now).whenComplete((){
+          notificationNotifier.value = now.toString();
+        });
+        if(message.data['sync_enabled'] == "true"){
           isDataSync.value = true;
         }
-        debugPrint('Notify333');
-      });
-
+      }
 
       if (message.notification != null) {
         if (message.notification!.title != null &&
             message.notification!.body != null) {
           final notificationData = message.data;
           final screen = notificationData['screen'];
-
-          // Showing an alert dialog when a notification is received (Foreground state)
           if (context.mounted) {
             showNotification(message);
-            // showDialog(
-            //   context: context,
-            //   barrierDismissible: false,
-            //   builder: (BuildContext context) {
-            //     return PopScope(
-            //       canPop: false,
-            //       child: AlertDialog(
-            //         title: Text(message.notification!.title!),
-            //         content: Text(message.notification!.body!),
-            //         actions: [
-            //           if (notificationData.containsKey('screen'))
-            //             TextButton(
-            //               onPressed: () {
-            //                 Navigator.pop(context);
-            //                 Navigator.of(context).pushNamed(screen);
-            //               },
-            //               child: const Text('Open Screen'),
-            //             ),
-            //           TextButton(
-            //             onPressed: () => Navigator.of(context).pop(),
-            //             child: const Text('Dismiss'),
-            //           ),
-            //         ],
-            //       ),
-            //     );
-            //   },
-            // );
           }
         }
       }
@@ -137,16 +102,12 @@ class MessagingService {
 
 
 
-    // Handling the initial message received when the app is launched from dead (killed state)
-    // When the app is killed and a new notification arrives when user clicks on it
-    // It gets the data to which screen to open
     FirebaseMessaging.instance.getInitialMessage().then((message) {
       if (message != null && context.mounted) {
         _handleNotificationClick(context, message);
       }
     });
 
-    // Handling a notification click event when the app is in the background
     if (context.mounted) {
       FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
         debugPrint(
@@ -158,7 +119,6 @@ class MessagingService {
     }
   }
 
-  // Handling a notification click event by navigating to the specified screen
   void _handleNotificationClick(BuildContext context, RemoteMessage message) {
     final notificationData = message.data;
 
@@ -191,11 +151,8 @@ class MessagingService {
 
 }
 
-// Handler for background messages
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  // If you're going to use other Firebase services in the background, such as Firestore,
-  // make sure you call `initializeApp` before using other Firebase services.
   debugPrint('Handling a background message: ${message.notification!.title}');
 }
 final firebaseFirestore = FirebaseFirestore.instance;

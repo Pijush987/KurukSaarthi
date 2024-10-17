@@ -352,6 +352,11 @@ class SurveysBloc extends Bloc<SurveysEvent, SurveysState> {
       'Content-Type':'application/json',
       'Authorization': 'Bearer ${newToken['token']}'
     };
+    // Map<String,String> headers = {
+    //   'Content-Type':'application/json',
+    //   'Authorization': 'Bearer ${newToken['token']}',
+    //   'pijush':"abcd"
+    // };
 
     Map<String,dynamic> data = {
 
@@ -364,6 +369,7 @@ class SurveysBloc extends Bloc<SurveysEvent, SurveysState> {
         if(value["success"] == false && value["code"]==420){
           await SessionController().removeUserInPreference();
           await SessionController().getUserFromPreference();
+          print("Authentication failed. Try logging in again");
           emit(state.copyWith(postApiStatusStatic: PostApiStatus.error, message: "420"));
         }
         else if(value["success"] == false){
