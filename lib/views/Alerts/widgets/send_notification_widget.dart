@@ -2,10 +2,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kuruk_saarthi/bloc/dashboard_bloc/dashboard_bloc.dart';
 import 'package:kuruk_saarthi/bloc/notification_bloc/notification_bloc.dart';
 import 'package:kuruk_saarthi/configs/color/color.dart';
 import 'package:kuruk_saarthi/configs/components/custom_button.dart';
 import 'package:kuruk_saarthi/configs/components/loading_widget.dart';
+import 'package:kuruk_saarthi/configs/routes/routes_name.dart';
 import 'package:kuruk_saarthi/utils/enums.dart';
 import 'package:kuruk_saarthi/utils/extension/flush_bar_extension.dart';
 import 'package:kuruk_saarthi/utils/extension/general_ectensions.dart';
@@ -57,6 +59,11 @@ class SendNotificationWidget extends StatelessWidget {
                         child: BlocConsumer<NotificationBloc, NotificationState>(
                           buildWhen: (current, previous) => current.postApiStatus != previous.postApiStatus,
                           listener: (context, state) {
+                            if(state.message =="420"){
+                              context.flushBarErrorMessage(message: AppLocalizations.of(context)!.your_token_has_been_expire_try_to_login_again);
+                              print("session expire");Navigator.pushNamedAndRemoveUntil(context, RoutesName.login, (route) => false);
+                              context.read<DashboardBloc>().add(CurrentIndexChange(currentIndex: 0));
+                            }
                             if (state.postApiStatus == PostApiStatus.loading) {
                               showCustomLoader(context,50);
                             }

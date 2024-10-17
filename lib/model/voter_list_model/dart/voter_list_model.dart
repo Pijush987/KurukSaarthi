@@ -7,6 +7,7 @@ class VoterListModel with _$VoterListModel {
   factory VoterListModel({
     @Default(false)@JsonKey(name: 'success') bool success,
     @Default(0) @JsonKey(name: 'count')int count,
+    @Default(0) @JsonKey(name: 'code')int code,
     @Default('') @JsonKey(name: 'message')String message,
     @Default('') @JsonKey(name: 'limit')String limit,
     @Default('') @JsonKey(name: 'page') String page,

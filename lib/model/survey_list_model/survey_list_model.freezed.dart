@@ -24,6 +24,8 @@ mixin _$SurveyListModel {
   bool get success => throw _privateConstructorUsedError;
   @JsonKey(name: 'count')
   int get count => throw _privateConstructorUsedError;
+  @JsonKey(name: 'code')
+  int get code => throw _privateConstructorUsedError;
   @JsonKey(name: 'message')
   String get message => throw _privateConstructorUsedError;
   @JsonKey(name: 'limit')
@@ -52,6 +54,7 @@ abstract class $SurveyListModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'success') bool success,
       @JsonKey(name: 'count') int count,
+      @JsonKey(name: 'code') int code,
       @JsonKey(name: 'message') String message,
       @JsonKey(name: 'limit') int limit,
       @JsonKey(name: 'page') int page,
@@ -75,6 +78,7 @@ class _$SurveyListModelCopyWithImpl<$Res, $Val extends SurveyListModel>
   $Res call({
     Object? success = null,
     Object? count = null,
+    Object? code = null,
     Object? message = null,
     Object? limit = null,
     Object? page = null,
@@ -88,6 +92,10 @@ class _$SurveyListModelCopyWithImpl<$Res, $Val extends SurveyListModel>
       count: null == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      code: null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
               as int,
       message: null == message
           ? _value.message
@@ -120,6 +128,7 @@ abstract class _$$SurveyListModellImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'success') bool success,
       @JsonKey(name: 'count') int count,
+      @JsonKey(name: 'code') int code,
       @JsonKey(name: 'message') String message,
       @JsonKey(name: 'limit') int limit,
       @JsonKey(name: 'page') int page,
@@ -141,6 +150,7 @@ class __$$SurveyListModellImplCopyWithImpl<$Res>
   $Res call({
     Object? success = null,
     Object? count = null,
+    Object? code = null,
     Object? message = null,
     Object? limit = null,
     Object? page = null,
@@ -154,6 +164,10 @@ class __$$SurveyListModellImplCopyWithImpl<$Res>
       count: null == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      code: null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
               as int,
       message: null == message
           ? _value.message
@@ -181,6 +195,7 @@ class _$SurveyListModellImpl implements _SurveyListModell {
   _$SurveyListModellImpl(
       {@JsonKey(name: 'success') this.success = false,
       @JsonKey(name: 'count') this.count = 0,
+      @JsonKey(name: 'code') this.code = 0,
       @JsonKey(name: 'message') this.message = '',
       @JsonKey(name: 'limit') this.limit = 0,
       @JsonKey(name: 'page') this.page = 0,
@@ -196,6 +211,9 @@ class _$SurveyListModellImpl implements _SurveyListModell {
   @override
   @JsonKey(name: 'count')
   final int count;
+  @override
+  @JsonKey(name: 'code')
+  final int code;
   @override
   @JsonKey(name: 'message')
   final String message;
@@ -216,7 +234,7 @@ class _$SurveyListModellImpl implements _SurveyListModell {
 
   @override
   String toString() {
-    return 'SurveyListModel(success: $success, count: $count, message: $message, limit: $limit, page: $page, docs: $docs)';
+    return 'SurveyListModel(success: $success, count: $count, code: $code, message: $message, limit: $limit, page: $page, docs: $docs)';
   }
 
   @override
@@ -226,6 +244,7 @@ class _$SurveyListModellImpl implements _SurveyListModell {
             other is _$SurveyListModellImpl &&
             (identical(other.success, success) || other.success == success) &&
             (identical(other.count, count) || other.count == count) &&
+            (identical(other.code, code) || other.code == code) &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.limit, limit) || other.limit == limit) &&
             (identical(other.page, page) || other.page == page) &&
@@ -234,8 +253,8 @@ class _$SurveyListModellImpl implements _SurveyListModell {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, success, count, message, limit,
-      page, const DeepCollectionEquality().hash(_docs));
+  int get hashCode => Object.hash(runtimeType, success, count, code, message,
+      limit, page, const DeepCollectionEquality().hash(_docs));
 
   /// Create a copy of SurveyListModel
   /// with the given fields replaced by the non-null parameter values.
@@ -258,6 +277,7 @@ abstract class _SurveyListModell implements SurveyListModel {
   factory _SurveyListModell(
           {@JsonKey(name: 'success') final bool success,
           @JsonKey(name: 'count') final int count,
+          @JsonKey(name: 'code') final int code,
           @JsonKey(name: 'message') final String message,
           @JsonKey(name: 'limit') final int limit,
           @JsonKey(name: 'page') final int page,
@@ -273,6 +293,9 @@ abstract class _SurveyListModell implements SurveyListModel {
   @override
   @JsonKey(name: 'count')
   int get count;
+  @override
+  @JsonKey(name: 'code')
+  int get code;
   @override
   @JsonKey(name: 'message')
   String get message;

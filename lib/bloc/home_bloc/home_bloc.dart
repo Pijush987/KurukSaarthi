@@ -81,7 +81,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             };
            await getAllData(data,headers,emit).then((value)async{
              debugPrint("total count 1");
-              if(value.success == false  && value.message.isNotEmpty){
+             if(value.success == false && value.code==420){
+               await SessionController().removeUserInPreference();
+               await SessionController().getUserFromPreference();
+               print("Authentication failed. Try logging in again");
+               emit(state.copyWith(postApiStatus: PostApiStatus.error, message: "420"));
+             }
+              else if(value.success == false  && value.message.isNotEmpty){
                 emit(state.copyWith(postApiStatus: PostApiStatus.error, message: value.message));
               }else{
                 debugPrint("total count 2");

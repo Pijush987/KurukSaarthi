@@ -2,12 +2,14 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kuruk_saarthi/bloc/dashboard_bloc/dashboard_bloc.dart';
 import 'package:kuruk_saarthi/bloc/home_bloc/home_bloc.dart';
 import 'package:kuruk_saarthi/bloc/surveys_bloc/surveys_bloc.dart';
 import 'package:kuruk_saarthi/configs/color/color.dart';
 import 'package:kuruk_saarthi/configs/components/empty_list_widget.dart';
 import 'package:kuruk_saarthi/configs/components/loading_widget.dart';
 import 'package:kuruk_saarthi/configs/components/svg_image_widget.dart';
+import 'package:kuruk_saarthi/configs/routes/routes_name.dart';
 import 'package:kuruk_saarthi/main.dart';
 import 'package:kuruk_saarthi/services/database/database_services.dart';
 import 'package:kuruk_saarthi/services/session_manager/session_controller.dart';
@@ -154,6 +156,11 @@ Future deleteVoters()async{
     return BlocConsumer<HomeBloc, HomeState>(
       buildWhen: (current, previous) => current.postApiStatus != previous.postApiStatus,
       listener: (context, state) {
+        if(state.message =="420"){
+          context.flushBarErrorMessage(message: AppLocalizations.of(context)!.your_token_has_been_expire_try_to_login_again);
+          print("session expire");Navigator.pushNamedAndRemoveUntil(context, RoutesName.login, (route) => false);
+          context.read<DashboardBloc>().add(CurrentIndexChange(currentIndex: 0));
+        }
         if (state.postApiStatus == PostApiStatus.loading) {
           showSyncAlertDialog(context,50);
         }
@@ -210,15 +217,6 @@ Future deleteVoters()async{
                           )
                         ],),
                       ),
-                      // const SizedBox(height: 12),
-                      // Row(children: [
-                      //   Expanded(child:  SearchTextFromFieldWidget(focusNode: _searchFocusNode,)),
-                      //   const SizedBox(width: 12),
-                      //   const VoiceSearchWidget(),
-                      //   const SizedBox(width: 12),
-                      //   const ImageCaptureWidget(),
-                      //
-                      // ],),
                       const SizedBox(height: 12),
                       Expanded(
                         child: SingleChildScrollView(

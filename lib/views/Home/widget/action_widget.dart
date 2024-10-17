@@ -39,10 +39,6 @@ class ActionWidget extends StatelessWidget {
             })
         )
       ],),
-      // SizedBox(height: 14),
-      // customAction(context:  context,text: "Add a new Voters list",svgPath: AssetsPath.listIcon,onTab: (){
-      //   onAttachFiles(context);
-      // })
     ],);
   }
 

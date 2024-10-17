@@ -260,7 +260,14 @@ class SurveysBloc extends Bloc<SurveysEvent, SurveysState> {
     try {
       await surveyApiRepository.fetchSurveyList(header:headers,queryParams:data ).then((value)async{
         log("success $value");
-        if(value.success == false){
+        if(value.success == false && value.code==420){
+          await SessionController().removeUserInPreference();
+          await SessionController().getUserFromPreference();
+          print("Authentication failed. Try logging in again");
+          emit(state.copyWith(postApiStatusStatic: PostApiStatus.error, message: "420"));
+        }
+
+        else if(value.success == false){
           emit(state.copyWith(postApiStatus: PostApiStatus.error, message: value.message));
         }
         else{
@@ -309,7 +316,13 @@ class SurveysBloc extends Bloc<SurveysEvent, SurveysState> {
     try {
       await  surveyApiRepository.surveyManageApi(header:headers,body:manageSurveyModel.toJson()).then((value)async{
         log("success $value");
-        if(value["success"] == false){
+        if(value["success"] == false && value["code"]==420){
+          await SessionController().removeUserInPreference();
+          await SessionController().getUserFromPreference();
+          print("Authentication failed. Try logging in again");
+          emit(state.copyWith(postApiStatusStatic: PostApiStatus.error, message: "420"));
+        }
+        else if(value["success"] == false){
           emit(state.copyWith(postApiStatus: PostApiStatus.error, message: value.message));
         }
         else{

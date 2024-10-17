@@ -10,6 +10,7 @@ _$VoterListModelImpl _$$VoterListModelImplFromJson(Map<String, dynamic> json) =>
     _$VoterListModelImpl(
       success: json['success'] as bool? ?? false,
       count: (json['count'] as num?)?.toInt() ?? 0,
+      code: (json['code'] as num?)?.toInt() ?? 0,
       message: json['message'] as String? ?? '',
       limit: json['limit'] as String? ?? '',
       page: json['page'] as String? ?? '',
@@ -24,6 +25,7 @@ Map<String, dynamic> _$$VoterListModelImplToJson(
     <String, dynamic>{
       'success': instance.success,
       'count': instance.count,
+      'code': instance.code,
       'message': instance.message,
       'limit': instance.limit,
       'page': instance.page,

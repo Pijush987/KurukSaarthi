@@ -7,6 +7,7 @@ class SurveyListModel with _$SurveyListModel {
   factory SurveyListModel({
     @Default(false)@JsonKey(name: 'success') bool success,
     @Default(0) @JsonKey(name: 'count')int count,
+    @Default(0) @JsonKey(name: 'code')int code,
     @Default('') @JsonKey(name: 'message')String message,
     @Default(0) @JsonKey(name: 'limit')int limit,
     @Default(0) @JsonKey(name: 'page') int page,
