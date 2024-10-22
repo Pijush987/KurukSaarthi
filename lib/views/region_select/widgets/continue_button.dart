@@ -27,6 +27,7 @@ class ContinueButton extends StatelessWidget {
         }
         if (state.postApiStatus == PostApiStatus.error) {
           context.flushBarErrorMessage(message: AppLocalizations.of(context)!.something_want_to_wrong_try_again);
+
         }
 
         if (state.postApiStatus == PostApiStatus.success) {

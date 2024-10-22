@@ -41,7 +41,7 @@ class ListsBloc extends Bloc<ListsEvent, ListsState> {
 
 
   Future<void> _onFetchLists( FetchLists event, Emitter<ListsState> emit) async {
-
+    // emit(state.copyWith(postApiStatus: PostApiStatus.loading));
     if(event.refresh){
       emit(state.copyWith(postApiStatus: PostApiStatus.initial));
       _currentpage = 0;

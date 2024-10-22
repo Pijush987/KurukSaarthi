@@ -69,16 +69,16 @@ class BottomNavBarWidget extends StatelessWidget {
                   label:  AppLocalizations.of(context)!.home,
                 ),
                 BottomNavigationBarItem(
-                  icon:SvgImageWidget(svgPath: AssetsPath.surveys,color:state.currentIndex==1? AppColors.primaryColor:AppColors.secondaryTextColor),
-                  label: AppLocalizations.of(context)!.surveys,
+                  icon:SvgImageWidget(svgPath: AssetsPath.listsNavBarIcon,color:state.currentIndex==1? AppColors.primaryColor:AppColors.secondaryTextColor),
+                  label: AppLocalizations.of(context)!.lists,
                 ),
                 BottomNavigationBarItem(
-                  icon:SvgImageWidget(svgPath: AssetsPath.listsNavBarIcon,color: state.currentIndex==2? AppColors.primaryColor:AppColors.secondaryTextColor),
-                  label:  AppLocalizations.of(context)!.lists,
+                  icon:SvgImageWidget(svgPath: AssetsPath.alertsNavBarIcon,color: state.currentIndex==2? AppColors.primaryColor:AppColors.secondaryTextColor),
+                  label:  AppLocalizations.of(context)!.alerts,
                 ),
                 BottomNavigationBarItem(
                   icon: SvgImageWidget(svgPath: AssetsPath.helpNavBarIcon,color: state.currentIndex==3? AppColors.primaryColor:AppColors.secondaryTextColor),
-                  label: AppLocalizations.of(context)!.alerts,
+                  label: AppLocalizations.of(context)!.help,
                 ),
               ],
             ),

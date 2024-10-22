@@ -73,34 +73,34 @@ class _AlertsScreenState extends State<AlertsScreen> with TickerProviderStateMix
                 ),
               ),
             ),
-          floatingActionButton: FloatingActionButton.extended(
-            focusColor: AppColors.transparent,
-            hoverColor:AppColors.transparent,
-            splashColor: AppColors.transparent,
-            foregroundColor: AppColors.transparent,
-            extendedPadding: EdgeInsets.zero,
-            elevation: 0,
-            onPressed: (){
-              onSendNotification(_formKey);
-            },
-            label:Container(
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: AppColors.primaryColor,
-              borderRadius: BorderRadius.circular(40),
-            ),
-            padding: const EdgeInsets.all(12),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(Icons.add,color: AppColors.whiteColor),
-                const SizedBox(width: 6),
-                Text(AppLocalizations.of(context)!.createAlert,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.whiteColor,fontWeight: FontWeight.w600)),
-              ],
-            ),
-          ),
-          ),
+          // floatingActionButton: FloatingActionButton.extended(
+          //   focusColor: AppColors.transparent,
+          //   hoverColor:AppColors.transparent,
+          //   splashColor: AppColors.transparent,
+          //   foregroundColor: AppColors.transparent,
+          //   extendedPadding: EdgeInsets.zero,
+          //   elevation: 0,
+          //   onPressed: (){
+          //     onSendNotification(_formKey);
+          //   },
+          //   label:Container(
+          //   alignment: Alignment.center,
+          //   decoration: BoxDecoration(
+          //     color: AppColors.primaryColor,
+          //     borderRadius: BorderRadius.circular(40),
+          //   ),
+          //   padding: const EdgeInsets.all(12),
+          //   child: Row(
+          //     crossAxisAlignment: CrossAxisAlignment.center,
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     children: [
+          //       const Icon(Icons.add,color: AppColors.whiteColor),
+          //       const SizedBox(width: 6),
+          //       Text(AppLocalizations.of(context)!.createAlert,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.whiteColor,fontWeight: FontWeight.w600)),
+          //     ],
+          //   ),
+          // ),
+          // ),
         );
       },
     );

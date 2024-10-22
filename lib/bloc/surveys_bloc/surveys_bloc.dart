@@ -157,6 +157,7 @@ class SurveysBloc extends Bloc<SurveysEvent, SurveysState> {
        };
 
     Map<String, dynamic> data=  {
+      "key":Constant.privetKey.toString(),
       "region":state.selectedRegion.toString(),
       "subDivision": state.selectedArea.toString(),
       "boothNumber": state.selectedBoothNumber.toString(),
@@ -236,6 +237,8 @@ class SurveysBloc extends Bloc<SurveysEvent, SurveysState> {
     }
 
     final token = await SessionController().sharedPreferenceClass.readValue('token');
+    final String boothNo =await SessionController().sharedPreferenceClass.readValue('boothNo');
+    debugPrint("boothNo $boothNo");
 
     Map<String, dynamic> newToken = jsonDecode(token) ;
 
@@ -247,7 +250,8 @@ class SurveysBloc extends Bloc<SurveysEvent, SurveysState> {
     Map<String,dynamic> data = {
       "limit":"15",
       "page": _currentpage.toString(),
-      "search": '',
+      "key": Constant.privetKey,
+      "boothNumber": boothNo.toString(),
     };
 
 
@@ -260,20 +264,13 @@ class SurveysBloc extends Bloc<SurveysEvent, SurveysState> {
     try {
       await surveyApiRepository.fetchSurveyList(header:headers,queryParams:data ).then((value)async{
         log("success $value");
-        if(value.success == false && value.code==420){
-          await SessionController().removeUserInPreference();
-          await SessionController().getUserFromPreference();
-          print("Authentication failed. Try logging in again");
-          emit(state.copyWith(postApiStatusStatic: PostApiStatus.error, message: "420"));
-        }
-
-        else if(value.success == false){
+        if(value.success == false){
           emit(state.copyWith(postApiStatus: PostApiStatus.error, message: value.message));
         }
         else{
           log("success ${value.limit}");
           _allSurvey.addAll(value.docs);
-          log("success //////${value.docs.length}");
+          log("success ${value.docs.length}");
           emit(state.copyWith(allSurvey: List.from(_allSurvey)));
 
           emit(state.copyWith(postApiStatus: PostApiStatus.success));
@@ -289,8 +286,6 @@ class SurveysBloc extends Bloc<SurveysEvent, SurveysState> {
       emit(state.copyWith(postApiStatus: PostApiStatus.error, message: "data fetch error"));
     }
   }
-
-
 
   void _onSurveyManage(SurveyManage event, Emitter<SurveysState> emit)async{
     if(state.count ==0){
@@ -308,6 +303,7 @@ class SurveysBloc extends Bloc<SurveysEvent, SurveysState> {
     final String boothInchargeId =await SessionController().sharedPreferenceClass.readValue('boothInchargeId');
 
     selectedSurveys['inchargeId']=boothInchargeId.toString();
+    selectedSurveys['key']=Constant.privetKey.toString();
     selectedSurveys['polls']=surveyList;
 
     print("selectedSurveys   $selectedSurveys");
@@ -316,13 +312,7 @@ class SurveysBloc extends Bloc<SurveysEvent, SurveysState> {
     try {
       await  surveyApiRepository.surveyManageApi(header:headers,body:manageSurveyModel.toJson()).then((value)async{
         log("success $value");
-        if(value["success"] == false && value["code"]==420){
-          await SessionController().removeUserInPreference();
-          await SessionController().getUserFromPreference();
-          print("Authentication failed. Try logging in again");
-          emit(state.copyWith(postApiStatusStatic: PostApiStatus.error, message: "420"));
-        }
-        else if(value["success"] == false){
+        if(value["success"] == false){
           emit(state.copyWith(postApiStatus: PostApiStatus.error, message: value.message));
         }
         else{
@@ -365,27 +355,16 @@ class SurveysBloc extends Bloc<SurveysEvent, SurveysState> {
       'Content-Type':'application/json',
       'Authorization': 'Bearer ${newToken['token']}'
     };
-    // Map<String,String> headers = {
-    //   'Content-Type':'application/json',
-    //   'Authorization': 'Bearer ${newToken['token']}',
-    //   'pijush':"abcd"
-    // };
 
     Map<String,dynamic> data = {
-
+      "key": Constant.privetKey,
     };
 
     emit(state.copyWith(postApiStatusStatic: PostApiStatus.loading));
 
     try {
       await  surveyApiRepository.getSurveyStatistics(header:headers,queryParams:data).then((value)async{
-        if(value["success"] == false && value["code"]==420){
-          await SessionController().removeUserInPreference();
-          await SessionController().getUserFromPreference();
-          print("Authentication failed. Try logging in again");
-          emit(state.copyWith(postApiStatusStatic: PostApiStatus.error, message: "420"));
-        }
-        else if(value["success"] == false){
+        if(value["success"] == false){
           emit(state.copyWith(postApiStatusStatic: PostApiStatus.error, message: value.message));
         }
         else{

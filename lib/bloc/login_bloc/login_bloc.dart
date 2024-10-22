@@ -39,7 +39,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   void _onLogin(LoginEvent event, Emitter<LoginState> emit) async{
 
     Map<String,dynamic> data = {
-      "role":"ADMIN",
+      "role":"USER",
       "pin":state.loginPin.toString(),
       "key":Constant.privetKey
     };

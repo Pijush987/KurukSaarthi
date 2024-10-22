@@ -53,7 +53,7 @@ class _NotificationListWidgetState extends State<NotificationListWidget> {
       return SizedBox(
         height: 15,
       );
-    }, itemCount: 1);
+    }, itemCount: 2);
     },
     );
   }

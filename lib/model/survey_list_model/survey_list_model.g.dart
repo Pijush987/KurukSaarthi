@@ -11,7 +11,6 @@ _$SurveyListModellImpl _$$SurveyListModellImplFromJson(
     _$SurveyListModellImpl(
       success: json['success'] as bool? ?? false,
       count: (json['count'] as num?)?.toInt() ?? 0,
-      code: (json['code'] as num?)?.toInt() ?? 0,
       message: json['message'] as String? ?? '',
       limit: (json['limit'] as num?)?.toInt() ?? 0,
       page: (json['page'] as num?)?.toInt() ?? 0,
@@ -26,7 +25,6 @@ Map<String, dynamic> _$$SurveyListModellImplToJson(
     <String, dynamic>{
       'success': instance.success,
       'count': instance.count,
-      'code': instance.code,
       'message': instance.message,
       'limit': instance.limit,
       'page': instance.page,
@@ -36,23 +34,25 @@ Map<String, dynamic> _$$SurveyListModellImplToJson(
 _$SurveyModelImpl _$$SurveyModelImplFromJson(Map<String, dynamic> json) =>
     _$SurveyModelImpl(
       voterNo: json['_id'] as String? ?? '',
-      partyPlus: (json['partyPlus'] as num?)?.toInt() ?? 0,
-      partyMinus: (json['partyMinus'] as num?)?.toInt() ?? 0,
-      neutral: (json['neutral'] as num?)?.toInt() ?? 0,
-      dead: (json['dead'] as num?)?.toInt() ?? 0,
-      count: (json['count'] as num?)?.toInt() ?? 0,
+      name: json['name'] as String? ?? '',
+      age: (json['age'] as num?)?.toInt() ?? 0,
+      gender: json['gender'] as String? ?? '',
+      voterIDNumber: json['voterIDNumber'] as String? ?? '',
+      boothNumber: json['boothNumber'] as String? ?? '',
+      region: json['region'] as String? ?? '',
+      pollStatus: json['pollStatus'] as String? ?? '',
       inchargeName: json['inchargeName'] as String? ?? '',
-      updatedAt: json['updatedAt'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$SurveyModelImplToJson(_$SurveyModelImpl instance) =>
     <String, dynamic>{
       '_id': instance.voterNo,
-      'partyPlus': instance.partyPlus,
-      'partyMinus': instance.partyMinus,
-      'neutral': instance.neutral,
-      'dead': instance.dead,
-      'count': instance.count,
+      'name': instance.name,
+      'age': instance.age,
+      'gender': instance.gender,
+      'voterIDNumber': instance.voterIDNumber,
+      'boothNumber': instance.boothNumber,
+      'region': instance.region,
+      'pollStatus': instance.pollStatus,
       'inchargeName': instance.inchargeName,
-      'updatedAt': instance.updatedAt,
     };

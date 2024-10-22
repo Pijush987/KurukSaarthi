@@ -50,7 +50,7 @@ class NewSurveysAleart extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
 
-                    Text(AppLocalizations.of(context)!.area,style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
+                    Text("Area",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
 
                     SizedBox(height: 10),
 
@@ -58,7 +58,7 @@ class NewSurveysAleart extends StatelessWidget {
 
                     SizedBox(height: 15),
 
-                    Text(AppLocalizations.of(context)!.region,style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
+                    Text("Region",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
 
                     SizedBox(height: 10),
 
@@ -66,12 +66,12 @@ class NewSurveysAleart extends StatelessWidget {
 
                     SizedBox(height: 15),
 
-                    Text(AppLocalizations.of(context)!.boothNumber,style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
+                    Text("Booth Number",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
 
                     SizedBox(height: 10),
                     BoothNumberAleart(),
                     SizedBox(height: 15),
-                    Text(AppLocalizations.of(context)!.boothInchargeName,style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
+                    Text("Booth Incharge Name",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
                     SizedBox(height: 10),
                     BoothInchragename(),
                     SizedBox(height: 30),
@@ -83,6 +83,7 @@ class NewSurveysAleart extends StatelessWidget {
                         if (state.postApiStatus == PostApiStatus.error) {
                           stopCustomLoader(context);
                           context.flushBarErrorMessage(message: AppLocalizations.of(context)!.something_want_to_wrong_try_again);
+
                           context.read<SurveysBloc>().add(StatusChange(postApiStatus: PostApiStatus.initial));
                         }
 
@@ -91,8 +92,9 @@ class NewSurveysAleart extends StatelessWidget {
                           stopCustomLoader(context);
                           if(state.message.isNotEmpty){
                             context.flushBarErrorMessage(message: AppLocalizations.of(context)!.something_want_to_wrong_try_again);
+
                           }
-                          context.flushBarSuccessMessage(message: AppLocalizations.of(context)!.inchargeCreateSuccessful);
+                          context.flushBarSuccessMessage(message: "Incharge create successful");
                           // Navigator.pop(context);
                           // context.read<DashboardBloc>().add(CurrentIndexChange(currentIndex: 1));
                           // showDialog(
@@ -120,7 +122,7 @@ class NewSurveysAleart extends StatelessWidget {
                             CustomButton(
                               height: 44,
                               width: 110,
-                              title: AppLocalizations.of(context)!.proceed,
+                              title: "Proceed",
                               borderRadios: 10,
                               textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 15,color: AppColors.whiteColor,fontWeight: FontWeight.w600),
                               onPress:state.boothInchargeName.isEmpty?null: ()async{
@@ -132,7 +134,7 @@ class NewSurveysAleart extends StatelessWidget {
                             CustomButton(
                                 height: 44,
                                 width: 110,
-                                title: AppLocalizations.of(context)!.close,
+                                title: "Close",
                                 backgroundColor: Colors.white,
                                 borderColor: AppColors.primaryColor,
                                 borderRadios: 10,

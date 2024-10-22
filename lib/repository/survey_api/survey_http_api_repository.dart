@@ -23,13 +23,13 @@ class SurveyHttpApiRepository extends SurveyApiRepository{
 
   @override
   Future<SurveyListModel> fetchSurveyList({queryParams, header}) async{
-    final result = await _apiServices.getApiParams(url: AppUrl.surveyManage, queryParams: queryParams, header: header);
+    final result = await _apiServices.getApiParams(url: AppUrl.surveyList, queryParams: queryParams, header: header);
     return SurveyListModel.fromJson(result);
   }
 
   @override
   Future surveyManageApi({required Map<String, dynamic> body, required Map<String, String> header}) async{
-    final result = await _apiServices.getApiParams(url: AppUrl.surveyManage, queryParams: body, header: header);
+    final result = await _apiServices.postEncodeApi(url: AppUrl.surveyManage, data: body, header: header);
     return result;
   }
 

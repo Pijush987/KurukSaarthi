@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kuruk_saarthi/utils/assets_path.dart';
 import 'package:kuruk_saarthi/utils/extension/general_ectensions.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../bloc/surveys_bloc/surveys_bloc.dart';
 import '../../../configs/color/color.dart';
@@ -53,7 +52,8 @@ class BoothNumberAleart extends StatelessWidget {
             ),
             // Add more decoration..
           ),
-          hint:Text(AppLocalizations.of(context)!.booth,
+          hint:Text(
+            'Booth no.',
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.subTextColor,fontWeight: FontWeight.w600),
           ),
           items: boothList.map((item) {
@@ -86,6 +86,7 @@ class BoothNumberAleart extends StatelessWidget {
             return null;
           },
           onChanged: (value) {
+            print("ggggg");
             context.read<SurveysBloc>().add(BoothNumberChange(boothNumberChange: value.toString()));
             //Do something when selected item is changed.
           },

@@ -162,12 +162,14 @@ Future deleteVoters()async{
     return BlocConsumer<HomeBloc, HomeState>(
       buildWhen: (current, previous) => current.postApiStatus != previous.postApiStatus,
       listener: (context, state) {
+
         if (state.postApiStatus == PostApiStatus.loading) {
           showSyncAlertDialog(context,50);
         }
         if (state.postApiStatus == PostApiStatus.error) {
           stopCustomLoader(context);
           context.flushBarErrorMessage(message: AppLocalizations.of(context)!.something_want_to_wrong_try_again);
+
           context.read<HomeBloc>().add(HomeStatusChange(postApiStatus: PostApiStatus.initial));
           if(state.message =="420"){
             print("session expire");Navigator.pushNamedAndRemoveUntil(context, RoutesName.login, (route) => false);
@@ -223,6 +225,15 @@ Future deleteVoters()async{
                           )
                         ],),
                       ),
+                      // const SizedBox(height: 12),
+                      // Row(children: [
+                      //   Expanded(child:  SearchTextFromFieldWidget(focusNode: _searchFocusNode,)),
+                      //   const SizedBox(width: 12),
+                      //   const VoiceSearchWidget(),
+                      //   const SizedBox(width: 12),
+                      //   const ImageCaptureWidget(),
+                      //
+                      // ],),
                       const SizedBox(height: 12),
                       Expanded(
                         child: SingleChildScrollView(
@@ -234,10 +245,10 @@ Future deleteVoters()async{
                             const NotificationListWidget(),
                             const SizedBox(height:20),
 
-                            const ActionBarWidget(),
-                            const SizedBox(height:24),
-                            ActionWidget(notificationController: notificationController,attachFilesController: attachFilesController,formKey: _formKey,),
-                            const SizedBox(height:30),
+                            // const ActionBarWidget(),
+                            // const SizedBox(height:24),
+                            // ActionWidget(notificationController: notificationController,attachFilesController: attachFilesController,formKey: _formKey,),
+                            // const SizedBox(height:30),
 
                             const DashboardBarWidget(),
                             const SizedBox(height:14),
@@ -262,15 +273,15 @@ Future deleteVoters()async{
                                     ))
                               ],),
                             ),
-                            const SizedBox(height:30),
-                            const AnalyticsWidget(),
-                            const SizedBox(height: 16),
-                            BlocBuilder<SurveysBloc, SurveysState>(
-                              builder: (context, state) {
-                                return AnalyticsBarWidget();
-                              },
-                            ),
-                          const SizedBox(height: 150),
+                          //   const SizedBox(height:30),
+                          //   const AnalyticsWidget(),
+                          //   const SizedBox(height: 16),
+                          //   BlocBuilder<SurveysBloc, SurveysState>(
+                          //     builder: (context, state) {
+                          //       return AnalyticsBarWidget();
+                          //     },
+                          //   ),
+                          // const SizedBox(height: 150),
                           ],),
                         ),
                       ),

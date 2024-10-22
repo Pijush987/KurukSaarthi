@@ -90,29 +90,29 @@ class DatabaseHelper {
   ''');
   }
 
-    Future<void> saveApiData(VoterListModel apiData) async {
-      List<VoterModel> voters = [];
-      for (var item in apiData.docs) {
-        VoterModel voter = VoterModel(
-          name: item.name,
-          age: item.age,
-          gender: item.gender,
-          address: item.address,
-          voterIDNumber: item.voterIDNumber,
-          boothNumber: item.boothNumber,
-          boothAddress: item.boothAddress,
-          region: item.region,
-          subDivision: item.subDivision,
-          district: item.district,
-          pinCode: item.pinCode,
-          assembly: item.assembly,
-          assemblyNumber: item.assemblyNumber,
-          state: item.state,
-        );
-        voters.add(voter);
-      }
-      await insertMultipleOrders(voters);
+  Future<void> saveApiData(VoterListModel apiData) async {
+    List<VoterModel> voters = [];
+    for (var item in apiData.docs) {
+      VoterModel voter = VoterModel(
+        name: item.name,
+        age: item.age,
+        gender: item.gender,
+        address: item.address,
+        voterIDNumber: item.voterIDNumber,
+        boothNumber: item.boothNumber,
+        boothAddress: item.boothAddress,
+        region: item.region,
+        subDivision: item.subDivision,
+        district: item.district,
+        pinCode: item.pinCode,
+        assembly: item.assembly,
+        assemblyNumber: item.assemblyNumber,
+        state: item.state,
+      );
+      voters.add(voter);
     }
+    await insertMultipleOrders(voters);
+  }
 
   Future<List<VoterModel>> getVoters({required int offset, required int limit}) async {
     final db = await database;

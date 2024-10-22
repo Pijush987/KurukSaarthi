@@ -82,11 +82,11 @@ class _AnimatedSyncButtonState extends State<AnimatedSyncButton> {
       _update(false);
     }
     isDataSync.addListener((){
-     if(isDataSync.value == true){
-       _update(true);
-     }else{
-       _update(false);
-     }
+      if(isDataSync.value == true){
+        _update(true);
+      }else{
+        _update(false);
+      }
     });
   }
 

@@ -18,5 +18,4 @@ class LoginHttpApiRepository extends LoginApiRepository{
     final result = await _apiServices.putApi(url: AppUrl.pinChange, data: data!, header: header);
     return result;
   }
-
 }

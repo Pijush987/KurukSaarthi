@@ -87,9 +87,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                print("Authentication failed. Try logging in again");
                emit(state.copyWith(postApiStatus: PostApiStatus.error, message: "420"));
              }
-              else if(value.success == false  && value.message.isNotEmpty){
-                emit(state.copyWith(postApiStatus: PostApiStatus.error, message: value.message));
-              }else{
+             else if(value.success == false  && value.message.isNotEmpty){
+               emit(state.copyWith(postApiStatus: PostApiStatus.error, message: value.message));
+             }else{
                 debugPrint("total count 2");
                 await databaseHelper.saveApiData(value);
                 totalLoopCount =  (value.count/limit).ceil();

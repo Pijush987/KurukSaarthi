@@ -242,11 +242,11 @@ class _AlertsScreenState extends State<ListsScreen> with TickerProviderStateMixi
                         ),
                         const SizedBox(height: 12),
                         BlocBuilder<ListsBloc, ListsState>(
-                            // buildWhen: (current, previous) {
-                            //   debugPrint("fetch data &&& 1 ${current.postApiStatus}");
-                            //   debugPrint("fetch data &&& 2 ${previous.postApiStatus}");
-                            //   return current.postApiStatus != previous.postApiStatus;
-                            // },
+                          // buildWhen: (current, previous) {
+                          //   debugPrint("fetch data &&& 1 ${current.postApiStatus}");
+                          //   debugPrint("fetch data &&& 2 ${previous.postApiStatus}");
+                          //   return current.postApiStatus != previous.postApiStatus;
+                          // },
                             builder: (context, state) {
                               debugPrint("fetch data &&& 3${state.postApiStatus}");
                               if (state.postApiStatus == PostApiStatus.loading) {
