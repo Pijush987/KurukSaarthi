@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kuruk_saarthi/bloc/dashboard_bloc/dashboard_bloc.dart';
 import 'package:kuruk_saarthi/bloc/home_bloc/home_bloc.dart';
+import 'package:kuruk_saarthi/bloc/list_bloc/lists_bloc.dart';
+import 'package:kuruk_saarthi/bloc/list_bloc/lists_event.dart';
 import 'package:kuruk_saarthi/bloc/surveys_bloc/surveys_bloc.dart';
 import 'package:kuruk_saarthi/configs/color/color.dart';
 import 'package:kuruk_saarthi/configs/components/empty_list_widget.dart';
@@ -103,7 +105,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
     newSurveysAlertController.drive(CurveTween(curve: Curves.easeIn));
 
 
-
+    isDataSync.addListener((){
+      if(mounted){
+        context.read<ListsBloc>().add(FetchLists(refresh: true));
+      }
+    });
 
 
     _animationController = AnimationController(
@@ -156,18 +162,18 @@ Future deleteVoters()async{
     return BlocConsumer<HomeBloc, HomeState>(
       buildWhen: (current, previous) => current.postApiStatus != previous.postApiStatus,
       listener: (context, state) {
-        if(state.message =="420"){
-          context.flushBarErrorMessage(message: AppLocalizations.of(context)!.your_token_has_been_expire_try_to_login_again);
-          print("session expire");Navigator.pushNamedAndRemoveUntil(context, RoutesName.login, (route) => false);
-          context.read<DashboardBloc>().add(CurrentIndexChange(currentIndex: 0));
-        }
         if (state.postApiStatus == PostApiStatus.loading) {
           showSyncAlertDialog(context,50);
         }
         if (state.postApiStatus == PostApiStatus.error) {
           stopCustomLoader(context);
-          context.flushBarErrorMessage(message: state.message.toString());
+          context.flushBarErrorMessage(message: AppLocalizations.of(context)!.something_want_to_wrong_try_again);
           context.read<HomeBloc>().add(HomeStatusChange(postApiStatus: PostApiStatus.initial));
+          if(state.message =="420"){
+            print("session expire");Navigator.pushNamedAndRemoveUntil(context, RoutesName.login, (route) => false);
+            context.read<DashboardBloc>().add(CurrentIndexChange(currentIndex: 0));
+            context.flushBarErrorMessage(message: AppLocalizations.of(context)!.authentication_failed_try_logging_in_again);
+          }
         }
         if (state.postApiStatus == PostApiStatus.success) {
           print("object ${state.message.toString()}");

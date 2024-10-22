@@ -337,6 +337,8 @@ mixin _$SurveyModel {
   int get count => throw _privateConstructorUsedError;
   @JsonKey(name: 'inchargeName')
   String get inchargeName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updatedAt')
+  String get updatedAt => throw _privateConstructorUsedError;
 
   /// Serializes this SurveyModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -361,7 +363,8 @@ abstract class $SurveyModelCopyWith<$Res> {
       @JsonKey(name: 'neutral') int neutral,
       @JsonKey(name: 'dead') int dead,
       @JsonKey(name: 'count') int count,
-      @JsonKey(name: 'inchargeName') String inchargeName});
+      @JsonKey(name: 'inchargeName') String inchargeName,
+      @JsonKey(name: 'updatedAt') String updatedAt});
 }
 
 /// @nodoc
@@ -386,6 +389,7 @@ class _$SurveyModelCopyWithImpl<$Res, $Val extends SurveyModel>
     Object? dead = null,
     Object? count = null,
     Object? inchargeName = null,
+    Object? updatedAt = null,
   }) {
     return _then(_value.copyWith(
       voterNo: null == voterNo
@@ -416,6 +420,10 @@ class _$SurveyModelCopyWithImpl<$Res, $Val extends SurveyModel>
           ? _value.inchargeName
           : inchargeName // ignore: cast_nullable_to_non_nullable
               as String,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -435,7 +443,8 @@ abstract class _$$SurveyModelImplCopyWith<$Res>
       @JsonKey(name: 'neutral') int neutral,
       @JsonKey(name: 'dead') int dead,
       @JsonKey(name: 'count') int count,
-      @JsonKey(name: 'inchargeName') String inchargeName});
+      @JsonKey(name: 'inchargeName') String inchargeName,
+      @JsonKey(name: 'updatedAt') String updatedAt});
 }
 
 /// @nodoc
@@ -458,6 +467,7 @@ class __$$SurveyModelImplCopyWithImpl<$Res>
     Object? dead = null,
     Object? count = null,
     Object? inchargeName = null,
+    Object? updatedAt = null,
   }) {
     return _then(_$SurveyModelImpl(
       voterNo: null == voterNo
@@ -488,6 +498,10 @@ class __$$SurveyModelImplCopyWithImpl<$Res>
           ? _value.inchargeName
           : inchargeName // ignore: cast_nullable_to_non_nullable
               as String,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -502,7 +516,8 @@ class _$SurveyModelImpl implements _SurveyModel {
       @JsonKey(name: 'neutral') this.neutral = 0,
       @JsonKey(name: 'dead') this.dead = 0,
       @JsonKey(name: 'count') this.count = 0,
-      @JsonKey(name: 'inchargeName') this.inchargeName = ''});
+      @JsonKey(name: 'inchargeName') this.inchargeName = '',
+      @JsonKey(name: 'updatedAt') this.updatedAt = ''});
 
   factory _$SurveyModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$SurveyModelImplFromJson(json);
@@ -528,10 +543,13 @@ class _$SurveyModelImpl implements _SurveyModel {
   @override
   @JsonKey(name: 'inchargeName')
   final String inchargeName;
+  @override
+  @JsonKey(name: 'updatedAt')
+  final String updatedAt;
 
   @override
   String toString() {
-    return 'SurveyModel(voterNo: $voterNo, partyPlus: $partyPlus, partyMinus: $partyMinus, neutral: $neutral, dead: $dead, count: $count, inchargeName: $inchargeName)';
+    return 'SurveyModel(voterNo: $voterNo, partyPlus: $partyPlus, partyMinus: $partyMinus, neutral: $neutral, dead: $dead, count: $count, inchargeName: $inchargeName, updatedAt: $updatedAt)';
   }
 
   @override
@@ -548,13 +566,15 @@ class _$SurveyModelImpl implements _SurveyModel {
             (identical(other.dead, dead) || other.dead == dead) &&
             (identical(other.count, count) || other.count == count) &&
             (identical(other.inchargeName, inchargeName) ||
-                other.inchargeName == inchargeName));
+                other.inchargeName == inchargeName) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, voterNo, partyPlus, partyMinus,
-      neutral, dead, count, inchargeName);
+      neutral, dead, count, inchargeName, updatedAt);
 
   /// Create a copy of SurveyModel
   /// with the given fields replaced by the non-null parameter values.
@@ -574,14 +594,14 @@ class _$SurveyModelImpl implements _SurveyModel {
 
 abstract class _SurveyModel implements SurveyModel {
   factory _SurveyModel(
-          {@JsonKey(name: '_id') final String voterNo,
-          @JsonKey(name: 'partyPlus') final int partyPlus,
-          @JsonKey(name: 'partyMinus') final int partyMinus,
-          @JsonKey(name: 'neutral') final int neutral,
-          @JsonKey(name: 'dead') final int dead,
-          @JsonKey(name: 'count') final int count,
-          @JsonKey(name: 'inchargeName') final String inchargeName}) =
-      _$SurveyModelImpl;
+      {@JsonKey(name: '_id') final String voterNo,
+      @JsonKey(name: 'partyPlus') final int partyPlus,
+      @JsonKey(name: 'partyMinus') final int partyMinus,
+      @JsonKey(name: 'neutral') final int neutral,
+      @JsonKey(name: 'dead') final int dead,
+      @JsonKey(name: 'count') final int count,
+      @JsonKey(name: 'inchargeName') final String inchargeName,
+      @JsonKey(name: 'updatedAt') final String updatedAt}) = _$SurveyModelImpl;
 
   factory _SurveyModel.fromJson(Map<String, dynamic> json) =
       _$SurveyModelImpl.fromJson;
@@ -607,6 +627,9 @@ abstract class _SurveyModel implements SurveyModel {
   @override
   @JsonKey(name: 'inchargeName')
   String get inchargeName;
+  @override
+  @JsonKey(name: 'updatedAt')
+  String get updatedAt;
 
   /// Create a copy of SurveyModel
   /// with the given fields replaced by the non-null parameter values.

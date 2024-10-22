@@ -82,7 +82,7 @@ class NewSurveysAleart extends StatelessWidget {
                         }
                         if (state.postApiStatus == PostApiStatus.error) {
                           stopCustomLoader(context);
-                          context.flushBarErrorMessage(message: state.message.toString());
+                          context.flushBarErrorMessage(message: AppLocalizations.of(context)!.something_want_to_wrong_try_again);
                           context.read<SurveysBloc>().add(StatusChange(postApiStatus: PostApiStatus.initial));
                         }
 
@@ -90,7 +90,7 @@ class NewSurveysAleart extends StatelessWidget {
                           context.read<SurveysBloc>().add(StatusChange(postApiStatus: PostApiStatus.initial));
                           stopCustomLoader(context);
                           if(state.message.isNotEmpty){
-                            context.flushBarErrorMessage(message: state.message.toString());
+                            context.flushBarErrorMessage(message: AppLocalizations.of(context)!.something_want_to_wrong_try_again);
                           }
                           context.flushBarSuccessMessage(message: AppLocalizations.of(context)!.inchargeCreateSuccessful);
                           // Navigator.pop(context);

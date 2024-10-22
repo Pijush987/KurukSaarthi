@@ -81,7 +81,7 @@ class _TahsilDropdownWidgetState extends State<TahsilDropdownWidget> {
                             },
                             child: Row(
                               children: [
-                                Icon(state.selectedBooth == items[index]?Icons.circle_rounded:Icons.circle_outlined,color: AppColors.primaryColor,size: 16,),
+                                Icon(state.selectedRegion == items[index]?Icons.circle_rounded:Icons.circle_outlined,color: AppColors.primaryColor,size: 16,),
                                 const SizedBox(width: 14),
                                 Text(items[index],style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w600),),
                               ],

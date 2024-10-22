@@ -119,11 +119,11 @@ class _SurveysScreenState extends State<SurveysScreen> {
                           return true;
                         } ,
                         listener: (context, state) {
-                          if(_surveysBloc.state.message =="420"){
-                            context.flushBarErrorMessage(message: AppLocalizations.of(context)!.your_token_has_been_expire_try_to_login_again);
-                            print("session expire");Navigator.pushNamedAndRemoveUntil(context, RoutesName.login, (route) => false);
-                            context.read<DashboardBloc>().add(CurrentIndexChange(currentIndex: 0));
-                          }
+                            if(state.message =="420"){
+                              print("session expire");Navigator.pushNamedAndRemoveUntil(context, RoutesName.login, (route) => false);
+                              context.read<DashboardBloc>().add(CurrentIndexChange(currentIndex: 0));
+                              context.flushBarErrorMessage(message: AppLocalizations.of(context)!.authentication_failed_try_logging_in_again);
+                            }
                         },
                         builder: (context, state) {
                           if (state.postApiStatus == PostApiStatus.loading) {
@@ -149,7 +149,7 @@ class _SurveysScreenState extends State<SurveysScreen> {
                                               physics: NeverScrollableScrollPhysics(),
                                               itemBuilder: (context,index){
                                                 final survey = state.allSurvey[index];
-                                                return SurveyTrackWidget(index: index.toString(), positive:survey.partyPlus.toString(), negitive: survey.partyMinus.toString(), dead: survey.dead.toString(), neutral: survey.neutral.toString(), total: survey.count.toString(), booth: survey.voterNo.toString(), inchargeName:survey.inchargeName.toString(), time: '',);
+                                                return SurveyTrackWidget(index: index.toString(), positive:survey.partyPlus.toString(), negitive: survey.partyMinus.toString(), dead: survey.dead.toString(), neutral: survey.neutral.toString(), total: survey.count.toString(), booth: survey.voterNo.toString(), inchargeName:survey.inchargeName.toString(), time: survey.updatedAt);
 
                                                 // return VoterItem(voterId: survey.voterIDNumber, name: survey.name,region: survey.region,age: survey.age.toString(),sex: survey.gender,onShare: (){},
 

@@ -20,8 +20,11 @@ class SurveyTrackWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String newDate = Jiffy.parse(time).format(pattern: 'MMMM do yyyy');
+
+    final String newDate = Jiffy.parse(time.toString()).format(pattern: 'MMMM do yyyy');
     final String newTime = Jiffy.parse(time).format(pattern: 'h:mm a');
+print("gcewyfyefw $newDate");
+print("gcewyfyefw $newTime");
 
     return  Container(
       padding: EdgeInsets.all(20),
@@ -98,23 +101,24 @@ class SurveyTrackWidget extends StatelessWidget {
             ],
           ),
           SizedBox(height: 12),
-          Row(children: [
-            Expanded(
-              child:Row(
-                children: [
-                  SvgImageWidget(svgPath: AssetsPath.calender,color: null),
-                  SizedBox(width: 10),
-                  Text(newDate,style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.subTextColorGray,fontWeight: FontWeight.w500),),
-                ],
-              ),),
-            Expanded(
-              child:Row(
-                children: [
-                  SvgImageWidget(svgPath: AssetsPath.clock,color: null),
-                  SizedBox(width: 10),
-                  Text(newTime,style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.subTextColorGray,fontWeight: FontWeight.w500),),
-                ],
-              ),),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+            Row(
+              children: [
+                SvgImageWidget(svgPath: AssetsPath.calender,color: null),
+                SizedBox(width: 10),
+                Text(newDate,style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.subTextColorGray,fontWeight: FontWeight.w500),),
+              ],
+            ),
+            SizedBox(width: 20),
+            Row(
+              children: [
+                SvgImageWidget(svgPath: AssetsPath.clock,color: null),
+                SizedBox(width: 10),
+                Text(newTime,style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 14,color: AppColors.subTextColorGray,fontWeight: FontWeight.w500),),
+              ],
+            ),
 
           ],),
 

@@ -48,12 +48,14 @@ class _AnimatedSyncButtonState extends State<AnimatedSyncButton> {
 
   void stopAnimation() {
     _timer?.cancel();
-    setState(() {
-      gradientColors = [Color(0xff808080), Color(0xff808080)]; // Reset to initial colors
-      shadowBlurRadius = 0.0; // Reset shadow properties
-      spreadRadius = 0.0; // Reset shadow properties
-      shadowColor = Colors.transparent;
-    });
+    if(mounted){
+      setState(() {
+        gradientColors = [Color(0xff808080), Color(0xff808080)]; // Reset to initial colors
+        shadowBlurRadius = 0.0; // Reset shadow properties
+        spreadRadius = 0.0; // Reset shadow properties
+        shadowColor = Colors.transparent;
+      });
+    }
   }
 
   void toggleAnimation(bool animate) {
@@ -62,9 +64,11 @@ class _AnimatedSyncButtonState extends State<AnimatedSyncButton> {
     } else {
       stopAnimation();
     }
-    setState(() {
-      isAnimating = animate;
-    });
+    if(mounted){
+      setState(() {
+        isAnimating = animate;
+      });
+    }
   }
 
 

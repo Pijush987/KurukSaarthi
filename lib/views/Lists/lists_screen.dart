@@ -86,6 +86,11 @@ class _AlertsScreenState extends State<ListsScreen> with TickerProviderStateMixi
     context.read<ListsBloc>().add(RegionChange(selectedRegion: ''));
     context.read<ListsBloc>().add(AgeChange(selectedAge: ''));
     context.read<ListsBloc>().add(FetchLists());
+    if(mounted){
+      setState(() {
+        print("ddddddddddd");
+      });
+    }
 
     _scrollController.addListener(() {
       if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
@@ -101,6 +106,12 @@ class _AlertsScreenState extends State<ListsScreen> with TickerProviderStateMixi
         else{
           context.read<ListsBloc>().add(FetchLists());
         }
+      }
+    });
+
+    isDataSync.addListener((){
+      if(mounted){
+        context.read<ListsBloc>().add(FetchLists(refresh: true));
       }
     });
   }
@@ -198,7 +209,7 @@ class _AlertsScreenState extends State<ListsScreen> with TickerProviderStateMixi
                             Expanded(child: BlocBuilder<ListsBloc, ListsState>(
                               builder: (context, state) {
                                 return SelectWidget(
-                                  text:state.selectedRegion.isEmpty?AppLocalizations.of(context)!.selectRegion:state.selectedRegion,
+                                  text:state.selectedRegion.isEmpty?AppLocalizations.of(context)!.region:state.selectedRegion,
                                   onTap: (){
                                     openTahsilBottomSheet();
                                   },

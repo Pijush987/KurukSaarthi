@@ -120,7 +120,6 @@ class _MyAppState extends State<MyApp> {
         BlocProvider<DashboardBloc>(create: (context) => _dashboardBloc),
         BlocProvider<ListsBloc>(create: (context) => _listsBloc),
         BlocProvider<NotificationBloc>(create: (context) => _notificationBloc),
-        BlocProvider<NotificationBloc>(create: (context) => _notificationBloc),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,

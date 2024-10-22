@@ -1,7 +1,9 @@
 import 'dart:math';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter/material.dart';
+import 'package:kuruk_saarthi/bloc/dashboard_bloc/dashboard_bloc.dart';
 import 'package:kuruk_saarthi/configs/color/color.dart';
 import 'package:kuruk_saarthi/configs/routes/routes_name.dart';
 import 'package:kuruk_saarthi/main.dart';
@@ -24,39 +26,39 @@ class AnalyticsBarWidget extends StatefulWidget {
 class _AnalyticsBarWidgetState extends State<AnalyticsBarWidget> {
   late TooltipBehavior _tooltip;
   List<_ChartData> _data = [];
-  late double _totalSurvey;
+  double _totalSurvey = 0.0;
   SurveysBloc _surveysBloc = SurveysBloc(surveyApiRepository: getIt());
+
+  String PARTY_PLUS ='0.0'  ;
+  String PARTY_MINUS ='0.0' ;
+  String NEUTRAL = '0.0'  ;
+  String DEAD = '0.0' ;
 
   @override
   void initState() {
     _tooltip = TooltipBehavior(enable: true);
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_)async{
-      _surveysBloc.add(SurveyStatic());
-      Future.delayed(Duration(seconds: 3), () async{
-        print("55555555555555555555555555");
 
-        if(_surveysBloc.state.message =="420"){
-          context.flushBarErrorMessage(message: AppLocalizations.of(context)!.your_token_has_been_expire_try_to_login_again);
-          print("session expire");Navigator.pushNamedAndRemoveUntil(context, RoutesName.login, (route) => false);
+    _surveysBloc.add(SurveyStatic());
+    Future.delayed(Duration(seconds: 3), () async{
+      print("55555555555555555555555555");
 
-        }
-        final PARTY_PLUS = await SessionController().sharedPreferenceClass.readValue('partyPositive');
-        final PARTY_MINUS = await SessionController().sharedPreferenceClass.readValue('partyNegitive');
-        final NEUTRAL = await SessionController().sharedPreferenceClass.readValue('neutral');
-        final DEAD = await SessionController().sharedPreferenceClass.readValue('dead');
-        final total = await SessionController().sharedPreferenceClass.readValue('totalSurvey');
-        if(mounted){
-        _data = [
-          _ChartData('${AppLocalizations.of(context)!.party}+', double.parse(PARTY_PLUS),AppColors.primaryColor),
-          _ChartData('${AppLocalizations.of(context)!.party}-', double.parse(PARTY_MINUS),AppColors.fieldBackgroundColor),
-          _ChartData(AppLocalizations.of(context)!.death,  double.parse(DEAD),AppColors.fieldBackgroundColor),
-          _ChartData(AppLocalizations.of(context)!.neutral, double.parse(NEUTRAL),AppColors.fieldBackgroundColor),
-        ];
+      if(_surveysBloc.state.message =="420"){
+        print("session expire");
+        Navigator.pushNamedAndRemoveUntil(context, RoutesName.login, (route) => false);
+        print("session expire");Navigator.pushNamedAndRemoveUntil(context, RoutesName.login, (route) => false);
+        context.read<DashboardBloc>().add(CurrentIndexChange(currentIndex: 0));
+        context.flushBarErrorMessage(message: AppLocalizations.of(context)!.authentication_failed_try_logging_in_again);
+      }
+      PARTY_PLUS = await SessionController().sharedPreferenceClass.readValue('partyPositive');
+      PARTY_MINUS = await SessionController().sharedPreferenceClass.readValue('partyNegitive');
+      NEUTRAL = await SessionController().sharedPreferenceClass.readValue('neutral');
+      DEAD = await SessionController().sharedPreferenceClass.readValue('dead');
+      final total = await SessionController().sharedPreferenceClass.readValue('totalSurvey');
+      if(mounted){
         _totalSurvey = double.parse(total);
-          setState(() {});
-        }
-      });
+        setState(() {});
+      }
 
     });
   }
@@ -70,6 +72,12 @@ class _AnalyticsBarWidgetState extends State<AnalyticsBarWidget> {
 
   @override
   Widget build(BuildContext context) {
+    _data = [
+      _ChartData('${AppLocalizations.of(context)!.party}+', double.parse(PARTY_PLUS),AppColors.primaryColor),
+      _ChartData('${AppLocalizations.of(context)!.party}-', double.parse(PARTY_MINUS),AppColors.fieldBackgroundColor),
+      _ChartData(AppLocalizations.of(context)!.death,  double.parse(DEAD),AppColors.fieldBackgroundColor),
+      _ChartData(AppLocalizations.of(context)!.neutral, double.parse(NEUTRAL),AppColors.fieldBackgroundColor),
+    ];
     return _data.isEmpty?SizedBox(
     ): Column(
       children: [

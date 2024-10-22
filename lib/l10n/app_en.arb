@@ -122,5 +122,8 @@
   "proceed":"Proceed",
   "close":"Close",
   "confirm":"Confirm",
-  "your_token_has_been_expire_try_to_login_again":"Your token has been expire, try to login again"
+  "your_token_has_been_expire_try_to_login_again":"Your token has been expire, try to login again",
+  "authentication_failed_try_logging_in_again":"Authentication failed. Try logging in again",
+  "something_want_to_wrong_try_again":"Something went wrong, please try again."
+
 }

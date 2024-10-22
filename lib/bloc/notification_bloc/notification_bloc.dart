@@ -46,7 +46,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     };
 
     Map<String,dynamic> data = {
-      "body":state.notificationData.toString()
+      "content":state.notificationData.toString()
     };
     emit(state.copyWith(postApiStatus: PostApiStatus.loading));
 

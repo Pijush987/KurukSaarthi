@@ -180,7 +180,7 @@ class DatabaseHelper {
     log("serch   $query query");
     final db = await database;
     List<Map<String, dynamic>> results = await db.rawQuery(
-        "SELECT * FROM voters ORDER BY name ASC WHERE name LIKE ? OR voterIDNumber LIKE ?",
+        "SELECT * FROM voters WHERE name LIKE ? OR voterIDNumber LIKE ?",
         ['%$query%', '%$query%']
     );
 

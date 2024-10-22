@@ -42,6 +42,7 @@ _$SurveyModelImpl _$$SurveyModelImplFromJson(Map<String, dynamic> json) =>
       dead: (json['dead'] as num?)?.toInt() ?? 0,
       count: (json['count'] as num?)?.toInt() ?? 0,
       inchargeName: json['inchargeName'] as String? ?? '',
+      updatedAt: json['updatedAt'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$SurveyModelImplToJson(_$SurveyModelImpl instance) =>
@@ -53,4 +54,5 @@ Map<String, dynamic> _$$SurveyModelImplToJson(_$SurveyModelImpl instance) =>
       'dead': instance.dead,
       'count': instance.count,
       'inchargeName': instance.inchargeName,
+      'updatedAt': instance.updatedAt,
     };

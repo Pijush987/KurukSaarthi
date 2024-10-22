@@ -42,24 +42,24 @@ class _ShareWidgetState extends State<ShareWidget> {
       showCustomLoader(context, 55);
       // Request storage permissions (important for Android 10 and above)
       // if (await Permission.storage.request().isGranted) {
-        RenderRepaintBoundary boundary = _globalKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
-        ui.Image image = await boundary.toImage(pixelRatio: 3.0);
-        ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-        Uint8List pngBytes = byteData!.buffer.asUint8List();
+      RenderRepaintBoundary boundary = _globalKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+      ui.Image image = await boundary.toImage(pixelRatio: 3.0);
+      ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+      Uint8List pngBytes = byteData!.buffer.asUint8List();
 
-        // Get the path to the Downloads directory (Android)
-        final directory = Directory('/storage/emulated/0/Download');
-        if (!(await directory.exists())) {
-          await directory.create(recursive: true);
-        }
-        final filePath = '${directory.path}/banner.png';
-        final file = File(filePath);
-        await file.writeAsBytes(pngBytes);
-        stopCustomLoader(context);
-        print('Saved to: $filePath');
-        if(showToken){
-          context.flushBarSuccessMessage(message: "File has been downloaded");
-        }
+      // Get the path to the Downloads directory (Android)
+      final directory = Directory('/storage/emulated/0/Download');
+      if (!(await directory.exists())) {
+        await directory.create(recursive: true);
+      }
+      final filePath = '${directory.path}/banner.png';
+      final file = File(filePath);
+      await file.writeAsBytes(pngBytes);
+      stopCustomLoader(context);
+      print('Saved to: $filePath');
+      if(showToken){
+        context.flushBarSuccessMessage(message: "File has been downloaded");
+      }
 
       // } else {
       //   await Permission.storage.request();
@@ -71,10 +71,10 @@ class _ShareWidgetState extends State<ShareWidget> {
       print(e);
     }
   }
-  
+
   @override
   Widget build(BuildContext context) {
-     return InkWell(
+    return InkWell(
       focusColor: AppColors.transparent,
       hoverColor:AppColors.transparent,
       splashColor: AppColors.transparent,
@@ -94,7 +94,7 @@ class _ShareWidgetState extends State<ShareWidget> {
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 12),
                 decoration: BoxDecoration(
-                  color: AppColors.whiteColor,
+                    color: AppColors.whiteColor,
                     borderRadius: BorderRadius.circular(15),
                     border: Border.all(color: AppColors.cardBorderColor)
                 ),
@@ -122,31 +122,43 @@ class _ShareWidgetState extends State<ShareWidget> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Expanded(
-
                                   child: hiperText(title: AppLocalizations.of(context)!.age,subtitle: widget.age,context: context),),
 
-                                Expanded(child: hiperText(title: AppLocalizations.of(context)!.booth,subtitle: widget.booth,context: context,color: AppColors.primaryColor),),
-                                Expanded(child: hiperText(title:AppLocalizations.of(context)!.gender,subtitle: widget.sex,context: context),),
+                                Expanded(
+                                  flex: 3,
+                                  child: hiperText(title:AppLocalizations.of(context)!.gender,subtitle: widget.sex,context: context),),
 
                               ],),
                             SizedBox(height: 12),
-                            hiperText(title: AppLocalizations.of(context)!.voterId,subtitle: widget.voterId,context: context),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: hiperText(title: AppLocalizations.of(context)!.booth,subtitle: widget.booth,context: context,color: AppColors.primaryColor),
+                                ),
+                                Expanded(
+                                  flex: 3,
+                                  child: hiperText(title: AppLocalizations.of(context)!.voterId,subtitle: widget.voterId,context: context),
+                                )
+
+                              ],),
+
 
                             SizedBox(height: 12),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(AppLocalizations.of(context)!.boothAddres,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w700)),
-                              Text(" : ",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w600)),
-                              Expanded(child: Text(widget.boothAddress,maxLines: 5, style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color:AppColors.secondaryTextColor,fontWeight: FontWeight.w700,overflow: TextOverflow.ellipsis,))),
-                            ],),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(AppLocalizations.of(context)!.boothAddres,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w700)),
+                                Text(" : ",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w600)),
+                                Expanded(child: Text(widget.boothAddress,maxLines: 5, style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color:AppColors.secondaryTextColor,fontWeight: FontWeight.w700,overflow: TextOverflow.ellipsis,))),
+                              ],),
 
                             SizedBox(height: 30),
                             Container(
                               child: new Image.asset('assets/banner.png',
                                 width: context.mediaQueryWidth,
                                 height: 150.0,
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                               ),
                             )
                           ],

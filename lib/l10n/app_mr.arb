@@ -119,5 +119,9 @@
    "proceed": "सुरू करा",
    "close": "बंद करा",
    "confirm": "पुष्टि करा",
-   "your_token_has_been_expire_try_to_login_again": "तुमचा टोकन कालबाह्य झाला आहे, कृपया पुन्हा लॉगिन करण्याचा प्रयत्न करा"
+   "your_token_has_been_expire_try_to_login_again": "तुमचा टोकन कालबाह्य झाला आहे, कृपया पुन्हा लॉगिन करण्याचा प्रयत्न करा",
+   "authentication_failed_try_logging_in_again": "प्रमाणीकरण अयशस्वी. कृपया पुन्हा लॉगिन करण्याचा प्रयत्न करा",
+   "something_want_to_wrong_try_again": "काहीतरी चुकले, कृपया पुन्हा प्रयत्न करा."
+
+
 }

@@ -27,6 +27,7 @@ class SurveyModel with _$SurveyModel {
     @JsonKey(name: 'dead') @Default(0) int dead,
     @JsonKey(name: 'count') @Default(0) int count,
     @JsonKey(name: 'inchargeName') @Default('') String inchargeName,
+    @JsonKey(name: 'updatedAt') @Default('') String updatedAt,
 
   }) = _SurveyModel;
 

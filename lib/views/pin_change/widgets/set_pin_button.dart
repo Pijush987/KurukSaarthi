@@ -20,11 +20,6 @@ class SetPinButton extends StatelessWidget {
     return BlocConsumer<PinChangeBloc, PinChangeState>(
       // buildWhen: (current, previous) => current.postApiStatus != previous.postApiStatus,
       listener: (context, state) {
-        if(state.message =="420"){
-          context.flushBarErrorMessage(message: AppLocalizations.of(context)!.your_token_has_been_expire_try_to_login_again);
-          print("session expire");Navigator.pushNamedAndRemoveUntil(context, RoutesName.login, (route) => false);
-          context.read<DashboardBloc>().add(CurrentIndexChange(currentIndex: 0));
-        }
           if (state.postApiStatus == PostApiStatus.loading) {
             debugPrint("step7");
             showCustomLoader(context,50);
@@ -33,8 +28,13 @@ class SetPinButton extends StatelessWidget {
           if (state.postApiStatus == PostApiStatus.error) {
             debugPrint("step8");
             stopCustomLoader(context);
-            context.flushBarErrorMessage(message: state.message.toString());
+            context.flushBarErrorMessage(message: AppLocalizations.of(context)!.something_want_to_wrong_try_again);
             context.read<PinChangeBloc>().add(StatusChange(postApiStatus: PostApiStatus.initial));
+            if(state.message =="420"){
+              print("session expire");Navigator.pushNamedAndRemoveUntil(context, RoutesName.login, (route) => false);
+              context.read<DashboardBloc>().add(CurrentIndexChange(currentIndex: 0));
+              context.flushBarErrorMessage(message: AppLocalizations.of(context)!.authentication_failed_try_logging_in_again);
+            }
           }
 
           if (state.postApiStatus == PostApiStatus.success) {
