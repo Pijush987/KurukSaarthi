@@ -52,7 +52,13 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
 
     await notificationApiRepository.notificationApi(data: data,header: headers).then((value)async{
       log("value  $value");
-      if(value['success'] == false){
+      if(value['success'] == false && value['code']==420){
+        await SessionController().removeUserInPreference();
+        await SessionController().getUserFromPreference();
+        print("Authentication failed. Try logging in again");
+        emit(state.copyWith(postApiStatus: PostApiStatus.error, message: "420"));
+      }
+      else if(value['success'] == false){
         emit(state.copyWith(postApiStatus: PostApiStatus.error, message: 'Send notification failed'));
       }else{
         emit(state.copyWith(postApiStatus: PostApiStatus.success,message: "Send notification successfully"));

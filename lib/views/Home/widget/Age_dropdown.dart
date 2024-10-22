@@ -5,7 +5,6 @@ import 'package:kuruk_saarthi/utils/assets_path.dart';
 import 'package:kuruk_saarthi/utils/extension/general_ectensions.dart';
 import 'package:kuruk_saarthi/views/region_select/region_select_screen.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AgeDropdown extends StatefulWidget {
   final VoidCallback onTap;
@@ -64,8 +63,8 @@ class _AgeDropdownState extends State<AgeDropdown> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                Text("(${AppLocalizations.of(context)!.min})",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.blackColor,fontWeight: FontWeight.w400),),
-                Text("(${AppLocalizations.of(context)!.max})",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.blackColor,fontWeight: FontWeight.w400),),
+                Text("(min)",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.blackColor,fontWeight: FontWeight.w400),),
+                Text("(max)",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.blackColor,fontWeight: FontWeight.w400),),
 
               ],),
             )

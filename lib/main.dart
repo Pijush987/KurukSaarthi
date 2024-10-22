@@ -7,6 +7,7 @@ import 'package:kuruk_saarthi/bloc/dashboard_bloc/dashboard_bloc.dart';
 import 'package:kuruk_saarthi/bloc/list_bloc/lists_bloc.dart';
 import 'package:kuruk_saarthi/bloc/login_bloc/login_bloc.dart';
 import 'package:kuruk_saarthi/bloc/notification_bloc/notification_bloc.dart';
+import 'package:kuruk_saarthi/bloc/pin_change_bloc/pin_change_bloc.dart';
 import 'package:kuruk_saarthi/bloc/region_select_bloc/region_select_bloc.dart';
 import 'package:kuruk_saarthi/configs/components/internet_exception_widget.dart';
 import 'package:kuruk_saarthi/repository/login_api/login_api_repository.dart';
@@ -21,7 +22,9 @@ import 'package:kuruk_saarthi/repository/survey_api/survey_http_api_repository.d
 import 'package:kuruk_saarthi/repository/voter_list_api/voter_api_repository.dart';
 import 'package:kuruk_saarthi/repository/voter_list_api/voter_http_api_repository.dart';
 import 'package:kuruk_saarthi/services/pushNotification/local_notification_services.dart';
+import 'package:kuruk_saarthi/test_pubspec/animated_button.dart';
 import 'package:kuruk_saarthi/utils/const.dart';
+import 'package:kuruk_saarthi/views/Lists/widget/scan_to_seasch.dart';
 import 'bloc/home_bloc/home_bloc.dart';
 import 'bloc/surveys_bloc/surveys_bloc.dart';
 import 'configs/routes/routes.dart';
@@ -58,6 +61,7 @@ class _MyAppState extends State<MyApp> {
   late HomeBloc _homeBloc ;
   late DashboardBloc _dashboardBloc ;
   late LoginBloc _loginBloc ;
+  late PinChangeBloc _pinChangeBloc ;
   late RegionSelectBloc _regionSelectBloc ;
   late SurveysBloc _surveysBloc ;
   late ListsBloc _listsBloc ;
@@ -96,6 +100,7 @@ class _MyAppState extends State<MyApp> {
     _homeBloc.close();
     _dashboardBloc.close();
     _loginBloc.close();
+    _pinChangeBloc.close();
     _regionSelectBloc.close();
     _surveysBloc.close();
     _listsBloc.close();
@@ -109,10 +114,10 @@ class _MyAppState extends State<MyApp> {
           BlocProvider<HomeBloc>(create: (context) => _homeBloc),
           BlocProvider<SurveysBloc>(create: (context) => _surveysBloc),
           BlocProvider<LoginBloc>(create: (context) => _loginBloc),
+          BlocProvider<PinChangeBloc>(create: (context) => _pinChangeBloc),
           BlocProvider<RegionSelectBloc>(create: (context) => _regionSelectBloc),
           BlocProvider<DashboardBloc>(create: (context) => _dashboardBloc),
           BlocProvider<ListsBloc>(create: (context) => _listsBloc),
-          BlocProvider<NotificationBloc>(create: (context) => _notificationBloc),
           BlocProvider<NotificationBloc>(create: (context) => _notificationBloc),
         ],
         child: MaterialApp(

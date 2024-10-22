@@ -60,8 +60,18 @@ class BottomNavBarWidget extends StatelessWidget {
               selectedIconTheme:const IconThemeData(color: AppColors.primaryColor),
               unselectedIconTheme:const IconThemeData(color: AppColors.secondaryTextColor),
               onTap: (index)async {
-                pageController.animateToPage(index,duration:const Duration(milliseconds: 2), curve: Curves.easeInCubic);
-                context.read<DashboardBloc>().add(CurrentIndexChange(currentIndex: index));
+                final boothNo =await SessionController().sharedPreferenceClass.readValue('boothInchargeId');
+                if(index == 1 && boothNo == null){
+                  showCustomLoader(context, 55);
+                  await DatabaseHelper().getAllArea().then((onValue)async{
+                    context.read<SurveysBloc>().add(AreaListChange(allAreaList: onValue));
+                    stopCustomLoader(context);
+                    onNewSurvey(context);
+                  });
+                }else{
+                  pageController.animateToPage(index,duration:const Duration(milliseconds: 2), curve: Curves.easeInCubic);
+                  context.read<DashboardBloc>().add(CurrentIndexChange(currentIndex: index));
+                }
               },
               items: [
                 BottomNavigationBarItem(
@@ -69,16 +79,16 @@ class BottomNavBarWidget extends StatelessWidget {
                   label:  AppLocalizations.of(context)!.home,
                 ),
                 BottomNavigationBarItem(
-                  icon:SvgImageWidget(svgPath: AssetsPath.listsNavBarIcon,color:state.currentIndex==1? AppColors.primaryColor:AppColors.secondaryTextColor),
-                  label: AppLocalizations.of(context)!.lists,
+                  icon:SvgImageWidget(svgPath: AssetsPath.surveys,color:state.currentIndex==1? AppColors.primaryColor:AppColors.secondaryTextColor),
+                  label: AppLocalizations.of(context)!.surveys,
                 ),
                 BottomNavigationBarItem(
-                  icon:SvgImageWidget(svgPath: AssetsPath.alertsNavBarIcon,color: state.currentIndex==2? AppColors.primaryColor:AppColors.secondaryTextColor),
-                  label:  AppLocalizations.of(context)!.alerts,
+                  icon:SvgImageWidget(svgPath: AssetsPath.listsNavBarIcon,color: state.currentIndex==2? AppColors.primaryColor:AppColors.secondaryTextColor),
+                  label:  AppLocalizations.of(context)!.lists,
                 ),
                 BottomNavigationBarItem(
                   icon: SvgImageWidget(svgPath: AssetsPath.helpNavBarIcon,color: state.currentIndex==3? AppColors.primaryColor:AppColors.secondaryTextColor),
-                  label: AppLocalizations.of(context)!.help,
+                  label: AppLocalizations.of(context)!.alerts,
                 ),
               ],
             ),

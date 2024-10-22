@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kuruk_saarthi/bloc/dashboard_bloc/dashboard_bloc.dart';
@@ -32,6 +31,7 @@ class NewSurveysAleart extends StatelessWidget {
         color: Colors.transparent,
         height: context.mediaQueryHeight,
         width: context.mediaQueryWidth,
+        margin: EdgeInsets.only(bottom: 110),
         child: Center(
           child: GestureDetector(
             onTap: (){
@@ -50,7 +50,7 @@ class NewSurveysAleart extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
 
-                    Text("Area",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
+                    Text(AppLocalizations.of(context)!.area,style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
 
                     SizedBox(height: 10),
 
@@ -58,7 +58,7 @@ class NewSurveysAleart extends StatelessWidget {
 
                     SizedBox(height: 15),
 
-                    Text("Region",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
+                    Text(AppLocalizations.of(context)!.region,style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
 
                     SizedBox(height: 10),
 
@@ -66,12 +66,12 @@ class NewSurveysAleart extends StatelessWidget {
 
                     SizedBox(height: 15),
 
-                    Text("Booth Number",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
+                    Text(AppLocalizations.of(context)!.boothNumber,style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
 
                     SizedBox(height: 10),
                     BoothNumberAleart(),
                     SizedBox(height: 15),
-                    Text("Booth Incharge Name",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
+                    Text(AppLocalizations.of(context)!.boothInchargeName,style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w500)),
                     SizedBox(height: 10),
                     BoothInchragename(),
                     SizedBox(height: 30),
@@ -83,7 +83,6 @@ class NewSurveysAleart extends StatelessWidget {
                         if (state.postApiStatus == PostApiStatus.error) {
                           stopCustomLoader(context);
                           context.flushBarErrorMessage(message: AppLocalizations.of(context)!.something_want_to_wrong_try_again);
-
                           context.read<SurveysBloc>().add(StatusChange(postApiStatus: PostApiStatus.initial));
                         }
 
@@ -92,9 +91,8 @@ class NewSurveysAleart extends StatelessWidget {
                           stopCustomLoader(context);
                           if(state.message.isNotEmpty){
                             context.flushBarErrorMessage(message: AppLocalizations.of(context)!.something_want_to_wrong_try_again);
-
                           }
-                          context.flushBarSuccessMessage(message: "Incharge create successful");
+                          context.flushBarSuccessMessage(message: AppLocalizations.of(context)!.inchargeCreateSuccessful);
                           // Navigator.pop(context);
                           // context.read<DashboardBloc>().add(CurrentIndexChange(currentIndex: 1));
                           // showDialog(
@@ -122,7 +120,7 @@ class NewSurveysAleart extends StatelessWidget {
                             CustomButton(
                               height: 44,
                               width: 110,
-                              title: "Proceed",
+                              title: AppLocalizations.of(context)!.proceed,
                               borderRadios: 10,
                               textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 15,color: AppColors.whiteColor,fontWeight: FontWeight.w600),
                               onPress:state.boothInchargeName.isEmpty?null: ()async{
@@ -134,7 +132,7 @@ class NewSurveysAleart extends StatelessWidget {
                             CustomButton(
                                 height: 44,
                                 width: 110,
-                                title: "Close",
+                                title: AppLocalizations.of(context)!.close,
                                 backgroundColor: Colors.white,
                                 borderColor: AppColors.primaryColor,
                                 borderRadios: 10,

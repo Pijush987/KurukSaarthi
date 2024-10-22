@@ -38,7 +38,7 @@ class _TotalVotersWidgetState extends State<TotalVotersWidget> {
     final data = await dbHelper.getTotalCount();
     total = data.toString();
     if( data == 0||  data<int.parse(total)){
-    isDataSync.value = true;
+      isDataSync.value = true;
     }
     else{
       isDataSync.value = false;
@@ -58,8 +58,8 @@ class _TotalVotersWidgetState extends State<TotalVotersWidget> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: AppColors.cardBorderColor)
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(color: AppColors.cardBorderColor)
       ),
       padding: EdgeInsets.all(16),
       child: Column(

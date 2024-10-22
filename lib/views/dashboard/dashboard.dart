@@ -42,14 +42,10 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin{
   }
   List<Widget> _buildScreens() {
     return [
-      // HomeScreen(),
-      // SurveysScreen() ,
-      // ListsScreen(),
-      // AlertsScreen(),
       HomeScreen(),
+      SurveysScreen() ,
       ListsScreen(),
       AlertsScreen(isBack: false,),
-      HelpScreen()
     ];
   }
 

@@ -32,8 +32,8 @@ class _NotificationListWidgetState extends State<NotificationListWidget> {
     final data = await dbHelper.getNotifications();
     notifications = data;
     if (mounted) {
-        setState(() {});
-        notificationNotifier.value = "reset";
+      setState(() {});
+      notificationNotifier.value = "reset";
     }
   }
 
@@ -41,20 +41,20 @@ class _NotificationListWidgetState extends State<NotificationListWidget> {
   Widget build(BuildContext context) {
     return notifications.isEmpty?SizedBox():
     ValueListenableBuilder<String>(
-    valueListenable: notificationNotifier,
-    builder: (BuildContext context, String isValid, child) {
-    return  ListView.separated(
-        padding: EdgeInsets.all(4),
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        itemBuilder:(_,index){
-          return notificationItem(context: context, time: notifications[index]['date']??'', message:notifications[index]['message']??'', onTab: () {  });
-        }, separatorBuilder: (_,index){
-      return SizedBox(
-        height: 15,
-      );
-    }, itemCount: 2);
-    },
+      valueListenable: notificationNotifier,
+      builder: (BuildContext context, String isValid, child) {
+        return  ListView.separated(
+            padding: EdgeInsets.all(4),
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemBuilder:(_,index){
+              return notificationItem(context: context, time: notifications[index]['date']??'', message:notifications[index]['message']??'', onTab: () {  });
+            }, separatorBuilder: (_,index){
+          return SizedBox(
+            height: 15,
+          );
+        }, itemCount: 1);
+      },
     );
   }
 }
@@ -69,14 +69,14 @@ Widget notificationItem({required BuildContext context, required String time,req
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(time,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w600)),
-          // SvgImageWidget(svgPath: AssetsPath.crossIcon,color: null),
-        ],
-      ), SizedBox(height: 5),
-      Text(message,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.textFieldColor1,fontWeight: FontWeight.w600)),
-    ],),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(time,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12,color: AppColors.secondaryTextColor,fontWeight: FontWeight.w600)),
+            // SvgImageWidget(svgPath: AssetsPath.crossIcon,color: null),
+          ],
+        ), SizedBox(height: 5),
+        Text(message,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.textFieldColor1,fontWeight: FontWeight.w600)),
+      ],),
   );
 }

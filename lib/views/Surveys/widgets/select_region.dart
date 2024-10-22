@@ -9,6 +9,7 @@ import 'package:kuruk_saarthi/configs/components/svg_image_widget.dart';
 import 'package:kuruk_saarthi/services/database/database_services.dart';
 import 'package:kuruk_saarthi/utils/assets_path.dart';
 import 'package:kuruk_saarthi/utils/extension/general_ectensions.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SelectRegion extends StatelessWidget {
   const SelectRegion({super.key});
@@ -46,7 +47,7 @@ class SelectRegion extends StatelessWidget {
             // Add more decoration..
           ),
           hint:Text(
-            'Region',
+            AppLocalizations.of(context)!.region,
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.subTextColor,fontWeight: FontWeight.w600),
           ),
           items: state.allRegion.map((item) {
@@ -139,7 +140,7 @@ class SelectArea extends StatelessWidget {
             // Add more decoration..
           ),
           hint:Text(
-            'Area',
+            AppLocalizations.of(context)!.area,
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.subTextColor,fontWeight: FontWeight.w600),
           ),
           items: state.allArea.map((item) {

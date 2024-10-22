@@ -61,8 +61,8 @@ class _NotificationBarWidgetState extends State<NotificationBarWidget> {
     final data = await dbHelper.getNotifications();
     notifications = data;
     if (mounted) {
-        setState(() {});
-        notificationNotifier.value = "reset";
+      setState(() {});
+      notificationNotifier.value = "reset";
     }
   }
 
@@ -82,7 +82,7 @@ class _NotificationBarWidgetState extends State<NotificationBarWidget> {
               ],)),
             Expanded(child: InkWell(
               onTap: (){
-                   Navigator.pushNamed(context, RoutesName.alert);
+                Navigator.pushNamed(context, RoutesName.alert);
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,

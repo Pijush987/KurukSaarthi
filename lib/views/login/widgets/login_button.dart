@@ -29,15 +29,12 @@ class LoginButton extends StatelessWidget {
 
           stopCustomLoader(context);
           context.flushBarErrorMessage(message: AppLocalizations.of(context)!.something_want_to_wrong_try_again);
-
           context.read<LoginBloc>().add(StatusChange(postApiStatus: PostApiStatus.initial));
         }
 
         if (state.postApiStatus == PostApiStatus.success) {
-          context.read<LoginBloc>().add(StatusChange(postApiStatus: PostApiStatus.initial));
-
           context.read<LoginBloc>().add(PinChange(loginPin: ''));
-
+          context.read<LoginBloc>().add(StatusChange(postApiStatus: PostApiStatus.initial));
           debugPrint("step9");
           Navigator.of(context)
               .pushNamedAndRemoveUntil(RoutesName.dashboard, (Route<dynamic> route) => false);

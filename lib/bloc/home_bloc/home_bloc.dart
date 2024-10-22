@@ -69,82 +69,82 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         return;
       }
       else{
-          Map <String, dynamic> token = jsonDecode(onValue) ;
-          Map <String, String> headers = {
-            'Content-Type' : 'application/json',
-            'Authorization' : 'Bearer ${token['token']}'
-          };
+        Map <String, dynamic> token = jsonDecode(onValue) ;
+        Map <String, String> headers = {
+          'Content-Type' : 'application/json',
+          'Authorization' : 'Bearer ${token['token']}'
+        };
 
-            Map<String,dynamic> data = {
-              "limit":limit.toString(),
-              "page":count.toString(),
-            };
-           await getAllData(data,headers,emit).then((value)async{
-             debugPrint("total count 1");
-             if(value.success == false && value.code==420){
-               await SessionController().removeUserInPreference();
-               await SessionController().getUserFromPreference();
-               print("Authentication failed. Try logging in again");
-               emit(state.copyWith(postApiStatus: PostApiStatus.error, message: "420"));
-             }
-             else if(value.success == false  && value.message.isNotEmpty){
-               emit(state.copyWith(postApiStatus: PostApiStatus.error, message: value.message));
-             }else{
-                debugPrint("total count 2");
-                await databaseHelper.saveApiData(value);
-                totalLoopCount =  (value.count/limit).ceil();
-                debugPrint("total count $totalLoopCount");
-                await SessionController().saveTotalCount(count+1);
-                await SessionController().getTotalCount();
+        Map<String,dynamic> data = {
+          "limit":limit.toString(),
+          "page":count.toString(),
+        };
+        await getAllData(data,headers,emit).then((value)async{
+          debugPrint("total count 1");
+          if(value.success == false && value.code==420){
+            await SessionController().removeUserInPreference();
+            await SessionController().getUserFromPreference();
+            print("Authentication failed. Try logging in again");
+            emit(state.copyWith(postApiStatus: PostApiStatus.error, message: "420"));
+          }
+          else if(value.success == false  && value.message.isNotEmpty){
+            emit(state.copyWith(postApiStatus: PostApiStatus.error, message: value.message));
+          }else{
+            debugPrint("total count 2");
+            await databaseHelper.saveApiData(value);
+            totalLoopCount =  (value.count/limit).ceil();
+            debugPrint("total count $totalLoopCount");
+            await SessionController().saveTotalCount(count+1);
+            await SessionController().getTotalCount();
 
-                await SessionController().saveTotalVoters(value.count);
-                await SessionController().getTotalVoters();
+            await SessionController().saveTotalVoters(value.count);
+            await SessionController().getTotalVoters();
 
 
-                DateTime date = DateTime.now();
-                var now = Jiffy.parse(date.toString()).format(pattern: 'MMMM do yyyy, h:mm a');
-                await SessionController().saveLastSync(now);
-                await SessionController().getLastSync();
+            DateTime date = DateTime.now();
+            var now = Jiffy.parse(date.toString()).format(pattern: 'MMMM do yyyy, h:mm a');
+            await SessionController().saveLastSync(now);
+            await SessionController().getLastSync();
 
-                notificationNotifier.value = now.toString();
-                isDataSync.value= false;
-              }
-            }).onError((error,stackTrace){
-              debugPrint("error $error");
-              emit(state.copyWith(postApiStatus: PostApiStatus.error, message: error.toString()));
-            }).whenComplete(() async{
-              if(totalLoopCount != 0){
-                count = count + 1;
-                for(count; count<=totalLoopCount; count++){
-                  debugPrint("complete ......$count");
-                  Map<String,dynamic> data = {
-                    "limit":limit.toString(),
-                    "page":count.toString(),
-                  };
-                  await  getAllData(data,headers,emit).then((value)async{
-                    if(value.success == false  && value.message.isNotEmpty){
-                      flag=true;
-                      emit(state.copyWith(postApiStatus: PostApiStatus.error, message: value.message));
-                    }else{
-                      debugPrint("insert data ");
-                      await databaseHelper.saveApiData(value);
-                      await SessionController().saveTotalCount(count+1);
-                      await SessionController().getTotalCount();
-                    }
-                  }).onError((error,stackTrace){
-                    flag=true;
-                    debugPrint("error $error");
-                    emit(state.copyWith(postApiStatus: PostApiStatus.error, message: error.toString()));
-                  });
-                  if(flag==true){
-                    break;
-                  }
+            notificationNotifier.value = now.toString();
+            isDataSync.value= false;
+          }
+        }).onError((error,stackTrace){
+          debugPrint("error $error");
+          emit(state.copyWith(postApiStatus: PostApiStatus.error, message: error.toString()));
+        }).whenComplete(() async{
+          if(totalLoopCount != 0){
+            count = count + 1;
+            for(count; count<=totalLoopCount; count++){
+              debugPrint("complete ......$count");
+              Map<String,dynamic> data = {
+                "limit":limit.toString(),
+                "page":count.toString(),
+              };
+              await  getAllData(data,headers,emit).then((value)async{
+                if(value.success == false  && value.message.isNotEmpty){
+                  flag=true;
+                  emit(state.copyWith(postApiStatus: PostApiStatus.error, message: value.message));
+                }else{
+                  debugPrint("insert data ");
+                  await databaseHelper.saveApiData(value);
+                  await SessionController().saveTotalCount(count+1);
+                  await SessionController().getTotalCount();
                 }
-                debugPrint("end api call");
+              }).onError((error,stackTrace){
+                flag=true;
+                debugPrint("error $error");
+                emit(state.copyWith(postApiStatus: PostApiStatus.error, message: error.toString()));
+              });
+              if(flag==true){
+                break;
               }
-            });
-          debugPrint("end api call##");
-          emit(state.copyWith(postApiStatus: PostApiStatus.success));
+            }
+            debugPrint("end api call");
+          }
+        });
+        debugPrint("end api call##");
+        emit(state.copyWith(postApiStatus: PostApiStatus.success));
       }
     });
   }

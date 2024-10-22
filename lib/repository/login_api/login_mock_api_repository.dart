@@ -9,10 +9,4 @@ class LoginMockApiRepository extends LoginApiRepository {
     return LoginModel.fromJson(responseData);
   }
 
-  @override
-  Future pinChange({Map<String, dynamic>? data, Map<String, String>? header}) {
-    // TODO: implement pinChange
-    throw UnimplementedError();
-  }
-
 }

@@ -22,8 +22,6 @@ ManageSurveyModel _$ManageSurveyModelFromJson(Map<String, dynamic> json) {
 mixin _$ManageSurveyModel {
   @JsonKey(name: 'inchargeId')
   String get inchargeId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'key')
-  String get key => throw _privateConstructorUsedError;
   @JsonKey(name: 'polls')
   List<Survey> get surveys => throw _privateConstructorUsedError;
 
@@ -45,7 +43,6 @@ abstract class $ManageSurveyModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'inchargeId') String inchargeId,
-      @JsonKey(name: 'key') String key,
       @JsonKey(name: 'polls') List<Survey> surveys});
 }
 
@@ -65,17 +62,12 @@ class _$ManageSurveyModelCopyWithImpl<$Res, $Val extends ManageSurveyModel>
   @override
   $Res call({
     Object? inchargeId = null,
-    Object? key = null,
     Object? surveys = null,
   }) {
     return _then(_value.copyWith(
       inchargeId: null == inchargeId
           ? _value.inchargeId
           : inchargeId // ignore: cast_nullable_to_non_nullable
-              as String,
-      key: null == key
-          ? _value.key
-          : key // ignore: cast_nullable_to_non_nullable
               as String,
       surveys: null == surveys
           ? _value.surveys
@@ -95,7 +87,6 @@ abstract class _$$ManageSurveyModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'inchargeId') String inchargeId,
-      @JsonKey(name: 'key') String key,
       @JsonKey(name: 'polls') List<Survey> surveys});
 }
 
@@ -113,17 +104,12 @@ class __$$ManageSurveyModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? inchargeId = null,
-    Object? key = null,
     Object? surveys = null,
   }) {
     return _then(_$ManageSurveyModelImpl(
       inchargeId: null == inchargeId
           ? _value.inchargeId
           : inchargeId // ignore: cast_nullable_to_non_nullable
-              as String,
-      key: null == key
-          ? _value.key
-          : key // ignore: cast_nullable_to_non_nullable
               as String,
       surveys: null == surveys
           ? _value._surveys
@@ -138,7 +124,6 @@ class __$$ManageSurveyModelImplCopyWithImpl<$Res>
 class _$ManageSurveyModelImpl implements _ManageSurveyModel {
   _$ManageSurveyModelImpl(
       {@JsonKey(name: 'inchargeId') this.inchargeId = '',
-      @JsonKey(name: 'key') this.key = '',
       @JsonKey(name: 'polls') final List<Survey> surveys = const []})
       : _surveys = surveys;
 
@@ -148,9 +133,6 @@ class _$ManageSurveyModelImpl implements _ManageSurveyModel {
   @override
   @JsonKey(name: 'inchargeId')
   final String inchargeId;
-  @override
-  @JsonKey(name: 'key')
-  final String key;
   final List<Survey> _surveys;
   @override
   @JsonKey(name: 'polls')
@@ -162,7 +144,7 @@ class _$ManageSurveyModelImpl implements _ManageSurveyModel {
 
   @override
   String toString() {
-    return 'ManageSurveyModel(inchargeId: $inchargeId, key: $key, surveys: $surveys)';
+    return 'ManageSurveyModel(inchargeId: $inchargeId, surveys: $surveys)';
   }
 
   @override
@@ -172,14 +154,13 @@ class _$ManageSurveyModelImpl implements _ManageSurveyModel {
             other is _$ManageSurveyModelImpl &&
             (identical(other.inchargeId, inchargeId) ||
                 other.inchargeId == inchargeId) &&
-            (identical(other.key, key) || other.key == key) &&
             const DeepCollectionEquality().equals(other._surveys, _surveys));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, inchargeId, key,
-      const DeepCollectionEquality().hash(_surveys));
+  int get hashCode => Object.hash(
+      runtimeType, inchargeId, const DeepCollectionEquality().hash(_surveys));
 
   /// Create a copy of ManageSurveyModel
   /// with the given fields replaced by the non-null parameter values.
@@ -201,7 +182,6 @@ class _$ManageSurveyModelImpl implements _ManageSurveyModel {
 abstract class _ManageSurveyModel implements ManageSurveyModel {
   factory _ManageSurveyModel(
           {@JsonKey(name: 'inchargeId') final String inchargeId,
-          @JsonKey(name: 'key') final String key,
           @JsonKey(name: 'polls') final List<Survey> surveys}) =
       _$ManageSurveyModelImpl;
 
@@ -211,9 +191,6 @@ abstract class _ManageSurveyModel implements ManageSurveyModel {
   @override
   @JsonKey(name: 'inchargeId')
   String get inchargeId;
-  @override
-  @JsonKey(name: 'key')
-  String get key;
   @override
   @JsonKey(name: 'polls')
   List<Survey> get surveys;

@@ -13,9 +13,4 @@ class LoginHttpApiRepository extends LoginApiRepository{
     return LoginModel.fromJson(result);
   }
 
-  @override
-  Future pinChange({Map<String, dynamic>? data, Map<String, String>? header}) async{
-    final result = await _apiServices.putApi(url: AppUrl.pinChange, data: data!, header: header);
-    return result;
-  }
 }

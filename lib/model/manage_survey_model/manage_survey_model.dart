@@ -8,7 +8,6 @@ part 'manage_survey_model.g.dart';
 class ManageSurveyModel with _$ManageSurveyModel {
   factory ManageSurveyModel({
     @JsonKey(name: 'inchargeId') @Default('') String inchargeId,
-    @JsonKey(name: 'key') @Default('') String key,
     @Default([]) @JsonKey(name: 'polls') List<Survey> surveys,
   }) = _ManageSurveyModel;
 

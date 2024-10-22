@@ -52,8 +52,8 @@ class _SyncLastUpdateWidgetState extends State<SyncLastUpdateWidget> {
     return Container(
       alignment: Alignment.center,
       decoration: BoxDecoration(
-          color: AppColors.fieldBackgroundColor,
-          borderRadius: BorderRadius.circular(15),
+        color: AppColors.fieldBackgroundColor,
+        borderRadius: BorderRadius.circular(15),
       ),
       padding: EdgeInsets.all(6),
       child: Column(

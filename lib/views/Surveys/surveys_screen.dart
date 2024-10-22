@@ -56,11 +56,9 @@ class _SurveysScreenState extends State<SurveysScreen> with TickerProviderStateM
         showCustomLoader(context,50);
       }
     });
-
     Constant.countListinear.addListener((){
-      if(Constant.countListinear.value ==3){
+      if(Constant.countListinear.value ==10){
         context.read<SurveysBloc>().add(SurveyManage());
-        Constant.loading.value = "ShowLoading";
       }
     });
 
@@ -111,15 +109,15 @@ class _SurveysScreenState extends State<SurveysScreen> with TickerProviderStateM
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const SizedBox(width: 12),
-                              Text("Track Survey ",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.blackColor,fontWeight: FontWeight.w600),),
+                              Text(AppLocalizations.of(context)!.trackSurvey,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.blackColor,fontWeight: FontWeight.w600),),
                             ],),
                         ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-
-                            Text("$boothNo",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.primaryColor,fontWeight: FontWeight.w600),),
+                            Text(AppLocalizations.of(context)!.boothNumber,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.blackColor,fontWeight: FontWeight.w600),),
+                            Text(" $boothNo",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.primaryColor,fontWeight: FontWeight.w600),),
                           ],
                         )
                       ],
@@ -133,8 +131,8 @@ class _SurveysScreenState extends State<SurveysScreen> with TickerProviderStateM
                           return true;
                         } ,
                         listener: (context, state) {
-                          log("%%%%%%%%%%%%%%%"+state.selectedSurveys.toString());
-                          log("%%%%%%%%%%%%%%% ${state.selectedSurveyDropdownList.length}"+state.selectedSurveys.toString());
+                          log("%%%%%%%%%%%%%%%"+state.postApiStatus.toString());
+
                         },
                         builder: (context, state) {
                           if (state.postApiStatus == PostApiStatus.loading) {
@@ -153,7 +151,7 @@ class _SurveysScreenState extends State<SurveysScreen> with TickerProviderStateM
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text("Voters List",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.blackColor,fontWeight: FontWeight.w600),),
+                                      Text(AppLocalizations.of(context)!.votersList,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.blackColor,fontWeight: FontWeight.w600),),
                                     ],
                                   ),
                                   const SizedBox(height: 24),
@@ -234,7 +232,6 @@ class _SurveysScreenState extends State<SurveysScreen> with TickerProviderStateM
             }
             if (state.postApiStatus == PostApiStatus.error) {
               context.flushBarErrorMessage(message: AppLocalizations.of(context)!.something_want_to_wrong_try_again);
-
               context.read<SurveysBloc>().add(StatusChange(postApiStatus: PostApiStatus.initial));
             }
             if (state.postApiStatus == PostApiStatus.success) {
@@ -257,7 +254,7 @@ class _SurveysScreenState extends State<SurveysScreen> with TickerProviderStateM
                 children: [
                   SvgImageWidget(svgPath: AssetsPath.push,color: null),
                   const SizedBox(width: 6),
-                  Text("Force Push",style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.whiteColor,fontWeight: FontWeight.w600)),
+                  Text(AppLocalizations.of(context)!.forcePush,style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16,color: AppColors.whiteColor,fontWeight: FontWeight.w600)),
 
                 ],
               ),

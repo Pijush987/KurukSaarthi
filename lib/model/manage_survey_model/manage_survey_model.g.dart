@@ -10,7 +10,6 @@ _$ManageSurveyModelImpl _$$ManageSurveyModelImplFromJson(
         Map<String, dynamic> json) =>
     _$ManageSurveyModelImpl(
       inchargeId: json['inchargeId'] as String? ?? '',
-      key: json['key'] as String? ?? '',
       surveys: (json['polls'] as List<dynamic>?)
               ?.map((e) => Survey.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -21,7 +20,6 @@ Map<String, dynamic> _$$ManageSurveyModelImplToJson(
         _$ManageSurveyModelImpl instance) =>
     <String, dynamic>{
       'inchargeId': instance.inchargeId,
-      'key': instance.key,
       'polls': instance.surveys,
     };
 

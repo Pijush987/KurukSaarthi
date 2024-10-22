@@ -8,6 +8,7 @@ import 'package:kuruk_saarthi/configs/color/color.dart';
 import '../../../bloc/surveys_bloc/surveys_bloc.dart';
 import '../../../configs/components/svg_image_widget.dart';
 import '../../../utils/assets_path.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChoseVoterWidget extends StatelessWidget {
   final String selectedSurvey;
@@ -21,7 +22,7 @@ class ChoseVoterWidget extends StatelessWidget {
       'PARTY+',
       'PARTY-',
       'NEUTRAL',
-      'DEATH',
+      'DEAD',
     ];
     log("Success   ### ${selectedSurvey}");
     log("Success   ### ${index}");
@@ -61,7 +62,7 @@ class ChoseVoterWidget extends StatelessWidget {
         // Add more decoration..
       ),
       hint:Text(
-        'Mark Voter Component',
+          AppLocalizations.of(context)!.markVoterComponent,
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 14,color: AppColors.blackColor,fontWeight: FontWeight.w600),
       ),
       items: dropdownItem.map((item) {

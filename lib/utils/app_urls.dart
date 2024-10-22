@@ -1,5 +1,6 @@
 
 class AppUrl {
+
   static var baseUrl = 'https://app.kuruksaarthi.in/app/v1' ;
   static var loginApi =  '$baseUrl/user/login' ;
   static var regionSelect =  '$baseUrl/api/region_select' ;
@@ -10,6 +11,6 @@ class AppUrl {
   static var surveyManage =  '$baseUrl/survey/manage/poll' ;
   static var surveyList =  '$baseUrl/voter/survey/list' ;
   static var manageSurvey =  '$baseUrl/survey/manage' ;
-  static var pinChange =  '$baseUrl/account/pin/change' ;
   static var notification =  '$baseUrl/webhook/notification/send' ;
+
 }

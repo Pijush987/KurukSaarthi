@@ -10,6 +10,13 @@ class VoiceSearchWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: ()async{
+        // await DatabaseHelper.instance.searchObjectsWithRawQuery("Uganda").then((onValue){
+        //   onValue.forEach((action){
+        //     DatabaseClass databaseClass =action;
+        //     print('%%%%%%%%%${databaseClass.toString()}');
+        //   });
+        // });
+        // await DatabaseHelper.instance.deleteAllObjectsRaw();
       },
       child: Container(
         padding: EdgeInsets.all(15),
